@@ -1,4 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+export const userLogin = createAsyncThunk(
+  "user/userLogin",
+  async (loginCreds) => {
+    const resp = await fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(loginCreds),
+    });
+    const data = resp.json();
+    return data;
+  }
+);
+
+export const userLogout = createAsyncThunk("user/userLogout", async () => {
+  const resp = await fetch("/logout", {
+    method: "DELETE",
+  });
+  const data = resp.json();
+  return data;
+});
+
+export const userAutoLogin = createAsyncThunk("user/userAutoLogin", async (user) => {
+  const resp = await fetch(`/users/${user.id}`)
+  const data = resp.json()
+  return data
+})
 
 const initialState = {
   user: null,
@@ -13,6 +40,44 @@ const utilitySlice = createSlice({
   reducers: {
     toogleLoading(state, action) {
       state.isLoading = action.payload;
+    },
+  },
+  extraReducers: {
+    [userLogin.pending](state) {
+      state.status = "pending";
+    },
+    [userLogin.fulfilled](state, action) {
+      state.status = "completed";
+      if (action.payload.errors) {
+        state.errors = action.payload.errors;
+      } else {
+        state.user = action.payload;
+        state.errors = [];
+      }
+    },
+    [userLogin.rejected](state, action) {
+      state.status = "rejected";
+      if (action.payload) {
+        state.errors = action.payload.errorMessage;
+      } else {
+        state.errors = action.error.message;
+      }
+    },
+    [userLogout.pending](state) {
+      state.status = "pending";
+    },
+    [userLogout.fulfilled](state, action) {
+      state.status = "completed";
+      state.user = null
+      state.errors = action.payload.message;
+    },
+    [userLogout.rejected](state, action) {
+      state.status = "rejected";
+      if (action.payload) {
+        state.errors = action.payload.errorMessage;
+      } else {
+        state.errors = action.error.message;
+      }
     },
   },
 });

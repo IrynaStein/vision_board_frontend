@@ -1,7 +1,13 @@
-import {Link} from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../store/utilitySlice";
 export default function ToolBar() {
-const user = useSelector(state => state.utilities.user)
+  const user = useSelector((state) => state.utilities.user);
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(userLogout())
+  };
   return (
     <div className="toolbar">
       ToolBar
@@ -23,13 +29,16 @@ const user = useSelector(state => state.utilities.user)
         <button>Download</button>
       </div>
       _________
-
-    <Link to="/home">
-        ?
-    </Link>
-    <div>
-      {user? <button>Logout</button> : <div><button>Login</button>or <button>Signup</button></div>}
-    </div>
+      <Link to="/home">?</Link>
+      <div>
+        {user ? (
+          <button onClick={logoutHandler}>Logout</button>
+        ) : (
+          <div>
+            <Link to="/login">Login</Link>or <Link to="/signup">Signup</Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

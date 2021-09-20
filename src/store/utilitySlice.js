@@ -21,11 +21,13 @@ export const userLogout = createAsyncThunk("user/userLogout", async () => {
   return data;
 });
 
+
 export const userAutoLogin = createAsyncThunk("user/userAutoLogin", async (user) => {
   const resp = await fetch(`/users/${user.id}`)
   const data = resp.json()
   return data
 })
+//finalize writing ^^^^ auto-login request to backend
 
 const initialState = {
   user: null,

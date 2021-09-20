@@ -11,6 +11,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import {useSelector} from "react-redux"
 function App() {
 const user = useSelector(state => state.utilities.user)
+
+//Add auto-login here to fetch user info and set user based on session in progress
+
   return (
     <div className="App">
       <ToolBar />
@@ -20,8 +23,8 @@ const user = useSelector(state => state.utilities.user)
           {!user ? <Login/> : <Redirect to='/home'/>}
           </Route>
         <ProtectedRoute exact path="/air" component={Air}/>
-        {/* Water is a demo component that works without userAuth */}
         <Route exact path="/water" component={Water}/>
+        {/* Water ^^^ is a demo component that works without userAuth. Maybe this will change depending on the "unlock" logic for the rest of the components*/}
         <ProtectedRoute exact path="/earth" component={Earth}/>
         <ProtectedRoute exact path="/fire" component={Fire}/>
       </Switch>

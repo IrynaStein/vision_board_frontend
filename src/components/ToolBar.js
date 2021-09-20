@@ -1,5 +1,7 @@
 import {Link} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 export default function ToolBar() {
+const user = useSelector(state => state.utilities.user)
   return (
     <div className="toolbar">
       ToolBar
@@ -25,7 +27,9 @@ export default function ToolBar() {
     <Link to="/home">
         ?
     </Link>
-    <button>Logout</button>
+    <div>
+      {user? <button>Logout</button> : <div><button>Login</button>or <button>Signup</button></div>}
+    </div>
     </div>
   );
 }

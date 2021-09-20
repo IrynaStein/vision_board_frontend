@@ -12,21 +12,11 @@ function App() {
     <div className="App">
       <ToolBar />
       <Switch>
-        <Route exact path="/home">
-          <HomePage />
-        </Route>
-        <Route exact path="/air">
-          <Air />
-        </Route>
-        <Route exact path="/water">
-          <Water />
-        </Route>
-        <Route exact path="/earth">
-          <Earth />
-        </Route>
-        <Route exact path="/fire">
-          <Fire />
-        </Route>
+        <Route exact path="/home" component={HomePage}/>
+        <Route exact path="/air" component={Air}/>
+        <Route exact path="/water" component={Water}/>
+        <Route exact path="/earth" component={Earth}/>
+        <Route exact path="/fire" component={Fire}/>
       </Switch>
     </div>
   );

@@ -21,12 +21,14 @@ export const userLogout = createAsyncThunk("user/userLogout", async () => {
   return data;
 });
 
-
-export const userAutoLogin = createAsyncThunk("user/userAutoLogin", async (user) => {
-  const resp = await fetch(`/users/${user.id}`)
-  const data = resp.json()
-  return data
-})
+export const userAutoLogin = createAsyncThunk(
+  "user/userAutoLogin",
+  async () => {
+    const resp = await fetch('/profile');
+    const data = resp.json();
+    return data;
+  }
+);
 //finalize writing ^^^^ auto-login request to backend
 
 const initialState = {
@@ -70,8 +72,13 @@ const utilitySlice = createSlice({
     },
     [userLogout.fulfilled](state, action) {
       state.status = "completed";
-      state.user = null
-      state.errors = action.payload.message;
+      // debugger;
+      if (action.payload.errors){
+        state.errors = action.payload.errors
+      }else{
+        state.user = action.payload.user;
+        state.errors = action.payload.message;
+      }
     },
     [userLogout.rejected](state, action) {
       state.status = "rejected";
@@ -81,6 +88,23 @@ const utilitySlice = createSlice({
         state.errors = action.error.message;
       }
     },
+    [userAutoLogin.pending](state){
+      state.status = "pending"
+    },
+    [userAutoLogin.fulfilled](state, action){
+      state.status = "completed"
+      // debugger;
+        state.user = action.payload
+        state.errors = []
+    },
+    [userAutoLogin.rejected](state, action){
+      state.status = "rejected";
+      if (action.payload) {
+        state.errors = action.payload.errorMessage;
+      } else {
+        state.errors = action.error.message;
+      }
+    }
   },
 });
 

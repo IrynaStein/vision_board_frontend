@@ -30,3 +30,10 @@ border: solid black 1px;
   flex-direction: column;
   border: solid black 1px;
 }
+
+.layout{
+display: flex;
+flex-direction: column;
+border: solid black 1px;
+/* background: -webkit-linear-gradient(top, black, 0%,rgba(255,255,255,0) 100%); Chrome10-25,Safari5.1-6 */
+}

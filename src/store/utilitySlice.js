@@ -8,7 +8,7 @@ export const userLogin = createAsyncThunk(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginCreds),
     });
-    const data = resp.json();
+    const data = await resp.json();
     return data;
   }
 );
@@ -17,22 +17,35 @@ export const userLogout = createAsyncThunk("user/userLogout", async () => {
   const resp = await fetch("/logout", {
     method: "DELETE",
   });
-  const data = resp.json();
+  const data = await resp.json();
   return data;
 });
 
 export const userAutoLogin = createAsyncThunk(
   "user/userAutoLogin",
   async () => {
-    const resp = await fetch('/profile');
-    const data = resp.json();
+    const resp = await fetch("/profile");
+    const data = await resp.json();
     return data;
   }
 );
-//finalize writing ^^^^ auto-login request to backend
+
+export const userSignup = createAsyncThunk(
+  "user/userSignup",
+  async (formData) => {
+    const resp = await fetch("/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    const data = await resp.json();
+    return data;
+  }
+);
 
 const initialState = {
   user: null,
+  board: [],
   isLoading: false,
   status: "",
   errors: [],
@@ -73,10 +86,11 @@ const utilitySlice = createSlice({
     [userLogout.fulfilled](state, action) {
       state.status = "completed";
       // debugger;
-      if (action.payload.errors){
-        state.errors = action.payload.errors
-      }else{
-        state.user = action.payload.user;
+      if (action.payload.errors) {
+        state.errors = action.payload.errors;
+      } else {
+        // state.user = action.payload.user;
+        state.user = null
         state.errors = action.payload.message;
       }
     },
@@ -88,17 +102,41 @@ const utilitySlice = createSlice({
         state.errors = action.error.message;
       }
     },
-    [userAutoLogin.pending](state){
-      state.status = "pending"
+    [userAutoLogin.pending](state) {
+      state.status = "pending";
     },
-    [userAutoLogin.fulfilled](state, action){
-      state.status = "completed"
+    [userAutoLogin.fulfilled](state, action) {
+      state.status = "completed";
       // debugger;
+      if (action.payload.errors){
+        state.errors = action.payload.errors
+      }else{
+        state.user = action.payload;
+        state.errors = [];
+      }
+    },
+    [userAutoLogin.rejected](state, action) {
+      state.status = "rejected";
+      if (action.payload) {
+        state.errors = action.payload.errorMessage;
+      } else {
+        state.errors = action.error.message;
+      }
+    },
+    [userSignup.pending](state) {
+      state.status = "pending";
+    },
+    [userSignup.fulfilled](state, action){
+      state.status = "completed"
+      if (action.payload.errors){
+        state.errors = action.payload.errors
+      }else{
         state.user = action.payload
         state.errors = []
+      }
     },
-    [userAutoLogin.rejected](state, action){
-      state.status = "rejected";
+    [userSignup.rejected](state,action){
+      state.status = "rejected"
       if (action.payload) {
         state.errors = action.payload.errorMessage;
       } else {

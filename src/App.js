@@ -8,12 +8,15 @@ import Fire from "./pages/Fire";
 import Earth from "./pages/Earth";
 import Water from "./pages/Water";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
+
 function App() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
+
   //Add auto-login here to fetch user info and set user based on session in progress
 
   useEffect(() => {
@@ -27,6 +30,9 @@ function App() {
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/login">
           {!user ? <Login /> : <Redirect to="/home" />}
+        </Route>
+        <Route exact path="/signup">
+          {!user ? <Signup /> : <Redirect to="/home" />}
         </Route>
         <ProtectedRoute exact path="/air" component={Air} />
         <Route exact path="/water" component={Water} />

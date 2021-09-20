@@ -8,7 +8,6 @@ export default function Login() {
 
   const onSubmit = (data, e) => {
     e.preventDefault();
-    console.log(data);
     dispatch(userLogin(data));
     reset();
   };
@@ -23,7 +22,7 @@ export default function Login() {
         {...register("password", { required: "Please enter your password." })}
         placeholder="enter password..."
       ></input>
-      <button>Login</button>
+      <button type='submit'>Login</button>
     </form>
   );
 }

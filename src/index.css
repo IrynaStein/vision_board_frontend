@@ -17,12 +17,15 @@ display: flex;
 flex-direction: column;
 flex-wrap: nowrap;
 border: solid black 1px;
+min-width: 200px;
 }
 
 .homepage {
-  display: flex;
+display: flex;
 flex-direction: column;
 border: solid black 1px;
+margin-top: 20px;
+min-width: 700px;
 }
 
 .utilities-edit {
@@ -34,6 +37,37 @@ border: solid black 1px;
 .layout{
 display: flex;
 flex-direction: column;
-border: solid black 1px;
-/* background: -webkit-linear-gradient(top, black, 0%,rgba(255,255,255,0) 100%); Chrome10-25,Safari5.1-6 */
+justify-content: flex-end;
+min-height: 500px;
+width: 500px;
+/* border: solid black 1px; */
+background-image: -webkit-linear-gradient(rgb(255, 255, 255, 0), rgb(255, 255, 255, 100))
+
+}
+.element-link-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+.element-link{
+  display: flex;
+  height: 30px;
+  
+}
+element-link > img{
+  size: 100%;
+}
+.palette{
+  display: flex;
+  flex-direction: row;
+  min-height: 100px;
+  min-width: inherit;
+  /* border: solid black 1px; */
+  align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    top: 530px;
+    margin: 15px;
+    background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0))
 }

@@ -4,18 +4,21 @@ import { userLogout } from "../store/utilitySlice";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
-
+  const boards = useSelector(state => state.utilities.board)
+  console.log("TOOLBAR/boards", boards)
   const logoutHandler = () => {
-    dispatch(userLogout())
+    dispatch(userLogout());
   };
+
   return (
     <div className="toolbar">
       ToolBar
-      <div>
-        <Link to="/air">Air</Link>
-        <Link to="/earth">Earth</Link>
-        <Link to="/fire">Fire</Link>
-        <Link to="/water">Water</Link>
+      <div className="element-link-container">
+      <Link to="/water" className="element-link"><img src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png"/></Link>
+        <Link to="/fire" className="element-link"><img src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png"/></Link>
+        <Link to="/air" className="element-link"><img src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png"/></Link>
+        <Link to="/earth" className="element-link"><img src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png"/></Link>
+        
       </div>
       <input placeholder="affirmation..."></input>
       <button>Add Sticker</button>
@@ -29,6 +32,7 @@ export default function ToolBar() {
         <button>Download</button>
       </div>
       _________
+     
       <Link to="/home">?</Link>
       <div>
         {user ? (
@@ -42,3 +46,5 @@ export default function ToolBar() {
     </div>
   );
 }
+
+

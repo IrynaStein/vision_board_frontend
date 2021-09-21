@@ -1,11 +1,23 @@
 import {useState} from 'react'
-export default function DemoLayout(layoutProps){
+import {useDispatch} from 'react-redux'
+import {boardActions} from '../store/boardSlice'
+export default function DemoLayout({name, description}){
     const [isChosen, setIsChosen] = useState(false)
+    const dispatch = useDispatch()
 //when receiving props here this component should render the layout based on them
+
+function handleLayoutChoice(){
+    setIsChosen(mUv=>!mUv)
+    dispatch(boardActions.setLayout(name))
+    //dispatch an action to get all stickers and quotes that have category=name
+}
     return (
-        <div className="layout">
-        <h1>this is cutomizable demo layout</h1>
-        {isChosen ? null : <button onClick={()=> setIsChosen(mUv=>!mUv)}>choose this layout</button>}
+        <>
+        {!isChosen ? <div className="layout">
+        <p>{description}</p>
+       <button onClick={handleLayoutChoice}>Choose this layout</button>
         </div>
+        : <div className='palette'>palette</div>}
+        </>
     )
 }

@@ -9,7 +9,7 @@ const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data, e) => {
     e.preventDefault();
     dispatch(userSignup(data));
-    // reset();
+    reset();
   };
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>

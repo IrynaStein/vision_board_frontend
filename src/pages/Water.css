@@ -1,0 +1,10 @@
+.water-container{
+display: flex;
+background-image: url("https://live.staticflickr.com/65535/51497250447_bc9ecfee07_o.jpg");
+flex-direction: column;
+align-items: center;
+min-width: 700px;
+min-height: 700px;
+border: solid black 3px;
+
+}

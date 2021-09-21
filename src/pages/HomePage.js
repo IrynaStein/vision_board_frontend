@@ -8,7 +8,7 @@ export default function HomePage() {
         </div>
         _________________________________________________
         <br/>
-        (Click on any paragraph below to highlight features insed the tool panel)
+        (Click on any paragraph below to highlight features inside of the tool panel)
 
         <ul>
         <li>Choose a theme</li>

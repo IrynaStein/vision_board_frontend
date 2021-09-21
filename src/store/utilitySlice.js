@@ -85,11 +85,9 @@ const utilitySlice = createSlice({
     },
     [userLogout.fulfilled](state, action) {
       state.status = "completed";
-      // debugger;
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
-        // state.user = action.payload.user;
         state.user = null
         state.errors = action.payload.message;
       }

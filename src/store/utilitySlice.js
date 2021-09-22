@@ -46,7 +46,7 @@ export const userSignup = createAsyncThunk(
 const initialState = {
   user: null,
   board: [],
-  isLoading: false,
+  isLoading: true,
   status: "",
   errors: [],
 };
@@ -56,7 +56,7 @@ const utilitySlice = createSlice({
   initialState,
   reducers: {
     toogleLoading(state, action) {
-      state.isLoading = action.payload;
+      state.isLoading = action.payload
     },
   },
   extraReducers: {

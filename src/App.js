@@ -12,31 +12,36 @@ import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
+import { utilityActions } from "./store/utilitySlice";
+import Loader from "./components/Loader";
 
 function App() {
   const user = useSelector((state) => state.utilities.user);
+  const isLoading = useSelector((state) => state.utilities.isLoading);
   const dispatch = useDispatch();
-
-  //Add auto-login here to fetch user info and set user based on session in progress
+  console.log(isLoading);
 
   useEffect(() => {
-    dispatch(userAutoLogin());
-  }, [dispatch]);
+    dispatch(userAutoLogin()).then(
+      dispatch(utilityActions.toogleLoading(false))
+    );
+  }, []);
+
+  console.log(isLoading);
 
   return (
     <div className="App">
       <ToolBar />
       <Switch>
-        <Route exact path="/home" component={HomePage} />
         <Route exact path="/login">
           {!user ? <Login /> : <Redirect to="/home" />}
         </Route>
         <Route exact path="/signup">
           {!user ? <Signup /> : <Redirect to="/home" />}
         </Route>
+        <Route exact path="/home" component={HomePage} />
         <ProtectedRoute exact path="/air" component={Air} />
-        <Route exact path="/water" component={Water} />
-        {/* Water ^^^ is a demo component that works without userAuth. Maybe this will change depending on the "unlock" logic for the rest of the components*/}
+        <ProtectedRoute exact path="/water" component={Water} />
         <ProtectedRoute exact path="/earth" component={Earth} />
         <ProtectedRoute exact path="/fire" component={Fire} />
       </Switch>

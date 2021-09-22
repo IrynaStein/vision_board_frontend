@@ -1,17 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+export const createBoard = createAsyncThunk('boards/createBoard', async (category) => {
+    const resp = await fetch('/boards', {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify(category)
+    })
+    const data = await resp.json()
+    return data
+})
 const initialState ={
     layout: "",
     stickers: [],
     frames: [],
     posts: [],
-    quotes: [
-        {cat:"water",
-        text: "Lifes' roughset storms prove the strength of our anchors"},
-        {cat:"air",text: "Happiness comes the way the wind blows"},
-        {cat:"earth",text: "Climb mountains not so the world can see you, but so you can see the world"},
-        {cat:"fire",text: "The finest steel has to go through the hottest fire"}
-    ],
+    quotes: [],
     status: "",
     errors: []
 }
@@ -31,7 +34,28 @@ const boardSlice = createSlice({
         },
     },
     extraReducers: {
-        //getLayouts => asyncThunk that gets all the stickers and qoutes for that specific layout
+        [createBoard.pending](state){
+            state.status = "pending"
+        },
+        [createBoard.fulfilled](state, action){
+            state.status = "completed"
+            if (action.payload.errors){
+                state.errors = action.payload.errors
+            }else{
+                state.stickers = action.payload.stickers
+                state.quotes = action.payload.quote
+                state.posts = action.payload.posts
+                state.frames = action.payload.frames
+                state.errors = []
+            }
+        },
+        [createBoard.rejected](state, action){
+            if (action.payload) {
+                state.errors = action.payload.errorMessage;
+              } else {
+                state.errors = action.error.message;
+              }
+        }
     }
 })
 

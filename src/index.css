@@ -24,7 +24,6 @@ min-width: 200px;
 display: flex;
 flex-direction: column;
 border: solid black 1px;
-margin-top: 20px;
 min-width: 700px;
 }
 
@@ -38,8 +37,10 @@ min-width: 700px;
 display: flex;
 flex-direction: column;
 justify-content: flex-end;
+align-items: center;
 min-height: 500px;
 width: 500px;
+padding: 15px;
 /* border: solid black 1px; */
 background-image: -webkit-linear-gradient(rgb(255, 255, 255, 0), rgb(255, 255, 255, 100))
 
@@ -66,8 +67,22 @@ element-link > img{
   /* border: solid black 1px; */
   align-items: center;
     justify-content: space-evenly;
-    position: relative;
-    top: 530px;
+    /* position: relative;
+    top: 530px; */
     margin: 15px;
     background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0))
+}
+.work-bench-container{
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
+  max-width: inherit;
+  border: solid black 1px;
+}
+.canvas{
+  display: flex;
+  flex-direction: row;
+  max-height: inherit;
+  max-width: inherit;
+  border: solid black 1px;
 }

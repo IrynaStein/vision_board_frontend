@@ -60,7 +60,7 @@ export default function ToolBar() {
         </Link>
       </div>
       <input placeholder="affirmation..."></input>
-      <button>Add Sticker</button>
+      <button>Show Stickers</button>
       <button>Add Picture</button>
       <button onClick={handleClick}>Change Quote</button>
       _________

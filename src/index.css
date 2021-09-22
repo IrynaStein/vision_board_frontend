@@ -86,3 +86,12 @@ element-link > img{
   max-width: inherit;
   border: solid black 1px;
 }
+
+.sticker-container{
+  display: flex;
+  height: 60px;
+  width: 60px;
+}
+sticker-container > img{
+size: 100%
+}

@@ -38,14 +38,15 @@ const boardSlice = createSlice({
             state.status = "pending"
         },
         [createBoard.fulfilled](state, action){
+            // debugger;
             state.status = "completed"
             if (action.payload.errors){
                 state.errors = action.payload.errors
             }else{
-                state.stickers = action.payload.stickers
-                state.quotes = action.payload.quote
-                state.posts = action.payload.posts
-                state.frames = action.payload.frames
+                state.stickers = action.payload.assets.stickers
+                state.quotes = action.payload.assets.quote
+                state.posts = action.payload.assets.posts
+                state.frames = action.payload.assets.frames
                 state.errors = []
             }
         },

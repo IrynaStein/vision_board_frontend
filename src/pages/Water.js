@@ -8,7 +8,7 @@ export default function Water(){
     const quote = useSelector(state=> state.boards.quotes)
     const layout = useSelector(state => state.boards.layout)
     const stickers = useSelector(state => state.boards.stickers)
-
+console.log(stickers)
     const initialQuote = {cat:"water",
     text: "Lifes' roughset storms prove the strength of our anchors"}
     const symbol = "https://live.staticflickr.com/65535/51500171763_5dc0abac52_o.png"

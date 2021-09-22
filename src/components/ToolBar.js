@@ -47,16 +47,16 @@ export default function ToolBar() {
       ToolBar
       <div className="element-link-container">
         <Link to="/water" className="element-link">
-          <img src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png" />
+          <img src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png" alt="water symbol"/>
         </Link>
         <Link to="/fire" className="element-link">
-          <img src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png" />
+          <img src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png" alt="fire symbol"/>
         </Link>
         <Link to="/air" className="element-link">
-          <img src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png" />
+          <img src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png" alt="air symbol"/>
         </Link>
         <Link to="/earth" className="element-link">
-          <img src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png" />
+          <img src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png" alt="earth symbol"/>
         </Link>
       </div>
       <input placeholder="affirmation..."></input>

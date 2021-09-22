@@ -45,7 +45,6 @@ export const userSignup = createAsyncThunk(
 
 const initialState = {
   user: null,
-  board: [],
   isLoading: true,
   status: "",
   errors: [],

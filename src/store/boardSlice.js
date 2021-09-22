@@ -11,6 +11,7 @@ export const createBoard = createAsyncThunk('boards/createBoard', async (categor
 })
 const initialState ={
     layout: "",
+    currentBoard: {},
     stickers: [],
     frames: [],
     posts: [],
@@ -38,7 +39,6 @@ const boardSlice = createSlice({
             state.status = "pending"
         },
         [createBoard.fulfilled](state, action){
-            // debugger;
             state.status = "completed"
             if (action.payload.errors){
                 state.errors = action.payload.errors
@@ -47,6 +47,7 @@ const boardSlice = createSlice({
                 state.quotes = action.payload.assets.quote
                 state.posts = action.payload.assets.posts
                 state.frames = action.payload.assets.frames
+                state.currentBoard = action.payload.board
                 state.errors = []
             }
         },

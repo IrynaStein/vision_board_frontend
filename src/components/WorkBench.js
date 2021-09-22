@@ -1,8 +1,8 @@
 export default function WorkBench({stickers}){
     console.log("WORKBENCH",stickers)
     const renderStickers = stickers.map((sticker)=>
-        <div className="sticker-container">
-            <img src={sticker.image_url}></img>
+        <div className="sticker-container" key={sticker.id}>
+            <img src={sticker.image_url} alt="sticker"></img>
             </div>
     )
     return(

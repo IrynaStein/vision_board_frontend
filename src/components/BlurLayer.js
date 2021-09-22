@@ -11,12 +11,11 @@ function handleLayoutChoice(){
     setIsChosen(mUv=>!mUv)
     dispatch(boardActions.setLayout(name))
     dispatch(createBoard({category: name}))
-
 }
     return (
         <>
         {!isChosen ? <div className="layout">
-            <img src={symbol} style={{height: "100px", width: "100px"}}/>
+            <img src={symbol} style={{height: "100px", width: "100px"}}alt="symbol"/>
         <p>{description}</p>
        <button onClick={handleLayoutChoice}>Choose this layout</button>
         </div>

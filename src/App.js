@@ -13,7 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
 import { utilityActions } from "./store/utilitySlice";
-import Loader from "./components/Loader";
+// import Loader from "./components/Loader";
 
 function App() {
   const user = useSelector((state) => state.utilities.user);
@@ -25,7 +25,7 @@ function App() {
     dispatch(userAutoLogin()).then(
       dispatch(utilityActions.toogleLoading(false))
     );
-  }, []);
+  }, [dispatch]);
 
   console.log(isLoading);
 

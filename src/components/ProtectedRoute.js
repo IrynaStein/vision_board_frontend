@@ -3,10 +3,7 @@ import { useSelector } from "react-redux";
 import Loader from "./Loader";
 const ProtectedRoute = ({ component: Component }) => {
   const user = useSelector((state) => state.utilities.user);
-  const isLoading = useSelector((state) => state.utilities.isLoading)
   return (
-      <>
-    {isLoading ? <Loader/> :
     <Route
       render={() => {
         //   debugger;
@@ -16,8 +13,7 @@ const ProtectedRoute = ({ component: Component }) => {
           return <Redirect to="/home" />;
         }
       }}
-    />}
-    </>
+    />
   );
 };
 

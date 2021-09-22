@@ -26,6 +26,7 @@ export const userAutoLogin = createAsyncThunk(
   async () => {
     const resp = await fetch("/profile");
     const data = await resp.json();
+    // debugger;
     return data;
   }
 );
@@ -55,7 +56,7 @@ const utilitySlice = createSlice({
   initialState,
   reducers: {
     toogleLoading(state, action) {
-      state.isLoading = action.payload
+      state.isLoading = !state.isLoading
     },
   },
   extraReducers: {
@@ -104,6 +105,7 @@ const utilitySlice = createSlice({
     },
     [userAutoLogin.fulfilled](state, action) {
       state.status = "completed";
+      state.isLoading = false
       // debugger;
       if (action.payload.errors){
         state.errors = action.payload.errors

@@ -13,18 +13,16 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
 import { utilityActions } from "./store/utilitySlice";
-// import Loader from "./components/Loader";
+import Loader from "./components/Loader";
 
 function App() {
   const user = useSelector((state) => state.utilities.user);
   const isLoading = useSelector((state) => state.utilities.isLoading);
   const dispatch = useDispatch();
-  console.log(isLoading);
+  console.log(user, isLoading);
 
   useEffect(() => {
-    dispatch(userAutoLogin()).then(
-      dispatch(utilityActions.toogleLoading(false))
-    );
+    dispatch(userAutoLogin())
   }, [dispatch]);
 
   console.log(isLoading);
@@ -32,6 +30,7 @@ function App() {
   return (
     <div className="App">
       <ToolBar />
+      {isLoading? <Loader/> :
       <Switch>
         <Route exact path="/login">
           {!user ? <Login /> : <Redirect to="/home" />}
@@ -40,11 +39,11 @@ function App() {
           {!user ? <Signup /> : <Redirect to="/home" />}
         </Route>
         <Route exact path="/home" component={HomePage} />
-        <ProtectedRoute exact path="/air" component={Air} />
+         <ProtectedRoute exact path="/air" component={Air} />
         <ProtectedRoute exact path="/water" component={Water} />
         <ProtectedRoute exact path="/earth" component={Earth} />
         <ProtectedRoute exact path="/fire" component={Fire} />
-      </Switch>
+      </Switch>}
     </div>
   );
 }

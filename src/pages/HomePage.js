@@ -1,17 +1,20 @@
+import {useSelector} from 'react-redux'
 export default function HomePage() {
+    const user = useSelector(state => state.utilities.user)
     return (
     <div className="homepage">
         Namaste!
+        Welcome to Dream-Create-Receive
         <div>
-        <label>Name your board</label>
-        <input placeholder="name your board..."></input>
+        <div>Browse and choose a theme</div>
+        <div>Water || Eart || Air || Fire</div>
         </div>
         _________________________________________________
         <br/>
         (Click on any paragraph below to highlight features inside of the tool panel)
 
         <ul>
-        <li>Choose a theme</li>
+       
         <li>Generate a quote or....</li>
         <li>add your own</li>
         <li>Write your affirmations</li>

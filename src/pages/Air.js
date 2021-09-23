@@ -1,13 +1,23 @@
 import { useSelector } from "react-redux"
-import DemoLayout from "../components/BlurLayer"
+import './Elements.css'
+import WorkBench from "../components/WorkBench"
+import BlurLayer from "../components/BlurLayer"
 export default function Air(){
-const quote = useSelector(state => state.boards.quotes)
 const initialQuote = {cat:"air",text: "Happiness comes the way the wind blows"}
-console.log(quote)
+const quote = useSelector(state=> state.boards.quote)
+const layout = useSelector(state => state.boards.layout)
+const stickers = useSelector(state => state.boards.stickers)
+console.log(stickers)
+const symbol = "https://live.staticflickr.com/65535/51499946401_80628c9579_o.png"
+
+
+const description = "It is associated with the breath of life and attributed to cleansing power. Air symbolizes communication, intelligence, perception, knowledge, learning, thinking, imagination, creativity, harmony, and travel. This source of life can also, at times, become a force of terrible destruction. Air is associated with the Spring season and its corresponding direction is East. The Air symbol is an upright triangle with a horizontal line going through it."
+
     return (
-        <div className="layout">
-        <h1>Air Page</h1>
-        <DemoLayout name="air"/>
+        <div className='air-container'>
+        {quote === "" ? <h3>{initialQuote.text}</h3> : <h3>{quote}</h3>}
+        {layout === "" ? 
+        <BlurLayer name="air" description={description} symbol={symbol}/> : <WorkBench stickers={stickers}/>}
         </div>
     )
 }

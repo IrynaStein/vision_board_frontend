@@ -1,0 +1,45 @@
+.water-container {
+  display: flex;
+  background-image: url("https://live.staticflickr.com/65535/51497250447_bc9ecfee07_o.jpg");
+  flex-direction: column;
+  align-items: center;
+  min-width: 700px;
+  min-height: 700px;
+  border: solid black 3px;
+  justify-content: space-between;
+}
+
+.earth-container {
+  display: flex;
+  background-image: url("https://live.staticflickr.com/65535/51498042966_d046b67ed4_o.jpg");
+  flex-direction: column;
+  align-items: center;
+  min-width: 700px;
+  min-height: 700px;
+  border: solid black 3px;
+  justify-content: space-between;
+}
+
+.air-container {
+    display: flex;
+    background-image: url("https://live.staticflickr.com/65535/51498758654_4ba0274f43_o.png");
+    flex-direction: column;
+    align-items: center;
+    min-width: 700px;
+    min-height: 700px;
+    border: solid black 3px;
+    justify-content: space-between;
+  }
+
+  .fire-container {
+    display: flex;
+    background-image: url("https://live.staticflickr.com/65535/51498758564_edd5eeee32_o.jpg");
+    flex-direction: column;
+    align-items: center;
+    min-width: 700px;
+    min-height: 700px;
+    border: solid black 3px;
+    justify-content: space-between;
+  }
+
+  

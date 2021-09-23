@@ -15,7 +15,7 @@ const initialState ={
     stickers: [],
     frames: [],
     posts: [],
-    quotes: [],
+    quote: "",
     status: "",
     errors: []
 }

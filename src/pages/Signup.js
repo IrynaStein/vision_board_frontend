@@ -12,6 +12,7 @@ const { register, handleSubmit, reset } = useForm();
     reset();
   };
     return (
+      <div className="signuppage">
         <Form onSubmit={handleSubmit(onSubmit)}>
             <input
         {...register("name", { required: "Please enter your name." })}
@@ -35,5 +36,6 @@ const { register, handleSubmit, reset } = useForm();
       ></input>
       <Button basic color='purple'>Signup</Button>
     </Form>
+    </div>
     )
 }

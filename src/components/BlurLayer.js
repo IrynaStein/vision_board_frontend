@@ -17,7 +17,7 @@ function handleLayoutChoice(){
         {!isChosen ? <div className="layout">
             <img src={symbol} style={{height: "100px", width: "100px"}}alt="symbol"/>
         <p>{description}</p>
-       <button onClick={handleLayoutChoice}>Choose this layout</button>
+       <button disabled={name === "air" || name === "fire" ? true : false} onClick={handleLayoutChoice}>{name === "air" || name === "fire" ? "Comign soon!" : "Choose this layout"}</button>
         </div>
         : null}
         </>

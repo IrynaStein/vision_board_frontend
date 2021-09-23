@@ -12,7 +12,6 @@ import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
-import { utilityActions } from "./store/utilitySlice";
 import Loader from "./components/Loader";
 
 function App() {
@@ -39,7 +38,7 @@ function App() {
           {!user ? <Signup /> : <Redirect to="/home" />}
         </Route>
         <Route exact path="/home" component={HomePage} />
-         <ProtectedRoute exact path="/air" component={Air} />
+        <ProtectedRoute exact path="/air" component={Air} />
         <ProtectedRoute exact path="/water" component={Water} />
         <ProtectedRoute exact path="/earth" component={Earth} />
         <ProtectedRoute exact path="/fire" component={Fire} />

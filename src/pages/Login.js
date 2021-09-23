@@ -13,6 +13,7 @@ export default function Login() {
   };
 
   return (
+    <div className='loginpage'>
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
         {...register("username", { required: "Please enter your username." })}
@@ -24,5 +25,6 @@ export default function Login() {
       ></input>
       <button type='submit'>Login</button>
     </form>
+    </div>
   );
 }

@@ -119,3 +119,8 @@ element-link > img{
 sticker-container > img{
 size: 100%
 }
+
+.nameForm{
+  display: flex;
+  flex-direction: column;
+}

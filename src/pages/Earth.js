@@ -10,14 +10,15 @@ export default function Earth(){
     const dispatch = useDispatch()
     const quote = useSelector(state=> state.boards.quote)
     const layout = useSelector(state => state.boards.layout)
-    const stickers = useSelector(state => state.boards.stickers)
-    console.log(stickers)
+    const stickers = useSelector(state => state.boards.stickers.filter((s)=> s.category === "earth"))
+    const currentBoard = useSelector(state => state.boards.currentBoard)
 
-   
   useEffect(() => {
       dispatch(toolbarActions.resetLayoutShow())
-      dispatch(boardActions.setLayout(""))
-  }, [dispatch])
+      if (!currentBoard){
+        dispatch(boardActions.setLayout(""));
+    }
+  }, [dispatch, currentBoard])
 
   const initialQuote = useSelector((state) =>
   state.utilities.initialQuotes.find((q) => q.category === "earth")

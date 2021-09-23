@@ -1,6 +1,6 @@
-import {useSelector} from 'react-redux'
+// import {useSelector} from 'react-redux'
 export default function HomePage() {
-    const user = useSelector(state => state.utilities.user)
+    // const user = useSelector(state => state.utilities.user)
     return (
     <div className="homepage">
         Namaste!

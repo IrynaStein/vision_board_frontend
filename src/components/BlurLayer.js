@@ -5,12 +5,10 @@ import {boardActions, createBoard} from '../store/boardSlice'
 export default function BlurLayer({name, description, symbol, quote}){
     const [isChosen, setIsChosen] = useState(false)
     const dispatch = useDispatch()
-//when receiving props here this component should render the layout based on them
 
 function handleLayoutChoice(){
     setIsChosen(mUv=>!mUv)
     dispatch(boardActions.setLayout(name))
-    //need to add currently selected quote to the intialization object
     dispatch(createBoard({category: name, quote_id: quote}))
 }
     return (

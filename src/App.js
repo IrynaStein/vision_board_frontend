@@ -12,6 +12,7 @@ import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
+import { getStickers } from "./store/boardSlice";
 import Loader from "./components/Loader";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
   useEffect(() => {
     dispatch(userAutoLogin())
+    dispatch(getStickers())
   }, [dispatch]);
 
   console.log(isLoading);

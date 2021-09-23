@@ -10,6 +10,24 @@ export const createBoard = createAsyncThunk('boards/createBoard', async (params)
     const data = await resp.json()
     return data
 })
+
+export const updateBoard = createAsyncThunk('boards/updateBoard', async(dataToUpdate) => {
+    // debugger;
+    const resp = await fetch(`/boards/${dataToUpdate.id}`, {
+        method: "PATCH",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify(dataToUpdate.load)
+    })
+    const data = await resp.json()
+    return data
+})
+
+export const getStickers = createAsyncThunk("stickers/getStickers", async () => {
+    const resp = await fetch("/stickers")
+    const data = await resp.json()
+    return data
+})
+
 const initialState ={
     layout: "",
     currentBoard: {},
@@ -34,6 +52,9 @@ const boardSlice = createSlice({
         removeAffirmation(state, action){
             state.posts = state.posts.filter((post) => post.id !== action.payload)
         },
+        setCurrentBoard(state, {payload}){
+            state.currentBoard = payload
+        }
     },
     extraReducers: {
         [createBoard.pending](state){
@@ -58,7 +79,47 @@ const boardSlice = createSlice({
               } else {
                 state.errors = action.error.message;
               }
-        }
+        },
+        [getStickers.pending](state){
+            state.status = "pending"
+        },
+        [getStickers.fulfilled](state, action){
+            state.status = "completed"
+            if (action.payload.errors){
+                state.errors = action.payload.errors
+            }else {
+                state.stickers = action.payload
+                state.errors = []
+            }
+        },
+        [getStickers.rejected](state, action){
+            state.status = "rejected"
+            if (action.payload) {
+                state.errors = action.payload.errorMessage;
+              } else {
+                state.errors = action.error.message;
+              }
+        },
+        [updateBoard.pending](state){
+            state.status = "pending"
+        },
+        [updateBoard.fulfilled](state, action){
+            state.status = "completed"
+            if (action.payload.errors){
+                state.errors = action.payload.errors
+            }else {
+                state.currentBoard = action.payload
+                state.errors = []
+            }
+        },
+        [updateBoard.rejected](state, action){
+            state.status = "rejected"
+            if (action.payload) {
+                state.errors = action.payload.errorMessage;
+              } else {
+                state.errors = action.error.message;
+              }
+        },
     }
 })
 

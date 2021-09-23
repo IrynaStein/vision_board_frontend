@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store/utilitySlice";
 import apiKey from "../api";
+import { toolbarActions } from "../store/toolbarSlice";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
@@ -62,9 +63,9 @@ export default function ToolBar() {
           <img src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png" alt="fire symbol"/>
         </Link>
       </div>
-      <input placeholder="affirmation..."></input>
-      <button >Show Stickers</button>
-      <button>Add Picture</button>
+      <button onClick={() => dispatch(toolbarActions.tooglePosts())}>Compose affirmation</button>
+      <button onClick={() => dispatch(toolbarActions.toogleStickers())}>Show Stickers</button>
+      <button onClick={() => dispatch(toolbarActions.tooglePictures())}>Add Picture</button>
       <button onClick={handleClick}>Change Quote</button>
       _________
       <div className="utilities-edit">

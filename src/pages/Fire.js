@@ -1,13 +1,23 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import './Elements.css'
 import WorkBench from "../components/WorkBench"
 import BlurLayer from "../components/BlurLayer"
+import { toolbarActions } from "../store/toolbarSlice"
+import { boardActions } from "../store/boardSlice"
+
 export default function Fire(){
     const initialQuote = {cat:"fire",text: "The finest steel has to go through the hottest fire"}
     const quote = useSelector(state=> state.boards.quote)
     const layout = useSelector(state => state.boards.layout)
     const stickers = useSelector(state => state.boards.stickers)
     console.log(stickers)
+    const dispatch = useDispatch()
+
+useEffect(() => {
+    dispatch(toolbarActions.resetLayoutShow())
+    dispatch(boardActions.setLayout(""))
+}, [dispatch])
     const symbol = "https://live.staticflickr.com/65535/51499946366_7736fe5630_o.png"
     
 

@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const createBoard = createAsyncThunk('boards/createBoard', async (category) => {
+//need to send a quote along with the category
+export const createBoard = createAsyncThunk('boards/createBoard', async (params) => {
     const resp = await fetch('/boards', {
         method: "POST",
         headers: {"Content-Type" : "application/json"},
-        body: JSON.stringify(category)
+        body: JSON.stringify(params)
     })
     const data = await resp.json()
     return data

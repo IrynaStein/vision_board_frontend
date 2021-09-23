@@ -1,16 +1,27 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import './Elements.css'
 import './Frames.css'
 import BlurLayer from "../components/BlurLayer"
 import WorkBench from "../components/WorkBench"
+import { toolbarActions } from "../store/toolbarSlice"
+import { boardActions } from "../store/boardSlice"
 export default function Earth(){
-
+    const dispatch = useDispatch()
     const quote = useSelector(state=> state.boards.quote)
     const layout = useSelector(state => state.boards.layout)
     const stickers = useSelector(state => state.boards.stickers)
     console.log(stickers)
-    const initialQuote = {cat:"earth",
-    text: "Climb mountains not so the world can see you, but so you can see the world"}
+
+   
+  useEffect(() => {
+      dispatch(toolbarActions.resetLayoutShow())
+      dispatch(boardActions.setLayout(""))
+  }, [dispatch])
+
+  const initialQuote = useSelector((state) =>
+  state.utilities.initialQuotes.find((q) => q.category === "earth")
+);
     const symbol = "https://live.staticflickr.com/65535/51499151717_78d72f7b43_o.png"
     
 
@@ -18,7 +29,7 @@ export default function Earth(){
 
     return (
         <div className='earth-container'>
-        {quote === "" ? <h3>{initialQuote.text}</h3> : <h3>{quote}</h3>}
+        {quote === "" ? <h3>{initialQuote.paragraph}</h3> : <h3>{quote}</h3>}
         {layout === "" ? 
         <BlurLayer name="earth" description={description} symbol={symbol}/> : <WorkBench stickers={stickers}/>}
         </div>

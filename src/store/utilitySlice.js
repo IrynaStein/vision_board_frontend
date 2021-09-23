@@ -49,6 +49,7 @@ const initialState = {
   isLoading: true,
   status: "",
   errors: [],
+  initialQuotes: []
 };
 
 const utilitySlice = createSlice({
@@ -68,7 +69,8 @@ const utilitySlice = createSlice({
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
-        state.user = action.payload;
+        state.user = action.payload.user
+        state.initialQuotes = action.payload.quotes
         state.errors = [];
       }
     },
@@ -110,7 +112,8 @@ const utilitySlice = createSlice({
       if (action.payload.errors){
         state.errors = action.payload.errors
       }else{
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.initialQuotes = action.payload.quotes
         state.errors = [];
       }
     },
@@ -130,7 +133,8 @@ const utilitySlice = createSlice({
       if (action.payload.errors){
         state.errors = action.payload.errors
       }else{
-        state.user = action.payload
+        state.user = action.payload.user
+        state.initialQuotes = action.payload.quotes
         state.errors = []
       }
     },

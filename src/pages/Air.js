@@ -1,13 +1,22 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import './Elements.css'
 import WorkBench from "../components/WorkBench"
 import BlurLayer from "../components/BlurLayer"
+import { boardActions } from "../store/boardSlice"
+import { toolbarActions } from "../store/toolbarSlice"
 export default function Air(){
 const initialQuote = {cat:"air",text: "Happiness comes the way the wind blows"}
 const quote = useSelector(state=> state.boards.quote)
 const layout = useSelector(state => state.boards.layout)
 const stickers = useSelector(state => state.boards.stickers)
-console.log(stickers)
+const dispatch = useDispatch()
+
+useEffect(() => {
+    dispatch(toolbarActions.resetLayoutShow())
+    dispatch(boardActions.setLayout(""))
+}, [dispatch])
+
 const symbol = "https://live.staticflickr.com/65535/51499946401_80628c9579_o.png"
 
 

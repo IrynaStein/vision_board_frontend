@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {boardActions, createBoard} from '../store/boardSlice'
 
-export default function BlurLayer({name, description, symbol}){
+export default function BlurLayer({name, description, symbol, quote}){
     const [isChosen, setIsChosen] = useState(false)
     const dispatch = useDispatch()
 //when receiving props here this component should render the layout based on them
@@ -10,7 +10,8 @@ export default function BlurLayer({name, description, symbol}){
 function handleLayoutChoice(){
     setIsChosen(mUv=>!mUv)
     dispatch(boardActions.setLayout(name))
-    dispatch(createBoard({category: name}))
+    //need to add currently selected quote to the intialization object
+    dispatch(createBoard({category: name, quote: quote}))
 }
     return (
         <>

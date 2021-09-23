@@ -31,7 +31,7 @@ export default function Earth(){
         <div className='earth-container'>
         {quote === "" ? <h3>{initialQuote.paragraph}</h3> : <h3>{quote}</h3>}
         {layout === "" ? 
-        <BlurLayer name="earth" description={description} symbol={symbol}/> : <WorkBench stickers={stickers}/>}
+        <BlurLayer name="earth" description={description} symbol={symbol} quote={initialQuote.id}/> : <WorkBench stickers={stickers}/>}
         </div>
     )
 }

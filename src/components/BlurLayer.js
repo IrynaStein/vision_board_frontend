@@ -11,7 +11,7 @@ function handleLayoutChoice(){
     setIsChosen(mUv=>!mUv)
     dispatch(boardActions.setLayout(name))
     //need to add currently selected quote to the intialization object
-    dispatch(createBoard({category: name, quote: quote}))
+    dispatch(createBoard({category: name, quote_id: quote}))
 }
     return (
         <>

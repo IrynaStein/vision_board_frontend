@@ -19,12 +19,10 @@ export default function Water() {
   console.log("BOARD",currentBoard)
  
   const [form, setForm]= useState({
-      name: currentBoard.name
+      name: ""
   })
-//   debugger;
-console.log("BOARDNAME",form.name)
-// debugger;
-  const [hideInput, setHideInput ] = useState(true)
+
+  const [hideInput, setHideInput ] = useState(false)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(toolbarActions.resetLayoutShow());
@@ -33,7 +31,7 @@ console.log("BOARDNAME",form.name)
     }
   }, [dispatch, currentBoard]);
   const boardNameCheck = (name) => {
-    return name.match('Untitled-board-') ? true: false
+    return name.match('Untitled-board-')
 }
   const initialQuote = useSelector((state) =>
     state.utilities.initialQuotes.find((q) => q.category === "water")
@@ -54,7 +52,7 @@ console.log("BOARDNAME",form.name)
         // console.log(form)
         // console.log(id)
         dispatch(updateBoard({load:form, id: id}))
-        setHideInput(false)
+        setHideInput(true)
     }
 
   return (
@@ -63,17 +61,32 @@ console.log("BOARDNAME",form.name)
       {layout === "" ? (
         <BlurLayer name="water" description={description} symbol={symbol} quote={initialQuote.id} />
       ) : (
-          <>
-         {boardNameCheck && hideInput ? 
-        <form className="nameForm" onSubmit={(e) => handleSubmit(e,currentBoard.id)}>
-             <label for="nameChange">What are you manifesting today?</label>
-             <input id="nameChange" onChange={handleChange} name="name" value={form.name}></input>
-             <button type="submit">Ok</button>
-         </form> 
-         : 
-         null
-         } 
-        <WorkBench stickers={stickers} />
+        <>
+          {hideInput ? null : (
+            <>
+              {!boardNameCheck(currentBoard.name) ? (
+                <>
+                  <div>Last time you were manifesting:</div>
+                  <div>{currentBoard.name}</div>
+                </>
+              ) : null}
+              <form
+                className="nameForm"
+                onSubmit={(e) => handleSubmit(e, currentBoard.id)}
+              >
+                <label for="nameChange">What are you manifesting today?</label>
+                <input
+                  id="nameChange"
+                  onChange={handleChange}
+                  name="name"
+                  value={form.name}
+                ></input>
+                <button type="submit">Ok</button>
+              </form>{" "}
+            </>
+          )}
+
+          <WorkBench stickers={stickers} />
         </>
       )}
     </div>

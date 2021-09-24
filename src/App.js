@@ -13,7 +13,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
 import { getStickers } from "./store/boardSlice";
+import { boardActions } from "./store/boardSlice";
 import Loader from "./components/Loader";
+import Canvas from "./pages/Canvas";
 
 function App() {
   const user = useSelector((state) => state.utilities.user);
@@ -44,6 +46,7 @@ function App() {
         <ProtectedRoute exact path="/water" component={Water} />
         <ProtectedRoute exact path="/earth" component={Earth} />
         <ProtectedRoute exact path="/fire" component={Fire} />
+        <ProtectedRoute exact path="/:element/:boardName" component={Canvas}/>
       </Switch>}
     </div>
   );

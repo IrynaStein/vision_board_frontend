@@ -30,6 +30,7 @@ export const getStickers = createAsyncThunk("stickers/getStickers", async () => 
 
 const initialState ={
     layout: "",
+    userBoards: [],
     currentBoard: {},
     stickers: [],
     frames: [],
@@ -54,6 +55,9 @@ const boardSlice = createSlice({
         },
         setCurrentBoard(state, {payload}){
             state.currentBoard = payload
+        },
+        setUserBoards(state, action){
+            state.userBoards = action.payload
         }
     },
     extraReducers: {
@@ -70,6 +74,7 @@ const boardSlice = createSlice({
                 state.posts = action.payload.assets.posts
                 state.frames = action.payload.assets.frames
                 state.currentBoard = action.payload.board
+                state.userBoards = [...state.userBoards, action.payload.board]
                 state.errors = []
             }
         },
@@ -109,8 +114,10 @@ const boardSlice = createSlice({
                 state.errors = action.payload.errors
             }else {
                 state.currentBoard = action.payload
+                state.userBoards = state.userBoards.map((b) => 
+                    b.id === action.payload.id ? action.payload : b)
                 state.errors = []
-            }
+                } 
         },
         [updateBoard.rejected](state, action){
             state.status = "rejected"

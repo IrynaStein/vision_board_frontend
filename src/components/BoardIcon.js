@@ -10,7 +10,7 @@ export default function BoardIcon({ boards }) {
         dispatch(boardActions.setLayout(board.category))
     }
   const renderBoards = boards.map((board) => (
-     <Link to={board.category} onClick={()=>handleClick(board)}key={board.id}>{board.category}{board.name}</Link>
+     <Link to={board.category} onClick={()=>handleClick(board)}key={board.id}>{board.category}<br/>{board.name}</Link>
   ));
   return renderBoards;
 }

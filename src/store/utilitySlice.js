@@ -56,7 +56,7 @@ const utilitySlice = createSlice({
   name: "utility",
   initialState,
   reducers: {
-    toogleLoading(state, action) {
+    toogleLoading(state) {
       state.isLoading = !state.isLoading
     },
   },

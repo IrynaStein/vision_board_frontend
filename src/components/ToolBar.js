@@ -1,20 +1,20 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store/utilitySlice";
-import BoardIcon from "./BoardIcon";
 import apiKey from "../api";
 import { toolbarActions } from "../store/toolbarSlice";
 import { boardActions } from "../store/boardSlice";
+import BoardList from "./BoardsList";
 // import { Modal } from "semantic-ui-react";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
-  // const currentBoard = useSelector(state => state.boards.currentBoard)
-  // const [open, setOpen] = useState(false)
+const [showBoards, setShowBoards] = useState(false)
   const logoutHandler = () => {
     dispatch(userLogout());
   };
+
 
     function handleClick() {
       fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
@@ -37,6 +37,11 @@ function handleReset(){
     dispatch(boardActions.setLayout(""));
     dispatch(boardActions.setCurrentBoard(''))
 }
+
+function handleClick(){
+  dispatch(boardActions.setUserBoards(user.boards))
+  setShowBoards(mUv=>!mUv)
+}
   return (
     <div className="toolbar">
       ToolBar
@@ -55,21 +60,21 @@ function handleReset(){
           <img src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png" alt="fire symbol"/>
         </Link>
       </div>
-      <button onClick={() => dispatch(toolbarActions.tooglePosts())}>Compose affirmation</button>
-      <button onClick={() => dispatch(toolbarActions.toogleStickers())}>Show Stickers</button>
-      <button onClick={() => dispatch(toolbarActions.tooglePictures())}>Add Picture</button>
-      <button onClick={handleClick}>Change Quote</button>
+      <button disabled={!user} onClick={() => dispatch(toolbarActions.tooglePosts())}>Compose affirmation</button>
+      <button disabled={!user} onClick={() => dispatch(toolbarActions.toogleStickers())}>Show Stickers</button>
+      <button disabled={!user} onClick={() => dispatch(toolbarActions.tooglePictures())}>Add Picture</button>
+      <button disabled={!user} onClick={handleClick}>Change Quote</button>
       _________
       <div className="utilities-edit">
-        <button>Clear</button>
-        <button>Save</button>
-        <button>Edit</button>
-        <button>Download</button>
+        <button disabled={!user}>Clear</button>
+        <button disabled={!user}>Save</button>
+        <button disabled={!user}>Edit</button>
+        <button disabled={!user}>Download</button>
       </div>
       ____________________
-      <div>
-       {user && user.boards.length > 0? <BoardIcon boards={user.boards}/> : "You dont have any boards yet. Create one and start manifesting"}
-      </div>
+      {user ? 
+     <><button onClick={handleClick}>{showBoards? "hide my boards" : "show my boards"}</button>
+     {showBoards ? <BoardList /> : null}</>: null}
       _________
       <Link to="/home">?</Link>
       <div>

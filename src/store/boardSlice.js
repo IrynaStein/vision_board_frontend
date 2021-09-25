@@ -58,6 +58,9 @@ const boardSlice = createSlice({
         },
         setUserBoards(state, action){
             state.userBoards = action.payload
+        },
+        resetBoardSliceState(state){
+            state = initialState
         }
     },
     extraReducers: {

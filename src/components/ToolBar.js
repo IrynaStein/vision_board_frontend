@@ -10,60 +10,90 @@ import BoardList from "./BoardsList";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
-const [showBoards, setShowBoards] = useState(false)
+  const [showBoards, setShowBoards] = useState(false);
   const logoutHandler = () => {
     dispatch(userLogout());
+    dispatch(boardActions.resetBoardSliceState());
+    dispatch(toolbarActions.resetLayoutShow());
   };
 
-
-    function handleClick() {
-      fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "quotes15.p.rapidapi.com",
-          "x-rapidapi-key": apiKey
-        },
+  function handleClick() {
+    fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "quotes15.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
       })
-        .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
-function handleReset(){
+  function handleReset() {
     dispatch(boardActions.setLayout(""));
-    dispatch(boardActions.setCurrentBoard(''))
-}
+    dispatch(boardActions.setCurrentBoard(""));
+  }
 
-function handleClick(){
-  dispatch(boardActions.setUserBoards(user.boards))
-  setShowBoards(mUv=>!mUv)
-}
+  function handleClick() {
+    dispatch(boardActions.setUserBoards(user.boards));
+    setShowBoards((mUv) => !mUv);
+  }
   return (
     <div className="toolbar">
       ToolBar
       <div className="element-link-container">
-       {/* <Modal /> */}
-        <Link to="/water" onClick={handleReset}className="element-link">
-          <img src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png" alt="water symbol"/>
+        {/* <Modal /> */}
+        <Link to="/water" onClick={handleReset} className="element-link">
+          <img
+            src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png"
+            alt="water symbol"
+          />
         </Link>
         <Link to="/earth" onClick={handleReset} className="element-link">
-          <img src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png" alt="earth symbol"/>
+          <img
+            src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png"
+            alt="earth symbol"
+          />
         </Link>
         <Link to="/air" onClick={handleReset} className="element-link">
-          <img src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png" alt="air symbol"/>
+          <img
+            src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png"
+            alt="air symbol"
+          />
         </Link>
         <Link to="/fire" onClick={handleReset} className="element-link">
-          <img src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png" alt="fire symbol"/>
+          <img
+            src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png"
+            alt="fire symbol"
+          />
         </Link>
       </div>
-      <button disabled={!user} onClick={() => dispatch(toolbarActions.tooglePosts())}>Compose affirmation</button>
-      <button disabled={!user} onClick={() => dispatch(toolbarActions.toogleStickers())}>Show Stickers</button>
-      <button disabled={!user} onClick={() => dispatch(toolbarActions.tooglePictures())}>Add Picture</button>
-      <button disabled={!user} onClick={handleClick}>Change Quote</button>
+      <button
+        disabled={!user}
+        onClick={() => dispatch(toolbarActions.tooglePosts())}
+      >
+        Compose affirmation
+      </button>
+      <button
+        disabled={!user}
+        onClick={() => dispatch(toolbarActions.toogleStickers())}
+      >
+        Show Stickers
+      </button>
+      <button
+        disabled={!user}
+        onClick={() => dispatch(toolbarActions.tooglePictures())}
+      >
+        Add Picture
+      </button>
+      <button disabled={!user} onClick={handleClick}>
+        Change Quote
+      </button>
       _________
       <div className="utilities-edit">
         <button disabled={!user}>Clear</button>
@@ -72,9 +102,14 @@ function handleClick(){
         <button disabled={!user}>Download</button>
       </div>
       ____________________
-      {user ? 
-     <><button onClick={handleClick}>{showBoards? "hide my boards" : "show my boards"}</button>
-     {showBoards ? <BoardList /> : null}</>: null}
+      {user ? (
+        <>
+          <button onClick={handleClick}>
+            {showBoards ? "hide my boards" : "show my boards"}
+          </button>
+          {showBoards ? <BoardList /> : null}
+        </>
+      ) : null}
       _________
       <Link to="/home">?</Link>
       <div>

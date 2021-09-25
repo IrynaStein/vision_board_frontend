@@ -18,6 +18,7 @@ flex-direction: column;
 flex-wrap: nowrap;
 border: solid black 1px;
 min-width: 200px;
+justify-content: space-evenly;
 }
 
 .homepage {
@@ -111,14 +112,16 @@ element-link > img{
   border: solid black 1px;
 }
 
-.sticker-container{
+/* .sticker-container{
   display: flex;
   height: 60px;
   width: 60px;
-}
-sticker-container > img{
-size: 100%
-}
+  border: black solid 5px;
+} */
+/* sticker-container > img{
+size: 50%;
+pointer-events: none;
+} */
 
 .nameForm{
   display: flex;

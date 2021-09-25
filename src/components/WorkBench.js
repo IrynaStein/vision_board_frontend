@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import Sticker from "./Sticker";
 export default function WorkBench({ stickers }) {
   const stickerShow = useSelector((state) => state.toolbars.showSticker);
   const pictureShow = useSelector((state) => state.toolbars.showPicture);
@@ -6,10 +7,10 @@ export default function WorkBench({ stickers }) {
 
   console.log("WORKBENCH", stickers);
   const renderStickers = stickers.map((sticker) => (
-    <div className="sticker-container" key={sticker.id}>
-      <img src={sticker.image_url} alt="sticker"></img>
-    </div>
+    <Sticker key={sticker.id} sticker={sticker}/>
   ));
+
+  
   const renderAffirmationInput = () => {
     return <input placeholder="compose your affirmation..."></input>;
   };

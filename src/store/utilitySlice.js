@@ -91,7 +91,10 @@ const utilitySlice = createSlice({
         state.errors = action.payload.errors;
       } else {
         state.user = null
-        state.errors = action.payload.message;
+        state.errors = action.payload.message
+        state.isLoading = true
+        state.status = ""
+        state.initialQuotes = []
       }
     },
     [userLogout.rejected](state, action) {

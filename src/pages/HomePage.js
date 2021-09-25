@@ -1,12 +1,25 @@
 // import {useSelector} from 'react-redux'
+import { useState } from "react";
+import { useDrag } from '@use-gesture/react'
 export default function HomePage() {
-    // const user = useSelector(state => state.utilities.user)
+    const [logoPos, setLogoPos] = useState({
+        x: 0,
+        y: 0
+    })
+    const bindLogoPos = useDrag((params)=>{
+            setLogoPos({
+                x: params.offset[0],
+                y: params.offset[1]
+            })
+    })
     return (
     <div className="homepage">
         Namaste!
         Welcome to Dream-Create-Receive
         <div>
-        <div>Browse and choose a theme</div>
+        <div {...bindLogoPos()} style={{position: "relative", top: logoPos.y, left: logoPos.x}}> 
+      <img className="App-logo" src="https://live.staticflickr.com/65535/51508747110_13a7864a12_s.jpg" alt="sticker"></img> 
+    </div>
         <div>Water || Eart || Air || Fire</div>
         </div>
         _________________________________________________

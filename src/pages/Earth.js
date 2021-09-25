@@ -14,20 +14,25 @@ export default function Earth() {
   const stickers = useSelector((state) =>
     state.boards.stickers.filter((s) => s.category === "earth")
   );
+  const errors = useSelector(state => state.boards.errors)
   const currentBoard = useSelector((state) => state.boards.currentBoard);
   const [form, setForm] = useState({
     name: "",
   });
   const [hideInput, setHideInput] = useState(false);
   useEffect(() => {
-    dispatch(toolbarActions.resetLayoutShow());
+    // dispatch(toolbarActions.resetLayoutShow());
     if (!currentBoard) {
       dispatch(boardActions.setLayout(""));
     }
   }, [dispatch, currentBoard]);
 
   const boardNameCheck = (name) => {
-    return name.match("Untitled-board-");
+    if (errors.length > 0) {
+      return errors;
+    } else {
+      return name.match("Untitled-board-");
+    }
   };
 
   const initialQuote = useSelector((state) =>
@@ -50,6 +55,8 @@ export default function Earth() {
   }
 
   return (
+    <>
+    {errors.length === 0 ? 
     <div className="earth-container">
       {quote === "" ? <h3>{initialQuote.paragraph}</h3> : <h3>{quote}</h3>}
       {layout === "" ? (
@@ -88,6 +95,8 @@ export default function Earth() {
           <WorkBench stickers={stickers} />
         </>
       )}
-    </div>
+    </div> :
+    <div>{errors}</div>}
+    </>
   );
 }

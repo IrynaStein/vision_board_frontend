@@ -16,7 +16,7 @@ export default function ToolBar() {
     dispatch(boardActions.resetBoardSliceState());
     dispatch(toolbarActions.resetLayoutShow());
   };
-
+const currentBoard = useSelector(state => state.boards.currentBoard)
   function handleClick() {
     fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
       method: "GET",
@@ -39,6 +39,12 @@ export default function ToolBar() {
     dispatch(boardActions.setCurrentBoard(""));
   }
 
+  function stickersHandler(){
+    dispatch(toolbarActions.toogleStickers())
+    // debugger
+    dispatch(boardActions.currentBoardStickers(currentBoard.category))
+  }
+
   function handleClick() {
     dispatch(boardActions.setUserBoards(user.boards));
     setShowBoards((mUv) => !mUv);
@@ -48,25 +54,25 @@ export default function ToolBar() {
       ToolBar
       <div className="element-link-container">
         {/* <Modal /> */}
-        <Link to="/water" onClick={handleReset} className="element-link">
+        <Link to="/water" onClick={()=> handleReset()} className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png"
             alt="water symbol"
           />
         </Link>
-        <Link to="/earth" onClick={handleReset} className="element-link">
+        <Link to="/earth" onClick={()=>handleReset()} className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png"
             alt="earth symbol"
           />
         </Link>
-        <Link to="/air" onClick={handleReset} className="element-link">
+        <Link to="/air" onClick={()=>handleReset()} className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png"
             alt="air symbol"
           />
         </Link>
-        <Link to="/fire" onClick={handleReset} className="element-link">
+        <Link to="/fire" onClick={()=>handleReset()} className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png"
             alt="fire symbol"
@@ -83,13 +89,14 @@ export default function ToolBar() {
         disabled={!user}
         onClick={() => dispatch(toolbarActions.toogleStickers())}
       >
-        Show Stickers
+        
+        Add Picture
       </button>
       <button
         disabled={!user}
-        onClick={() => dispatch(toolbarActions.tooglePictures())}
+        onClick={stickersHandler}
       >
-        Add Picture
+       Show Stickers
       </button>
       <button disabled={!user} onClick={handleClick}>
         Change Quote

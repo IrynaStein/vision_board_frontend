@@ -10,6 +10,7 @@ export default function Login() {
   const onSubmit = (data, e) => {
     e.preventDefault();
     dispatch(userLogin(data))
+    // dispatch(boardActions.setUserBoards(user.boards))
     reset();
   };
 

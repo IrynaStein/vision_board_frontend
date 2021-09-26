@@ -6,17 +6,19 @@ import apiKey from "../api";
 import { toolbarActions } from "../store/toolbarSlice";
 import { boardActions } from "../store/boardSlice";
 import BoardList from "./BoardsList";
+import Loader from "./Loader";
 // import { Modal } from "semantic-ui-react";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
   const [showBoards, setShowBoards] = useState(false);
+  const isLoading = useSelector(state => state.boards.userBoards)
   const logoutHandler = () => {
     dispatch(userLogout());
     dispatch(boardActions.reset());
     dispatch(toolbarActions.resetLayoutShow());
   };
-const currentBoard = useSelector(state => state.boards.currentBoard)
+
   // function handleClick() {
   //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
   //     method: "GET",
@@ -36,13 +38,10 @@ const currentBoard = useSelector(state => state.boards.currentBoard)
 
   function handleReset() {
     dispatch(boardActions.setLayout(""));
-    dispatch(boardActions.setCurrentBoard({}));
   }
 
   function stickersHandler(){
     dispatch(toolbarActions.toogleStickers())
-    // debugger
-    dispatch(boardActions.currentBoardStickers(currentBoard.category))
   }
 
   function handleClick() {
@@ -50,17 +49,18 @@ const currentBoard = useSelector(state => state.boards.currentBoard)
     setShowBoards((mUv) => !mUv);
   }
   return (
+    // <>{isLoading? <Loader/>:
     <div className="toolbar">
       ToolBar
       <div className="element-link-container">
         {/* <Modal /> */}
-        <Link to="/water" onClick={()=> handleReset()} className="element-link">
+        <Link to="/water" onClick={()=> dispatch(boardActions.setLayout("water"))} className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png"
             alt="water symbol"
           />
         </Link>
-        <Link to="/earth" onClick={()=>handleReset()} className="element-link">
+        <Link to="/earth" onClick={()=>dispatch(boardActions.setLayout("earth"))}className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png"
             alt="earth symbol"
@@ -129,5 +129,7 @@ const currentBoard = useSelector(state => state.boards.currentBoard)
         )}
       </div>
     </div>
+    // }
+    // </>
   );
 }

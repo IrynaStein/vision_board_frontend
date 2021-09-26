@@ -15,7 +15,7 @@ import { userAutoLogin } from "./store/utilitySlice";
 import { getStickers } from "./store/boardSlice";
 import Loader from "./components/Loader";
 import WorkBench from "./components/WorkBench";
-import {useParams} from 'react-router-dom'
+
 
 function App() {
   const user = useSelector((state) => state.utilities.user);

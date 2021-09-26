@@ -106,7 +106,7 @@ const boardSlice = createSlice({
         state.errors = action.payload.errors;
       } else {
         state.userBoards = [...state.userBoards, action.payload];
-        // state.currentBoard = action.payload
+        state.currentBoard = action.payload
         state.errors = []; 
       }
     },

@@ -14,6 +14,7 @@ export default function BlurLayer({ name, description, symbol, quote }) {
     dispatch(createBoard({ category: name, quote_id: quote }));
     dispatch(boardActions.toogleBoardsLoading())
   }
+
   return (
       <>{isLoading ? <Loader/> :
     <>

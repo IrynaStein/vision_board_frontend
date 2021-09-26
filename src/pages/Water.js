@@ -29,7 +29,6 @@ export default function Water() {
   return (
     <div className="water-container">
       {errors.length === 0 ? (
-
         <>
          <h3>{initialQuote.paragraph}</h3> 
             <BlurLayer

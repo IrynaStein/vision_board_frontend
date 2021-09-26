@@ -9,11 +9,11 @@ export default function BoardIcon({ boards }) {
         dispatch(boardActions.setCurrentBoard(board))
         dispatch(boardActions.setLayout(board.category))
     }
+  // const renderBoards = boards.map((board) => (
+  //    <Link to={`workbench/${board.id}`} onClick={()=>handleClick(board)}key={board.id}>{board.category}</Link>
+  // ));
   const renderBoards = boards.map((board) => (
-     <Link to={`workbench/${board.id}`} onClick={()=>handleClick(board)}key={board.id}>{board.category}</Link>
-  ));
-//   const renderBoards = boards.map((board) => (
-//     <Link to={`${board.category}/${board.id}`} onClick={()=>handleClick(board)}key={board.id}>{board.category}<br/>{board.name}</Link>
-//  ));
+    <Link to={`${board.category}/${board.id}`} onClick={()=>handleClick(board)}key={board.id}>{board.category}<br/>{board.name}</Link>
+ ));
   return renderBoards;
 }

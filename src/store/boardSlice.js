@@ -70,7 +70,7 @@ const boardSlice = createSlice({
       state.userBoards = action.payload;
     },
     reset: () => initialState,
-
+    
     currentBoardStickers(state, action) {
         // debugger
       state.currentBoard.stickers = state.stickers.filter(

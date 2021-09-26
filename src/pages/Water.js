@@ -16,15 +16,14 @@ export default function Water() {
   const isLoading = useSelector(state => state.boards.isLoadingBoards)
   const quote = useSelector((state) => state.boards.quote);
   const layout = useSelector((state) => state.boards.layout);
-  const stickers = useSelector((state) =>
-    state.boards.stickers.filter((s) => s.category === "water")
-  );
+  
   const currentBoard = useSelector((state) => state.boards.currentBoard);
   console.log("BOARD", currentBoard);
   const errors = useSelector((state) => state.boards.errors);
   const initialQuote = useSelector((state) =>
     state.utilities.initialQuotes.find((q) => q.category === "water")
   );
+  const user = useSelector((state) => state.utilities.user);
   const [form, setForm] = useState({
     name: "",
   });
@@ -41,6 +40,7 @@ const history = useHistory()
 
 function handleReset(){
   dispatch(boardActions.reset())
+  dispatch(boardActions.setUserBoards(user.boards))
 }
   function boardNameCheck(name){
     if (Object.keys(currentBoard).length > 0 && errors.length === 0){

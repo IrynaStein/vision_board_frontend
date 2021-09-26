@@ -13,7 +13,7 @@ export default function ToolBar() {
   const [showBoards, setShowBoards] = useState(false);
   const logoutHandler = () => {
     dispatch(userLogout());
-    dispatch(boardActions.resetBoardSliceState());
+    dispatch(boardActions.reset());
     dispatch(toolbarActions.resetLayoutShow());
   };
 const currentBoard = useSelector(state => state.boards.currentBoard)
@@ -87,7 +87,7 @@ const currentBoard = useSelector(state => state.boards.currentBoard)
       </button>
       <button
         disabled={!user}
-        onClick={() => dispatch(toolbarActions.toogleStickers())}
+        onClick={() => dispatch(toolbarActions.tooglePictures())}
       >
         
         Add Picture

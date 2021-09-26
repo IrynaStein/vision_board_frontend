@@ -14,19 +14,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
 import { getStickers } from "./store/boardSlice";
 import Loader from "./components/Loader";
+import WorkBench from "./components/WorkBench";
+import {useParams} from 'react-router-dom'
 
 function App() {
   const user = useSelector((state) => state.utilities.user);
   const isLoading = useSelector((state) => state.utilities.isLoading);
   const dispatch = useDispatch();
-  console.log(user, isLoading);
 
   useEffect(() => {
     dispatch(userAutoLogin())
     dispatch(getStickers())
   }, [dispatch]);
-
-  console.log(isLoading);
 
   return (
     <div className="App">
@@ -44,6 +43,7 @@ function App() {
         <ProtectedRoute exact path="/water" component={Water} />
         <ProtectedRoute exact path="/earth" component={Earth} />
         <ProtectedRoute exact path="/fire" component={Fire} />
+        <ProtectedRoute exact path="/workbench/:id" component={WorkBench}/>
       </Switch>}
     </div>
   );

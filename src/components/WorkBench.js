@@ -1,38 +1,46 @@
 import { useSelector } from "react-redux";
-export default function WorkBench({ stickers }) {
+import { useParams } from "react-router";
+// import Sticker from "./Sticker";
+export default function WorkBench() {
+  let params = useParams()
+  console.log(params)
+ 
   const stickerShow = useSelector((state) => state.toolbars.showSticker);
   const pictureShow = useSelector((state) => state.toolbars.showPicture);
   const postShow = useSelector((state) => state.toolbars.showPost);
 
-  console.log("WORKBENCH", stickers);
-  const renderStickers = stickers.map((sticker) => (
-    <div className="sticker-container" key={sticker.id}>
-      <img src={sticker.image_url} alt="sticker"></img>
-    </div>
-  ));
-  const renderAffirmationInput = () => {
-    return <input placeholder="compose your affirmation..."></input>;
-  };
+//   // debugger;
+// const {quote, posts} = currentBoard
+// // debugger
+//   const renderStickers = stickers.map((sticker) => (
+//     <Sticker key={sticker.id} sticker={sticker}/>
+//   ));
 
-  const renderImageUpload = () =>{
-    return <input type="file" placeholder="upload image..."></input>
-  }
-  const renderWorbench = () => {
-    if (stickerShow) {
-      return renderStickers;
-    } else if (postShow) {
-      return renderAffirmationInput();
-    } else if (pictureShow){
-      return renderImageUpload();
-    }else {
-        return 
-    }
-  };
+  
+//   const renderAffirmationInput = () => {
+//     return <input placeholder="compose your affirmation..."></input>;
+//   };
+
+//   const renderImageUpload = () =>{
+//     return <input type="file" placeholder="upload image..."></input>
+//   }
+//   const renderWorkench = () => {
+//     if (stickerShow) {
+//       return renderStickers;
+//     } else if (postShow) {
+//       return renderAffirmationInput();
+//     } else if (pictureShow){
+//       return renderImageUpload();
+//     }else {
+//         return 
+//     }
+//   };
 
   return (
-    <>
-      <div className="canvas">Canvas area</div>
-      <div className="palette">{renderWorbench()}</div>
-    </>
+    // <>
+    //   <div className="canvas">{quote.paragraph}</div>
+    //   <div className="palette">{renderWorkench()}</div>
+    // </>
+    <div> workbench {params.id}</div>
   );
 }

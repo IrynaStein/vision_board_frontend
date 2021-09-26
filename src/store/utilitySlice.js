@@ -56,7 +56,7 @@ const utilitySlice = createSlice({
   name: "utility",
   initialState,
   reducers: {
-    toogleLoading(state, action) {
+    toogleLoading(state) {
       state.isLoading = !state.isLoading
     },
   },
@@ -91,7 +91,10 @@ const utilitySlice = createSlice({
         state.errors = action.payload.errors;
       } else {
         state.user = null
-        state.errors = action.payload.message;
+        state.errors = action.payload.message
+        state.isLoading = true
+        state.status = ""
+        state.initialQuotes = []
       }
     },
     [userLogout.rejected](state, action) {

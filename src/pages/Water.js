@@ -10,6 +10,7 @@ import WorkBench from "../components/WorkBench";
 import { toolbarActions } from "../store/toolbarSlice";
 import { boardActions } from "../store/boardSlice";
 import { updateBoard } from "../store/boardSlice";
+import { useHistory } from "react-router";
 import Loader from "../components/Loader";
 export default function Water() {
   const isLoading = useSelector(state => state.boards.isLoadingBoards)
@@ -27,7 +28,7 @@ export default function Water() {
   const [form, setForm] = useState({
     name: "",
   });
-
+const history = useHistory()
   const [hideInput, setHideInput] = useState(false);
   const dispatch = useDispatch();
 
@@ -60,6 +61,11 @@ function handleReset(){
     e.preventDefault();
     dispatch(updateBoard({ load: form, id: id }));
     setHideInput(true);
+    history.push(`/workbench/${currentBoard.id}`)
+  }
+  function onSame(){
+    setHideInput(true)
+    history.push(`/workbench/${currentBoard.id}`)
   }
  
   return (
@@ -99,12 +105,12 @@ function handleReset(){
                     ></input>
                     <div>
                     <button type="submit">Ok</button>
-                    <button onClick={()=>setHideInput(true)}>Same</button>
+                    <button onClick={onSame}>Same</button>
                     </div>
                   </form>{" "}
                 </>
               )}
-             {Object.keys(currentBoard).length > 0 && errors.length === 0 ? <WorkBench currentBoard={currentBoard} stickers={stickers}/> : null}
+             {/* {Object.keys(currentBoard).length > 0 && errors.length === 0 ? <WorkBench currentBoard={currentBoard} stickers={stickers}/> : null} */}
              
             </>
           )}</> : <div>{errors}<button onClick={handleReset}>Ok</button></div>}

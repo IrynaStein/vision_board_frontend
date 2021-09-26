@@ -1,13 +1,14 @@
 import { Route, Redirect } from "react-router";
 import { useSelector } from "react-redux";
-const ProtectedRoute = ({ component: Component }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.utilities.user);
   return (
     <Route
-      render={() => {
+    {...rest}
+      render={(props) => {
         //   debugger;
         if (user) { 
-          return <Component />;
+          return <Component {...props}/>;
         } else {
           return <Redirect to="/home" />;
         }

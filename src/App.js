@@ -15,7 +15,7 @@ import { userAutoLogin } from "./store/utilitySlice";
 import { getStickers } from "./store/boardSlice";
 import Loader from "./components/Loader";
 import WorkBench from "./components/WorkBench";
-import {useParams} from 'react-router-dom'
+
 
 function App() {
   const user = useSelector((state) => state.utilities.user);
@@ -43,7 +43,7 @@ function App() {
         <ProtectedRoute exact path="/water" component={Water} />
         <ProtectedRoute exact path="/earth" component={Earth} />
         <ProtectedRoute exact path="/fire" component={Fire} />
-        <ProtectedRoute exact path="/workbench/:id" component={WorkBench}/>
+        <ProtectedRoute exact path="/:element/:id" component={WorkBench}/>
       </Switch>}
     </div>
   );

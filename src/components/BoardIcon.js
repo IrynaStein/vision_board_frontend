@@ -2,18 +2,12 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { boardActions } from "../store/boardSlice";
 export default function BoardIcon({ boards }) {
-    const dispatch = useDispatch()
-    function handleClick(board){
-        console.log("BOARDICON navigating")
-        console.log(board.category)
-        dispatch(boardActions.setCurrentBoard(board))
-        dispatch(boardActions.setLayout(board.category))
-    }
+  const dispatch = useDispatch()
+ 
   const renderBoards = boards.map((board) => (
-     <Link to={`workbench/${board.id}`} onClick={()=>handleClick(board)}key={board.id}>{board.category}</Link>
-  ));
-//   const renderBoards = boards.map((board) => (
-//     <Link to={`${board.category}/${board.id}`} onClick={()=>handleClick(board)}key={board.id}>{board.category}<br/>{board.name}</Link>
-//  ));
+    <Link to={`/${board.category}/${board.id}`} onClick={()=>dispatch(boardActions.setLayout(board.category))}key={board.id}>{board.category}<br/>{board.name}</Link>
+ ));
+
+
   return renderBoards;
 }

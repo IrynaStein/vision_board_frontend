@@ -17,7 +17,6 @@ export const createBoard = createAsyncThunk(
 export const updateBoard = createAsyncThunk(
   "boards/updateBoard",
   async (dataToUpdate) => {
-    // debugger;
     const resp = await fetch(`/boards/${dataToUpdate.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -40,20 +39,23 @@ export const getStickers = createAsyncThunk(
 const initialState = {
   layout: "",
   userBoards: [],
-  currentBoard: {},
+  currentBoard: null,
   stickers: [],
   frames: [],
   posts: [],
   quote: "",
   status: "",
   errors: [],
-  isLoadingBoards: true
+  isLoadingBoards: false
 };
 
 const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
+    toogleBoardsLoading(state) {
+        state.isLoadingBoards = !state.isLoadingBoards
+      },
     setLayout(state, action) {
       state.layout = action.payload;
     },
@@ -63,14 +65,23 @@ const boardSlice = createSlice({
     removeAffirmation(state, action) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
-    setCurrentBoard(state, { payload }) {
-      state.currentBoard = payload;
-    },
     setUserBoards(state, action) {
       state.userBoards = action.payload;
     },
     reset: () => initialState,
-
+    
+//doesnt reset stickers 
+    partialReset(state){
+        state.layout = ""
+        state.userBoards = []
+        state.currentBoard = null
+        state.frames = []
+        state.posts = []
+        state.quote = ""
+        state.status = ""
+        state.errors = []
+        state.isLoadingBoards = false
+    },
     currentBoardStickers(state, action) {
         // debugger
       state.currentBoard.stickers = state.stickers.filter(
@@ -90,17 +101,13 @@ const boardSlice = createSlice({
     },
     [createBoard.fulfilled](state, action) {
       state.status = "completed";
+      state.isLoadingBoards = false
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
-        state.stickers = action.payload.assets.stickers;
-        state.quotes = action.payload.assets.quote;
-        state.posts = action.payload.assets.posts;
-        state.frames = action.payload.assets.frames;
-        state.currentBoard = action.payload.board;
-        state.userBoards = [...state.userBoards, action.payload.board];
-        state.errors = [];
-        state.isLoadingBoards = false
+        state.userBoards = [...state.userBoards, action.payload];
+        // state.currentBoard = action.payload
+        state.errors = []; 
       }
     },
     [createBoard.rejected](state, action) {

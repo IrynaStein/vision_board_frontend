@@ -47,6 +47,7 @@ const initialState = {
   quote: "",
   status: "",
   errors: [],
+  isLoadingBoards: true
 };
 
 const boardSlice = createSlice({
@@ -71,7 +72,7 @@ const boardSlice = createSlice({
     reset: () => initialState,
 
     currentBoardStickers(state, action) {
-        debugger
+        // debugger
       state.currentBoard.stickers = state.stickers.filter(
         (s) => s.category === action.payload
       );
@@ -99,6 +100,7 @@ const boardSlice = createSlice({
         state.currentBoard = action.payload.board;
         state.userBoards = [...state.userBoards, action.payload.board];
         state.errors = [];
+        state.isLoadingBoards = false
       }
     },
     [createBoard.rejected](state, action) {
@@ -119,6 +121,7 @@ const boardSlice = createSlice({
       } else {
         state.stickers = action.payload;
         state.errors = [];
+        // state.isLoading = false
       }
     },
     [getStickers.rejected](state, action) {
@@ -142,6 +145,7 @@ const boardSlice = createSlice({
           b.id === action.payload.id ? action.payload : b
         );
         state.errors = [];
+        // state.isLoading = false
       }
     },
     [updateBoard.rejected](state, action) {

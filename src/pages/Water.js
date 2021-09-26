@@ -10,8 +10,9 @@ import WorkBench from "../components/WorkBench";
 import { toolbarActions } from "../store/toolbarSlice";
 import { boardActions } from "../store/boardSlice";
 import { updateBoard } from "../store/boardSlice";
-
+import Loader from "../components/Loader";
 export default function Water() {
+  const isLoading = useSelector(state => state.boards.isLoadingBoards)
   const quote = useSelector((state) => state.boards.quote);
   const layout = useSelector((state) => state.boards.layout);
   const stickers = useSelector((state) =>
@@ -36,10 +37,8 @@ export default function Water() {
       dispatch(boardActions.setLayout(""));
     }
   }, [dispatch, currentBoard]);
-// debugger;
 
 function handleReset(){
-  // dispatch(boardActions.resetBoardSliceState())
   dispatch(boardActions.reset())
 }
   function boardNameCheck(name){
@@ -59,14 +58,12 @@ function handleReset(){
   }
   function handleSubmit(e, id) {
     e.preventDefault();
-    // console.log(form)
-    // console.log(id)
     dispatch(updateBoard({ load: form, id: id }));
     setHideInput(true);
   }
  
   return (
-  
+
         <div className="water-container">
           {errors.length === 0 ? <>
           {quote === "" ? <h3>{initialQuote.paragraph}</h3> : <h3>{quote}</h3>}
@@ -107,10 +104,11 @@ function handleReset(){
                   </form>{" "}
                 </>
               )}
-
-              <WorkBench stickers={stickers} />
+             {Object.keys(currentBoard).length > 0 && errors.length === 0 ? <WorkBench currentBoard={currentBoard} stickers={stickers}/> : null}
+             
             </>
           )}</> : <div>{errors}<button onClick={handleReset}>Ok</button></div>}
         </div>
+
       ) 
 }

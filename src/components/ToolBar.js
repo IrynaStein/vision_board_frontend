@@ -17,26 +17,26 @@ export default function ToolBar() {
     dispatch(toolbarActions.resetLayoutShow());
   };
 const currentBoard = useSelector(state => state.boards.currentBoard)
-  function handleClick() {
-    fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "quotes15.p.rapidapi.com",
-        "x-rapidapi-key": apiKey,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+  // function handleClick() {
+  //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
+  //     method: "GET",
+  //     headers: {
+  //       "x-rapidapi-host": "quotes15.p.rapidapi.com",
+  //       "x-rapidapi-key": apiKey,
+  //     },
+  //   })
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }
 
   function handleReset() {
     dispatch(boardActions.setLayout(""));
-    dispatch(boardActions.setCurrentBoard(""));
+    dispatch(boardActions.setCurrentBoard({}));
   }
 
   function stickersHandler(){

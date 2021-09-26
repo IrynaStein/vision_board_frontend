@@ -1,11 +1,16 @@
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import Sticker from "./Sticker";
-export default function WorkBench({ stickers }) {
+export default function WorkBench({ currentBoard, stickers}) {
+
+  const params = useParams()
+  // debugger
   const stickerShow = useSelector((state) => state.toolbars.showSticker);
   const pictureShow = useSelector((state) => state.toolbars.showPicture);
   const postShow = useSelector((state) => state.toolbars.showPost);
-
-  console.log("WORKBENCH", stickers);
+  // debugger;
+const {quote, posts} = currentBoard
+// debugger
   const renderStickers = stickers.map((sticker) => (
     <Sticker key={sticker.id} sticker={sticker}/>
   ));
@@ -18,7 +23,7 @@ export default function WorkBench({ stickers }) {
   const renderImageUpload = () =>{
     return <input type="file" placeholder="upload image..."></input>
   }
-  const renderWorbench = () => {
+  const renderWorkench = () => {
     if (stickerShow) {
       return renderStickers;
     } else if (postShow) {
@@ -32,8 +37,8 @@ export default function WorkBench({ stickers }) {
 
   return (
     <>
-      <div className="canvas">Canvas area</div>
-      <div className="palette">{renderWorbench()}</div>
+      <div className="canvas">{quote.paragraph}</div>
+      <div className="palette">{renderWorkench()}</div>
     </>
   );
 }

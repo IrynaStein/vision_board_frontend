@@ -4,10 +4,11 @@ import "./Elements.css";
 import "./Frames.css";
 import BlurLayer from "../components/BlurLayer";
 import WorkBench from "../components/WorkBench";
-import { toolbarActions } from "../store/toolbarSlice";
+import Loader from "../components/Loader";
 import { boardActions } from "../store/boardSlice";
 import { updateBoard } from "../store/boardSlice";
 export default function Earth() {
+  const isLoadingBoards = useSelector(state => state.boards.isLoadingBoards)
   const dispatch = useDispatch();
   const quote = useSelector((state) => state.boards.quote);
   const layout = useSelector((state) => state.boards.layout);
@@ -55,6 +56,7 @@ export default function Earth() {
   }
 
   return (
+  <>{isLoadingBoards? <Loader/> :
     <>
     {errors.length === 0 ? 
     <div className="earth-container">
@@ -97,6 +99,7 @@ export default function Earth() {
       )}
     </div> :
     <div>{errors}</div>}
+    </>}
     </>
   );
 }

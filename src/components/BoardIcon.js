@@ -12,5 +12,8 @@ export default function BoardIcon({ boards }) {
   const renderBoards = boards.map((board) => (
      <Link to={board.category} onClick={()=>handleClick(board)}key={board.id}>{board.category}<br/>{board.name}</Link>
   ));
+//   const renderBoards = boards.map((board) => (
+//     <Link to={`${board.category}/${board.id}`} onClick={()=>handleClick(board)}key={board.id}>{board.category}<br/>{board.name}</Link>
+//  ));
   return renderBoards;
 }

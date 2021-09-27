@@ -12,8 +12,9 @@ const [affirmation, setAffirmation] = useState('')
   const stickerShow = useSelector((state) => state.toolbars.showSticker);
   const pictureShow = useSelector((state) => state.toolbars.showPicture);
   const postShow = useSelector((state) => state.toolbars.showPost);
-
+  const user = useSelector(state => state.utilities.user)
   const boards = useSelector((state) => state.boards.userBoards);
+  // const boards = useSelector(state=> state.user.boards)
   // debugger
   const currentBoard = boards.find((b) => b.id === parseInt(params.id));
 // debugger

@@ -12,7 +12,7 @@ import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
-import { getStickers } from "./store/boardSlice";
+import { boardActions, getStickers } from "./store/boardSlice";
 import Loader from "./components/Loader";
 import WorkBench from "./components/WorkBench";
 

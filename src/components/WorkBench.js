@@ -50,9 +50,7 @@ console.log("AFF LIST",affirmationList)
     return <input type="file" placeholder="upload image..."></input>;
   };
   const renderWorkench = () => {
-    if (stickerShow) {
-      return renderStickers;
-    } else if (postShow) {
+   if (postShow) {
       return renderAffirmationInput();
     } else if (pictureShow) {
       return renderImageUpload();
@@ -68,6 +66,7 @@ console.log("AFF LIST",affirmationList)
       <h3>{quote.paragraph}</h3>
       <div>{affirmationList}</div>
       <div>{nameCheck}</div>
+      {stickerShow ? <div>{renderStickers}</div> : null}
       <div className="palette">{renderWorkench()}</div>
     </div>
   );

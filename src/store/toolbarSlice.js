@@ -10,19 +10,19 @@ const toolbarSlice = createSlice({
     name: 'toolbar',
     initialState,
     reducers: {
-        toogleStickers(state){
-            state.showSticker = !state.showSticker
+        toogleStickers(state, {payload}){
+            state.showSticker = payload
             state.showPicture = false
             state.showPost = false
         },
         tooglePictures(state){
             state.showPicture = !state.showPicture
             state.showPost = false
-            state.showSticker = false
+            // state.showSticker = false
         },
         tooglePosts(state){
             state.showPost = !state.showPost
-            state.showSticker = false
+            // state.showSticker = false
             state.showPicture = false
         },
         resetLayoutShow(state){

@@ -13,6 +13,7 @@ export default function ToolBar() {
   const dispatch = useDispatch();
   const [showBoards, setShowBoards] = useState(false);
   const isLoading = useSelector(state => state.boards.userBoards)
+  const showStickers = useSelector(state=> state.toolbars.showSticker)
   const logoutHandler = () => {
     dispatch(userLogout());
     dispatch(boardActions.reset());
@@ -41,7 +42,7 @@ export default function ToolBar() {
   }
 
   function stickersHandler(){
-    dispatch(toolbarActions.toogleStickers())
+    dispatch(toolbarActions.toogleStickers(true))
   }
 
   function handleClick() {
@@ -93,10 +94,10 @@ export default function ToolBar() {
         Add Picture
       </button>
       <button
-        disabled={!user}
+        disabled={!user || showStickers}
         onClick={stickersHandler}
       >
-       Show Stickers
+       Load Stickers
       </button>
       <button disabled={!user} onClick={handleClick}>
         Change Quote

@@ -5,6 +5,7 @@ import { userLogout } from "../store/utilitySlice";
 import apiKey from "../api";
 import { toolbarActions } from "../store/toolbarSlice";
 import { boardActions } from "../store/boardSlice";
+import { utilityActions } from "../store/utilitySlice";
 import BoardList from "./BoardsList";
 import Loader from "./Loader";
 // import { Modal } from "semantic-ui-react";
@@ -14,11 +15,7 @@ export default function ToolBar() {
   const [showBoards, setShowBoards] = useState(false);
   const isLoading = useSelector(state => state.boards.userBoards)
   const showStickers = useSelector(state=> state.toolbars.showSticker)
-  const logoutHandler = () => {
-    dispatch(userLogout());
-    dispatch(boardActions.reset());
-    dispatch(toolbarActions.resetLayoutShow());
-  };
+ 
 
   // function handleClick() {
   //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
@@ -53,7 +50,6 @@ export default function ToolBar() {
   }
 
   return (
-    // <>{isLoading? <Loader/>:
     <div className="toolbar">
       ToolBar
       <div className="element-link-container">
@@ -107,33 +103,17 @@ export default function ToolBar() {
       </button>
       _________
       <div className="utilities-edit">
-        <button disabled={!user}>Clear</button>
+        <button disabled={!user} >Clear</button>
         <button disabled={!user}>Save</button>
         <button disabled={!user}>Edit</button>
         <button disabled={!user}>Download</button>
       </div>
       ____________________
-      {user ? (
-        <>
-          {!showBoards ? <button onClick={handleClick}>
-           My boards
-          </button> : null}
-          {showBoards ? <BoardList /> : null}
-        </>
-      ) : null}
+
+      <BoardList />
       _________
       <Link to="/home">?</Link>
-      <div>
-        {user ? (
-          <button onClick={logoutHandler}>Logout</button>
-        ) : (
-          <div>
-            <Link to="/login">Login</Link>or <Link to="/signup">Signup</Link>
-          </div>
-        )}
-      </div>
     </div>
-    // }
-    // </>
+   
   );
 }

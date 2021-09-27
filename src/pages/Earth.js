@@ -27,7 +27,7 @@ export default function Earth() {
     <div className="earth-container">
       {errors.length === 0 ? (
         <>
-         <h3>{initialQuote.paragraph}</h3> 
+         <div className="quote">{initialQuote.paragraph}</div> 
             <BlurLayer
               name="earth"
               description={description}

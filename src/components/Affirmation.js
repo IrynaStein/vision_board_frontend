@@ -15,6 +15,6 @@ export default function Affirmation(text){
         })
 })
     return (
-        <h3 {...bindLogoPos()} style={{position: "relative", top: logoPos.y, left: logoPos.x}}>{text.text}</h3>
+        <div className="affirmation" {...bindLogoPos()} style={{position: "relative", top: logoPos.y, left: logoPos.x, font: "The BraggestDemo"}}>{text.text}</div>
     )
 }

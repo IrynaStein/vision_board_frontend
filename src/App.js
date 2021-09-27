@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLogin } from "./store/utilitySlice";
 import { boardActions, getStickers } from "./store/boardSlice";
+import { utilityActions } from "./store/utilitySlice";
 import Loader from "./components/Loader";
 import WorkBench from "./components/WorkBench";
 
@@ -23,9 +24,24 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userAutoLogin())
+    fetch('/profile', {
+      method: "GET"
+    })
+    .then((resp) => {
+      if (resp.ok){
+        resp.json().then( data => {
+          dispatch(utilityActions.setUser(data.user))
+      dispatch(boardActions.setUserBoards(data.user.boards))
+      dispatch(utilityActions.setInitialQuotes(data.quotes))
+      dispatch(utilityActions.toogleLoading(false))
+        })
+    }
+    else{
+      dispatch(utilityActions.toogleLoading(false))
+    }})
     dispatch(getStickers())
   }, [dispatch]);
+
 
   return (
     <div className="App">

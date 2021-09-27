@@ -30,7 +30,7 @@ export default function Water() {
     <div className="water-container">
       {errors.length === 0 ? (
         <>
-         <h3>{initialQuote.paragraph}</h3> 
+         <div className="quote">{initialQuote.paragraph}</div> 
             <BlurLayer
               name="water"
               description={description}

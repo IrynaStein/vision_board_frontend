@@ -39,10 +39,8 @@ export const getStickers = createAsyncThunk(
 const initialState = {
   layout: "",
   userBoards: [],
-  currentBoard: null,
   stickers: [],
   frames: [],
-  posts: [],
   quote: "",
   status: "",
   errors: [],
@@ -77,9 +75,7 @@ const boardSlice = createSlice({
     partialReset(state){
         state.layout = ""
         state.userBoards = []
-        state.currentBoard = null
         state.frames = []
-        state.posts = []
         state.quote = ""
         state.status = ""
         state.errors = []

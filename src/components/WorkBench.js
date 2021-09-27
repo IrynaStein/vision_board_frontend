@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import useNameCheck from "../hooks/Namecheck";
+import useNameCheck from "../hooks/useNamecheck";
 import { boardActions } from "../store/boardSlice";
 import Sticker from "./Sticker";
+import Quote from './Quote'
 import Affirmation from "./Affirmation";
 export default function WorkBench() {
   const params = useParams();
@@ -52,6 +53,7 @@ console.log("AFF LIST",affirmationList)
   const renderImageUpload = () => {
     return <input type="file" placeholder="upload image..."></input>;
   };
+
   const renderWorkench = () => {
    if (postShow) {
       return renderAffirmationInput();
@@ -66,7 +68,7 @@ console.log("AFF LIST",affirmationList)
 
   return (
     <div className={`${params.element}-container`}>
-      <h3>{quote.paragraph}</h3>
+      <Quote quote={quote}/>
       <div>{affirmationList}</div>
       <div>{nameCheck}</div>
       {stickerShow ? <div>{renderStickers}</div> : null}

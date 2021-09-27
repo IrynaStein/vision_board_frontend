@@ -1,16 +1,35 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../store/utilitySlice";
+import { utilityActions } from "../store/utilitySlice";
 import { boardActions } from "../store/boardSlice";
+import { getStickers } from "../store/boardSlice";
 export default function Login() {
-  const user = useSelector(state => state.utilities.user)
+ 
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
 
   const onSubmit = (data, e) => {
     e.preventDefault();
-    dispatch(userLogin(data))
-    // dispatch(boardActions.setUserBoards(user.boards))
+
+    fetch('/login', {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    })
+    .then((resp) => {
+      if (resp.ok){
+        resp.json().then(data => {
+          dispatch(utilityActions.setUser(data.user))
+          dispatch(boardActions.setUserBoards(data.user.boards))
+          dispatch(utilityActions.setInitialQuotes(data.quotes))
+          dispatch(utilityActions.toogleLoading(false))
+        })
+      }
+      else {
+        dispatch(utilityActions.toogleLoading(false))
+      }
+    })
+    dispatch(getStickers())
     reset();
   };
 

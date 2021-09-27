@@ -3,10 +3,11 @@ export default function Loader() {
   return (
     <ReactLoading
       className="loader"
-      type={"spinner"}
-      color={"black"}
-      height={100}
-      width={100}
+      type={"spokes"}
+      color={"#7CA7C9"}
+      height={60}
+      width={60}
     />
   );
 }
+

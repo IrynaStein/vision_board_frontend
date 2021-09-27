@@ -37,8 +37,10 @@ export default function ToolBar() {
   //     });
   // }
 
-  function handleReset() {
-    dispatch(boardActions.setLayout(""));
+  function handleReset(name) {
+    console.log(name)
+    dispatch(boardActions.setLayout(name));
+    dispatch(toolbarActions.resetLayoutShow())
   }
 
   function stickersHandler(){
@@ -55,25 +57,25 @@ export default function ToolBar() {
       ToolBar
       <div className="element-link-container">
         {/* <Modal /> */}
-        <Link to="/water" onClick={()=> dispatch(boardActions.setLayout("water"))} className="element-link">
+        <Link to="/water" onClick={()=>handleReset("water")} className="element-link"> 
           <img
             src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png"
             alt="water symbol"
           />
         </Link>
-        <Link to="/earth" onClick={()=>dispatch(boardActions.setLayout("earth"))}className="element-link">
+        <Link to="/earth" onClick={()=>handleReset("earth")}className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png"
             alt="earth symbol"
           />
         </Link>
-        <Link to="/air" onClick={()=>handleReset()} className="element-link">
+        <Link to="/air" onClick={()=>handleReset("air")} className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png"
             alt="air symbol"
           />
         </Link>
-        <Link to="/fire" onClick={()=>handleReset()} className="element-link">
+        <Link to="/fire" onClick={()=>handleReset("fire")} className="element-link">
           <img
             src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png"
             alt="fire symbol"

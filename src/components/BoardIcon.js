@@ -1,13 +1,31 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { boardActions } from "../store/boardSlice";
+import { current } from "@reduxjs/toolkit";
 export default function BoardIcon({ boards }) {
-  const dispatch = useDispatch()
- 
-  const renderBoards = boards.map((board) => (
-    <Link to={`/${board.category}/${board.id}`} onClick={()=>dispatch(boardActions.setLayout(board.category))}key={board.id}>{board.category}<br/>{board.name}</Link>
- ));
+  // const layout = useSelector(state =>state.boards.layout)
+  const stickers = useSelector(state => state.boards.stickers)
+  // const sticker = stickers[Math.floor(Math.random()*stickers.length)].image_url
 
+  const pickSticker = (category) => {
+const currentStickers = stickers.filter(s => s.category === category)
+return  currentStickers[Math.floor(Math.random()*currentStickers.length)].image_url
+}
+
+  const dispatch = useDispatch();
+console.log(boards)
+  const renderBoards = boards.map((board) => (
+    <Link
+      to={`/${board.category}/${board.id}`}
+      onClick={() => dispatch(boardActions.setLayout(board.category))}
+      key={board.id}
+    >
+      <div className="board-icon">
+        <img src={pickSticker(board.category)} alt ="sticker"/>
+        {board.name}
+      </div>
+    </Link>
+  ));
 
   return renderBoards;
 }

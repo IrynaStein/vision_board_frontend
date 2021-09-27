@@ -127,3 +127,10 @@ pointer-events: none;
   display: flex;
   flex-direction: column;
 }
+
+.board-icon{
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  width: 30px;
+}

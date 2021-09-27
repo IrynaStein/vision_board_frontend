@@ -1,20 +1,23 @@
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import useNameCheck from "../pages/Namecheck";
+import useNameCheck from "../hooks/Namecheck";
+import { boardActions } from "../store/boardSlice";
 import Sticker from "./Sticker";
+import Affirmation from "./Affirmation";
 export default function WorkBench() {
-
-  const params = useParams()
-
-
+  const params = useParams();
+const dispatch = useDispatch()
+const [affirmation, setAffirmation] = useState('')
   const stickerShow = useSelector((state) => state.toolbars.showSticker);
   const pictureShow = useSelector((state) => state.toolbars.showPicture);
   const postShow = useSelector((state) => state.toolbars.showPost);
   const boards = useSelector((state) => state.boards.userBoards);
   const currentBoard = boards.find((b) => b.id === parseInt(params.id));
- 
-  const {quote, posts} = currentBoard
- const nameCheck = useNameCheck(currentBoard)
+// debugger
+  const { quote, posts } = currentBoard;
+  console.log(currentBoard)
+  const nameCheck = useNameCheck(currentBoard);
   const stickers = useSelector((state) =>
     state.boards.stickers.filter((s) => s.category === params.element)
   );
@@ -22,8 +25,25 @@ export default function WorkBench() {
     <Sticker key={sticker.id} sticker={sticker} />
   ));
 
+  const affirmationList = posts.map((post) => (
+    <Affirmation key={post} text={post}/>
+    ))
+console.log("AFF LIST",affirmationList)
+  function onAddAffirmation(e, id){
+    e.preventDefault()
+    console.log(affirmation)
+    console.log(id)
+    dispatch(boardActions.addAffirmation({post: affirmation, id}))
+    setAffirmation('')
+  }
+
   const renderAffirmationInput = () => {
-    return <input placeholder="compose your affirmation..."></input>;
+    return <div>
+      <form onSubmit={(e)=> onAddAffirmation(e, currentBoard.id)}>
+      <input name="post" onChange={(e)=> {setAffirmation(e.target.value)}}placeholder="compose your affirmation..." value={affirmation}></input>
+      <button type="submit">Add</button>
+      </form>
+    </div>;
   };
 
   const renderImageUpload = () => {
@@ -41,9 +61,12 @@ export default function WorkBench() {
     }
   };
 
+  
+
   return (
     <div className={`${params.element}-container`}>
       <h3>{quote.paragraph}</h3>
+      <div>{affirmationList}</div>
       <div>{nameCheck}</div>
       <div className="palette">{renderWorkench()}</div>
     </div>

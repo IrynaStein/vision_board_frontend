@@ -59,8 +59,11 @@ const boardSlice = createSlice({
     setLayout(state, action) {
       state.layout = action.payload;
     },
-    addAffirmation(state, action) {
-      state.posts = state.posts.push(action.payload);
+    addAffirmation(state, {payload}) {
+        // debugger;
+       const board = state.userBoards.find((b) => b.id === payload.id)
+       board.posts.push(payload.post)
+    //   state.currentBoard.posts = [...state.currentBoard.posts, action.payload];
     },
     removeAffirmation(state, action) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);

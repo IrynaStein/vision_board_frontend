@@ -49,8 +49,9 @@ export default function ToolBar() {
 
   function handleClick() {
     dispatch(boardActions.setUserBoards(user.boards));
-    setShowBoards((mUv) => !mUv);
+    setShowBoards(true);
   }
+
   return (
     // <>{isLoading? <Loader/>:
     <div className="toolbar">
@@ -114,9 +115,9 @@ export default function ToolBar() {
       ____________________
       {user ? (
         <>
-          <button onClick={handleClick}>
-            {showBoards ? "hide my boards" : "show my boards"}
-          </button>
+          {!showBoards ? <button onClick={handleClick}>
+           My boards
+          </button> : null}
           {showBoards ? <BoardList /> : null}
         </>
       ) : null}

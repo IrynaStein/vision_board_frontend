@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDrag } from "@use-gesture/react"
-export default function useQuote({quote}){
+export default function Quote({quote}){
     const [quotePos, setQuotePos] = useState({
         x: 0,
         y: 0
@@ -15,7 +15,7 @@ export default function useQuote({quote}){
    
     return (
         <div className="sticker-container" key={quote.id}  {...bindLogoPos()} style={{position: "relative", top: quotePos.y, left: quotePos.x}}> 
-     {quote.paragraph}
+    <div className="quote" >{quote.paragraph}</div>
     </div>
     )
 }

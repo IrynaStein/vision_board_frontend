@@ -1,38 +1,57 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../store/utilitySlice";
+
 import apiKey from "../api";
 import { toolbarActions } from "../store/toolbarSlice";
 import { boardActions } from "../store/boardSlice";
-import { utilityActions } from "../store/utilitySlice";
+
 import BoardList from "./BoardsList";
-import Loader from "./Loader";
+
 // import { Modal } from "semantic-ui-react";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
-  const [showBoards, setShowBoards] = useState(false);
-  const isLoading = useSelector(state => state.boards.userBoards)
+  const layout = useSelector(state=> state.boards.layout)
   const showStickers = useSelector(state=> state.toolbars.showSticker)
  
 
-  // function handleClick() {
-  //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
-  //     method: "GET",
-  //     headers: {
-  //       "x-rapidapi-host": "quotes15.p.rapidapi.com",
-  //       "x-rapidapi-key": apiKey,
-  //     },
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }
+  function onChangeQuote() {
+    fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "quotes15.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data.content)
+        dispatch(boardActions.setNewQuote({
+          quote: data.content,
+          category: layout
+        }));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+//   function onChangeQuote() {
+//     fetch("https://quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com/quote?token=ipworld.info", {
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com",
+// 		"x-rapidapi-key": apiKey
+// 	}
+// })
+// .then(response => {
+// 	console.log(response);
+// })
+// .catch(err => {
+// 	console.error(err);
+// });
+//   }
 
   function handleReset(name) {
     console.log(name)
@@ -42,12 +61,17 @@ export default function ToolBar() {
 
   function stickersHandler(){
     dispatch(toolbarActions.toogleStickers(true))
+    dispatch(boardActions.addStickers(layout))
   }
 
-  function handleClick() {
-    dispatch(boardActions.setUserBoards(user.boards));
-    setShowBoards(true);
+  function clearHandler(){
+    console.log(layout)
+    dispatch(boardActions.clearBoard(layout))
+    dispatch(toolbarActions.toogleStickers(false))
   }
+function onSave(){
+  console.log("saving...")
+}
 
   return (
     <div className="toolbar">
@@ -98,13 +122,13 @@ export default function ToolBar() {
       >
        Load Stickers
       </button>
-      <button disabled={!user} onClick={handleClick}>
+      <button disabled={!user} onClick={onChangeQuote}>
         Change Quote
       </button>
       _________
       <div className="utilities-edit">
-        <button disabled={!user} >Clear</button>
-        <button disabled={!user}>Save</button>
+        <button disabled={!user} onClick={clearHandler}>Clear All</button>
+        <button disabled={!user} onClick={onSave}>Save</button>
         <button disabled={!user}>Edit</button>
         <button disabled={!user}>Download</button>
       </div>
@@ -112,7 +136,7 @@ export default function ToolBar() {
 
       <BoardList />
       _________
-      <Link to="/home">?</Link>
+      <Link to="/home">Home</Link>
     </div>
    
   );

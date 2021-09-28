@@ -22,9 +22,11 @@ export default function WorkBench() {
   const { quote, posts } = currentBoard;
   console.log(currentBoard);
   const nameCheck = useNameCheck(currentBoard);
-  const stickers = useSelector((state) =>
-    state.boards.stickers.filter((s) => s.category === params.element)
-  );
+  // const stickers = useSelector((state) =>
+  //   state.boards.stickers.filter((s) => s.category === params.element)
+  // );
+  // debugger
+  const stickers = currentBoard.stickers
 
   //STICKERS part
   const renderStickers = stickers.map((sticker) => (

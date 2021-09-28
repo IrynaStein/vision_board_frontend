@@ -101,7 +101,7 @@ export default function WorkBench() {
 
   return (
     <div className={`${params.element}-container`}>
-      <Quote quote={quote} />
+      <Quote quote={quote.paragraph} />
       <div>{affirmationList}</div>
       <div>{nameCheck}</div>
       {stickerShow ? <div>{renderStickers}</div> : null}

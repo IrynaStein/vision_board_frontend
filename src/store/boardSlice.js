@@ -97,7 +97,17 @@ const boardSlice = createSlice({
     },
     setNewQuote(state,{payload}){
         const board = state.userBoards.find(b => b.category === payload.category)
-        board.quote.paragraph = payload.quote
+        if (board.quote){
+            board.quote.id = payload.quoteId
+            board.quote.paragraph = payload.quote
+            board.quote.category = payload.category
+        }else {
+            board.quote = {
+                id: payload.quoteId,
+                paragraph: payload.quote,
+                category: payload.category,
+            }
+        }
     },
   },
   extraReducers: {

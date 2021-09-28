@@ -26,9 +26,10 @@ export default function ToolBar() {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data.content)
+        console.log(data)
         dispatch(boardActions.setNewQuote({
           quote: data.content,
+          quoteId: data.id,
           category: layout
         }));
       })

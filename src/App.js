@@ -11,7 +11,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
-import { userAutoLogin } from "./store/utilitySlice";
 import { boardActions, getStickers } from "./store/boardSlice";
 import { utilityActions } from "./store/utilitySlice";
 import Loader from "./components/Loader";

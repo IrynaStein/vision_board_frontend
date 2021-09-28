@@ -19,17 +19,19 @@ export default function WorkBench() {
   const pictureShow = useSelector((state) => state.toolbars.showPicture);
   const postShow = useSelector((state) => state.toolbars.showPost);
   const boards = useSelector((state) => state.boards.userBoards);
-  // debugger
   const currentBoard = boards.find((b) => b.id === parseInt(params.id));
 //image prop is going to have an array
   const { quote, posts, image } = currentBoard;
   console.log(currentBoard);
+
+  //custom Hook that checks the name of the board
   const nameCheck = useNameCheck(currentBoard);
+
   const stickers = currentBoard.stickers
 
   //STICKERS part
   const renderStickers = stickers.map((sticker) => (
-    <Sticker key={sticker.id} sticker={sticker} />
+    <Sticker key={sticker.id} sticker={sticker} currentBoardId={currentBoard.id}/>
   ));
 
   //AFFIRMATIONS part
@@ -113,9 +115,6 @@ export default function WorkBench() {
       </>
     );
   };
-
-
-
 
   //Rendering workbench toogle
   const renderWorkench = () => {

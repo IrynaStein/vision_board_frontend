@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardActions } from "../store/boardSlice";
-import { current } from "@reduxjs/toolkit";
 import { toolbarActions } from "../store/toolbarSlice";
 export default function BoardIcon({ boards }) {
   // const layout = useSelector(state =>state.boards.layout)

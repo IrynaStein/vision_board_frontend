@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Button, Form } from 'semantic-ui-react'
 import { userSignup } from "../store/utilitySlice";
 export default function Signup(){
 const { register, handleSubmit, reset } = useForm();
@@ -13,7 +12,7 @@ const { register, handleSubmit, reset } = useForm();
   };
     return (
       <div className="signuppage">
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <input
         {...register("name", { required: "Please enter your name." })}
         placeholder="enter name..."
@@ -34,8 +33,8 @@ const { register, handleSubmit, reset } = useForm();
         {...register("password_confirmation", { required: "Please re-enter your password." })}
         placeholder="re-enter password..."
       ></input>
-      <Button basic color='purple'>Signup</Button>
-    </Form>
+      <button basic color='purple'>Signup</button>
+    </form>
     </div>
     )
 }

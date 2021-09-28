@@ -151,8 +151,9 @@ pointer-events: none;
 } */
 
 .affirmation{
-  font-size: 30px;
-  font-family: The BraggestDemo;;
+  font-size: 25px;
+  font-family: Mandhor;
+  color: white;
   margin: 5px;
   cursor: grab;
 }

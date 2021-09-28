@@ -15,9 +15,11 @@ const toolbarSlice = createSlice({
             state.showPicture = false
             state.showPost = false
         },
+    
         tooglePictures(state){
             state.showPicture = !state.showPicture
             state.showPost = false
+
             // state.showSticker = false
         },
         tooglePosts(state){

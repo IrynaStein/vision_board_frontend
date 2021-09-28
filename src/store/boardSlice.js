@@ -42,7 +42,7 @@ const initialState = {
   stickers: [],
   status: "",
   errors: [],
-  isLoadingBoards: false
+  isLoadingBoards: false,
 };
 
 const boardSlice = createSlice({
@@ -50,15 +50,15 @@ const boardSlice = createSlice({
   initialState,
   reducers: {
     toogleBoardsLoading(state) {
-        state.isLoadingBoards = !state.isLoadingBoards
-      },
+      state.isLoadingBoards = !state.isLoadingBoards;
+    },
     setLayout(state, action) {
       state.layout = action.payload;
     },
-    addAffirmation(state, {payload}) {
-        // debugger;
-       const board = state.userBoards.find((b) => b.id === payload.id)
-       board.posts.push(payload.post)
+    addAffirmation(state, { payload }) {
+      // debugger;
+      const board = state.userBoards.find((b) => b.id === payload.id);
+      board.posts.push(payload.post);
     },
     removeAffirmation(state, action) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
@@ -66,48 +66,56 @@ const boardSlice = createSlice({
     setUserBoards(state, action) {
       state.userBoards = action.payload;
     },
-    reset: () => initialState,
-    
-//doesnt reset stickers. Do not change, this might break sticker loading 
-    partialReset(state){
-        state.layout = ""
-        state.userBoards = []
-        state.status = ""
-        state.errors = []
-        state.isLoadingBoards = false
-    },
-    addStickers(state, {payload}) {
-        const board = state.userBoards.find(b => b.category === payload)
-        board.stickers = state.stickers.filter(
-        (s) => s.category === payload
-      );
-    },
-    stickerCoordinates(state, action) {
-      const sticker = state.stickers.find((s) => s.id === action.payload.id);
-      // state.currentBoard.stickers.map((s) => {
-      //     if (s.)
-      // })
-    },
-    clearBoard(state, {payload}){
-        const board = state.userBoards.find(b => b.category === payload)
-        board.stickers = []
-        board.posts = []
-        board.frames = []
-        board.quote = ''
-    },
-    setNewQuote(state,{payload}){
-        const board = state.userBoards.find(b => b.category === payload.category)
-        if (board.quote){
-            board.quote.id = payload.quoteId
-            board.quote.paragraph = payload.quote
-            board.quote.category = payload.category
-        }else {
-            board.quote = {
-                id: payload.quoteId,
-                paragraph: payload.quote,
-                category: payload.category,
-            }
+    updateCurrentBoardImages(state, { payload }) {
+      const board = payload;
+      state.userBoards = state.userBoards.map((b) => {
+        if (b.id === payload.id) {
+          return board;
+        } else {
+          return b;
         }
+      });
+    },
+    reset: () => initialState,
+
+    //doesnt reset stickers. Do not change, this might break sticker loading
+    partialReset(state) {
+      state.layout = "";
+      state.userBoards = [];
+      state.status = "";
+      state.errors = [];
+      state.isLoadingBoards = false;
+    },
+    addStickers(state, { payload }) {
+      const board = state.userBoards.find((b) => b.category === payload);
+      board.stickers = state.stickers.filter((s) => s.category === payload);
+    },
+    setStickerCoordinates(state, {payload}) {
+      const sticker = state.stickers.find((s) => s.id === payload.id);
+      sticker.coordinates = payload.coordinates
+    },
+    clearBoard(state, { payload }) {
+      const board = state.userBoards.find((b) => b.category === payload);
+      board.stickers = [];
+      board.posts = [];
+      board.frames = [];
+      board.quote = "";
+    },
+    setNewQuote(state, { payload }) {
+      const board = state.userBoards.find(
+        (b) => b.category === payload.category
+      );
+    //   if (board.quote) {
+    //     board.quote.id = payload.quoteId;
+    //     board.quote.paragraph = payload.quote;
+    //     board.quote.category = payload.category;
+    //   } else {
+        board.quote = {
+          id: payload.quoteId,
+          paragraph: payload.quote,
+          category: payload.category,
+        }
+    //   }
     },
   },
   extraReducers: {
@@ -116,13 +124,13 @@ const boardSlice = createSlice({
     },
     [createBoard.fulfilled](state, action) {
       state.status = "completed";
-    //   debugger
-      state.isLoadingBoards = false
+      //   debugger
+      state.isLoadingBoards = false;
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
         state.userBoards = [...state.userBoards, action.payload];
-        state.errors = []; 
+        state.errors = [];
       }
     },
     [createBoard.rejected](state, action) {
@@ -162,10 +170,17 @@ const boardSlice = createSlice({
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
-        state.currentBoard = action.payload;
-        state.userBoards = state.userBoards.map((b) =>
-          b.id === action.payload.id ? action.payload : b
-        );
+        const board = action.payload;
+        state.userBoards = state.userBoards.map((b) => {
+          if (b.id === action.payload.id) {
+            return board;
+          } else {
+            return b;
+          }
+        });
+        // state.userBoards = state.userBoards.map((b) =>
+        //   b.id === action.payload.id ? action.payload : b
+        // );
         state.errors = [];
         // state.isLoading = false
       }

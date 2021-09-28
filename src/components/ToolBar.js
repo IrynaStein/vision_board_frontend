@@ -65,6 +65,7 @@ export default function ToolBar() {
     dispatch(boardActions.addStickers(layout))
   }
 
+
   function clearHandler(){
     console.log(layout)
     dispatch(boardActions.clearBoard(layout))
@@ -110,13 +111,14 @@ function onSave(){
       >
         Compose affirmation
       </button>
+
       <button
         disabled={!user}
         onClick={() => dispatch(toolbarActions.tooglePictures())}
       >
-        
-        Add Picture
+        Add Pictures
       </button>
+      
       <button
         disabled={!user || showStickers}
         onClick={stickersHandler}

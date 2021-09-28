@@ -6,7 +6,9 @@ import Loader from "./Loader";
 export default function BlurLayer({ name, description, symbol, quote }) {
   const [isChosen, setIsChosen] = useState(false);
   const dispatch = useDispatch();
-  const currentBoard = useSelector(state => state.boards.currentBoard)
+  const layout = useSelector(state => state.boards.layout)
+  const boards = useSelector(state => state.boards.userBoards)
+  const currentBoard = boards.find(b => b.category === layout)
   const isLoading = useSelector(state => state.boards.isLoadingBoards)
   function handleLayoutChoice() {
     setIsChosen((mUv) => !mUv);

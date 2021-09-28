@@ -144,10 +144,15 @@ pointer-events: none;
   font-size: 50px;
   font-family: The BraggestDemo;;
   margin: 15px;
+  cursor: grab;
 }
+/* .quote:active{
+  cursor: grabbing
+} */
 
 .affirmation{
   font-size: 30px;
   font-family: The BraggestDemo;;
   margin: 5px;
+  cursor: grab;
 }

@@ -14,8 +14,8 @@ export default function Quote({quote}){
 })
    
     return (
-        <div className="sticker-container" key={quote.id}  {...bindLogoPos()} style={{position: "relative", top: quotePos.y, left: quotePos.x}}> 
-    <div className="quote" >{quote.paragraph}</div>
+        <div className="sticker-container" key={quote}  {...bindLogoPos()} style={{position: "relative", top: quotePos.y, left: quotePos.x}}> 
+    <div className="quote" >{quote}</div>
     </div>
     )
 }

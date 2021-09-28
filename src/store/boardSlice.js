@@ -40,8 +40,6 @@ const initialState = {
   layout: "",
   userBoards: [],
   stickers: [],
-  frames: [],
-  quote: "",
   status: "",
   errors: [],
   isLoadingBoards: false
@@ -61,7 +59,6 @@ const boardSlice = createSlice({
         // debugger;
        const board = state.userBoards.find((b) => b.id === payload.id)
        board.posts.push(payload.post)
-    //   state.currentBoard.posts = [...state.currentBoard.posts, action.payload];
     },
     removeAffirmation(state, action) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
@@ -71,20 +68,18 @@ const boardSlice = createSlice({
     },
     reset: () => initialState,
     
-//doesnt reset stickers 
+//doesnt reset stickers. Do not change, this might break sticker loading 
     partialReset(state){
         state.layout = ""
         state.userBoards = []
-        state.frames = []
-        state.quote = ""
         state.status = ""
         state.errors = []
         state.isLoadingBoards = false
     },
-    currentBoardStickers(state, action) {
-        // debugger
-      state.currentBoard.stickers = state.stickers.filter(
-        (s) => s.category === action.payload
+    addStickers(state, {payload}) {
+        const board = state.userBoards.find(b => b.category === payload)
+        board.stickers = state.stickers.filter(
+        (s) => s.category === payload
       );
     },
     stickerCoordinates(state, action) {
@@ -93,6 +88,27 @@ const boardSlice = createSlice({
       //     if (s.)
       // })
     },
+    clearBoard(state, {payload}){
+        const board = state.userBoards.find(b => b.category === payload)
+        board.stickers = []
+        board.posts = []
+        board.frames = []
+        board.quote = ''
+    },
+    setNewQuote(state,{payload}){
+        const board = state.userBoards.find(b => b.category === payload.category)
+        if (board.quote){
+            board.quote.id = payload.quoteId
+            board.quote.paragraph = payload.quote
+            board.quote.category = payload.category
+        }else {
+            board.quote = {
+                id: payload.quoteId,
+                paragraph: payload.quote,
+                category: payload.category,
+            }
+        }
+    },
   },
   extraReducers: {
     [createBoard.pending](state) {
@@ -100,12 +116,12 @@ const boardSlice = createSlice({
     },
     [createBoard.fulfilled](state, action) {
       state.status = "completed";
+    //   debugger
       state.isLoadingBoards = false
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
         state.userBoards = [...state.userBoards, action.payload];
-        state.currentBoard = action.payload
         state.errors = []; 
       }
     },

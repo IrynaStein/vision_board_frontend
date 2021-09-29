@@ -90,12 +90,21 @@ const boardSlice = createSlice({
       const board = state.userBoards.find((b) => b.category === payload);
       board.stickers = state.stickers.filter((s) => s.category === payload);
     },
-    //callback that sets sticker coordinates in state
-    setStickerCoordinates(state, {payload}) {
-        // debugger
-        const board = state.userBoards.find(b=> b.id === payload.boardId)
+    //A BLOCK OF ACTIONS THAT SET COORDINATES FOR ELEMENTS
+    setStickerCoordinates(state, { payload }) {
+      // debugger
+      const board = state.userBoards.find((b) => b.id === payload.boardId);
       const sticker = board.stickers.find((s) => s.id === payload.stickerId);
-      sticker.coordinates = JSON.stringify(payload.coordinates).replace(/[{"'}]/g,'').replace(/[,]/g,', ')
+      sticker.coordinates = JSON.stringify(payload.coordinates)
+        .replace(/[{"'}]/g, "")
+        .replace(/[,]/g, ", ");
+    },
+    setQuoteCoordinates(state, {payload}){
+        // debugger;
+        const board = state.userBoards.find((b) => b.id === payload.boardId);
+        board.quote.coordinates = JSON.stringify(payload.coordinates)
+        .replace(/[{"'}]/g, "")
+        .replace(/[,]/g, ", "); 
     },
     clearBoard(state, { payload }) {
       const board = state.userBoards.find((b) => b.category === payload);
@@ -108,11 +117,11 @@ const boardSlice = createSlice({
       const board = state.userBoards.find(
         (b) => b.category === payload.category
       );
-        board.quote = {
-          id: payload.quoteId,
-          paragraph: payload.quote,
-          category: payload.category,
-        }
+      board.quote = {
+        id: payload.quoteId,
+        paragraph: payload.quote,
+        category: payload.category,
+      };
     },
   },
   extraReducers: {

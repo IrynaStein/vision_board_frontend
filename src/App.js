@@ -14,7 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { boardActions, getStickers } from "./store/boardSlice";
 import { utilityActions } from "./store/utilitySlice";
 import Loader from "./components/Loader";
-import WorkBench from "./components/WorkBench";
+import WorkBench from "./pages/WorkBench";
+import MyComponent from "./components/SaveAsJpeg";
 
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
         <ProtectedRoute exact path="/water" component={Water} />
         <ProtectedRoute exact path="/earth" component={Earth} />
         <ProtectedRoute exact path="/fire" component={Fire} />
-        <ProtectedRoute exact path="/:element/:id" component={WorkBench}/>
+        <ProtectedRoute exact path="/:element/:id" component={MyComponent}/>
       </Switch>}
     </div>
   );

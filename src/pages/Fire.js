@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import './Elements.css'
-import WorkBench from "../components/WorkBench"
+import WorkBench from "./WorkBench"
 import BlurLayer from "../components/BlurLayer"
 import { toolbarActions } from "../store/toolbarSlice"
 import { boardActions } from "../store/boardSlice"

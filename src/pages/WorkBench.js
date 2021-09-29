@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import useNameCheck from "../hooks/useNamecheck";
 import { boardActions } from "../store/boardSlice";
-import Sticker from "./Sticker";
-import Quote from "./Quote";
-import Affirmation from "./Affirmation";
-import Picture from "./Picture";
+import Sticker from "../components/Sticker";
+import Quote from "../components/Quote";
+import Affirmation from "../components/Affirmation";
+import Picture from "../components/Picture";
 export default function WorkBench() {
   const [affirmation, setAffirmation] = useState("");
   const [images, setImages] = useState([]);
@@ -36,7 +36,7 @@ export default function WorkBench() {
 
   //AFFIRMATIONS part
   const affirmationList = posts.map((post) => (
-    <Affirmation key={post} text={post} />
+    <Affirmation key={post} text={post} currentBoardId={currentBoard.id}/>
   ));
 
   function onAddAffirmation(e, id) {
@@ -68,20 +68,25 @@ export default function WorkBench() {
   //IMAGES part
   function onAddImage(e) {
     e.preventDefault();
-    console.log("SUBMIT", images);
-    const form = new FormData()
-    form.append("image", images)
-    console.log(currentBoard.id)
-    fetch(`/boards/${currentBoard.id}`, {
-      method: "PATCH",
-      body: form  
-    })
-    .then(resp => resp.json())
-    .then(data => {
-      // debugger
-      dispatch(boardActions.updateCurrentBoardImages(data))
-      setShowPictures(true)
-      console.log(data)})
+    if (images.length === 0){
+      console.log("Please add files to upload")
+    }else{
+      console.log("SUBMIT", images);
+      const form = new FormData()
+      form.append("image", images)
+      console.log(currentBoard.id)
+      fetch(`/boards/${currentBoard.id}`, {
+        method: "PATCH",
+        body: form  
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        // debugger
+        dispatch(boardActions.updateCurrentBoardImages(data))
+        setShowPictures(true)
+        console.log(data)})
+    }
+    
   }
 
   function onFileChange(e) {
@@ -108,7 +113,7 @@ export default function WorkBench() {
           placeholder="upload image..."
           onChange={onFileChange}
         />
-        <button>Add new</button>
+        <button type='submit'>Add new</button>
       </form>
       or
       <button onClick={onLoadPictures}>Load existing pictures</button>
@@ -135,7 +140,7 @@ export default function WorkBench() {
        </div> : null}
        {showPictures? <Picture image={image}/> : null}
        {stickerShow ? <div>{renderStickers}</div> : null}
-      <Quote quote={quote.paragraph} />
+      <Quote quote={quote} currentBoardId={currentBoard.id}/>
       <div>{affirmationList}</div>
       <div>{nameCheck}</div>
      

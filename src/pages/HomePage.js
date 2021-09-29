@@ -5,6 +5,8 @@ import { toolbarActions } from '../store/toolbarSlice';
 import { userLogout } from '../store/utilitySlice';
 import { useState } from "react";
 import { useDrag } from '@use-gesture/react'
+import MyComponent from '../components/SaveAsJpeg';
+// import React, { useRef } from 'react';
 export default function HomePage() {
     const [logoPos, setLogoPos] = useState({
         x: 0,
@@ -23,6 +25,11 @@ const dispatch = useDispatch()
         dispatch(boardActions.reset());
         dispatch(toolbarActions.resetLayoutShow());
       };
+
+    //   const ComponentToPrint = React.forwardRef((props, ref) => (
+    //     <div ref={ref}>Iryna</div>
+    //   ));
+
     return (
     <div className="homepage">
         Namaste!
@@ -59,6 +66,7 @@ const dispatch = useDispatch()
           </div>
         )}
       </div>
+
         </div>
         
     );

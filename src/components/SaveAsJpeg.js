@@ -21,6 +21,7 @@ const MyComponent = () => {
       <button onClick={() => exportComponentAsPNG(componentRef)}>
         Export As PNG
       </button> */}
+      
     </div>
   );
 };

@@ -5,21 +5,15 @@ import useCoordinates from "../hooks/useCoordinates";
 import { boardActions } from "../store/boardSlice";
 
 export default function Quote({quote, currentBoardId}){
-    console.log(quote, currentBoardId)
+
     const currentBoard = useSelector((state) =>
     state.boards.userBoards.find((b) => b.id === currentBoardId)
   );
   const dispatch = useDispatch();
   let coordinates = currentBoard.quote.coordinates;
-console.log("BOARD COORDINATES", coordinates)
 
   const updatedCoordinates = useCoordinates(coordinates);
-  console.log(updatedCoordinates)
-    // const [quotePos, setQuotePos] = useState({
-    //     x: 0,
-    //     y: 0
-    // })
-  
+
     const bindQuotePos = useDrag((params) => {
         dispatch(
           boardActions.setQuoteCoordinates({

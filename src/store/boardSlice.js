@@ -56,9 +56,17 @@ const boardSlice = createSlice({
       state.layout = action.payload;
     },
     addAffirmation(state, { payload }) {
-      // debugger;
+      debugger;
       const board = state.userBoards.find((b) => b.id === payload.id);
-      board.posts.push(payload.post);
+      const newId = "temp-" + payload.paragraph.match(/\w/g).length + payload.paragraph.match(/\w/g).slice(0,2) + payload.paragraph.match(/\w/g).slice(-1) + Math.random(1-2)
+      const newPostconstructed = {
+          id: newId,
+          paragraph: payload.paragraph,
+          category: payload.category,
+          coordinates: "x: 0, y: 0"
+      }
+      debugger
+      board.posts.push(newPostconstructed);
     },
     removeAffirmation(state, action) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
@@ -100,18 +108,25 @@ const boardSlice = createSlice({
         .replace(/[,]/g, ", ");
     },
     setQuoteCoordinates(state, {payload}){
-        // debugger;
         const board = state.userBoards.find((b) => b.id === payload.boardId);
         board.quote.coordinates = JSON.stringify(payload.coordinates)
         .replace(/[{"'}]/g, "")
         .replace(/[,]/g, ", "); 
+    },
+    setPostCoordinates(state, {payload}){
+        const board = state.userBoards.find((b) => b.id === payload.boardId);
+        const post = board.posts.find((p) => p.id === payload.postId);
+        post.coordinates = JSON.stringify(payload.coordinates)
+        .replace(/[{"'}]/g, "")
+        .replace(/[,]/g, ", ");
     },
     clearBoard(state, { payload }) {
       const board = state.userBoards.find((b) => b.category === payload);
       board.stickers = [];
       board.posts = [];
       board.frames = [];
-      board.quote = "";
+      board.quote = [];
+      board.image =[]
     },
     setNewQuote(state, { payload }) {
       const board = state.userBoards.find(
@@ -184,11 +199,7 @@ const boardSlice = createSlice({
             return b;
           }
         });
-        // state.userBoards = state.userBoards.map((b) =>
-        //   b.id === action.payload.id ? action.payload : b
-        // );
         state.errors = [];
-        // state.isLoading = false
       }
     },
     [updateBoard.rejected](state, action) {

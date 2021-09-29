@@ -15,7 +15,7 @@ export default function useNameCheck(currentBoard) {
   }
   function handleSubmit(e, id) {
     e.preventDefault();
-    dispatch(updateBoard({ load: form, id: id }));
+    dispatch(updateBoard({ load: form, id }));
     setHideInput(true);
   }
   function onSame() {

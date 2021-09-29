@@ -153,7 +153,7 @@ pointer-events: none;
 .affirmation{
   font-size: 25px;
   font-family: Mandhor;
-  color: white;
+  color: black;
   margin: 5px;
   cursor: grab;
 }

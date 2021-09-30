@@ -131,7 +131,7 @@ export default function WorkBench() {
   }
 
   function onLoadPictures() {
-    if (currentBoard.images.length > 0) {
+    if (currentBoard.images) {
       setShowPictures(true);
     } else {
       setMessage(true);

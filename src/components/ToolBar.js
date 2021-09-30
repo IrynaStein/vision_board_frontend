@@ -71,9 +71,7 @@ export default function ToolBar() {
     dispatch(boardActions.clearBoard(layout))
     dispatch(toolbarActions.toogleStickers(false))
   }
-function onSave(){
-  console.log("saving...")
-}
+
 
   return (
     <div className="toolbar">
@@ -131,9 +129,6 @@ function onSave(){
       _________
       <div className="utilities-edit">
         <button disabled={!user} onClick={clearHandler}>Clear All</button>
-        <button disabled={!user} onClick={onSave}>Save</button>
-        <button disabled={!user}>Edit</button>
-        <button disabled={!user}>Download</button>
       </div>
       ____________________
 

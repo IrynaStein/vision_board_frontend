@@ -134,7 +134,7 @@ export default function ToolBar() {
 
       <BoardList />
       _________
-      <Link to="/home">Home</Link>
+     
     </div>
    
   );

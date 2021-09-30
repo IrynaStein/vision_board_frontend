@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { boardActions, getStickers } from "./store/boardSlice";
 import { utilityActions } from "./store/utilitySlice";
 import Loader from "./components/Loader";
-import WorkBench from "./pages/WorkBench";
+import Header from "./components/Header";
 import MyComponent from "./components/SaveAsJpeg";
 
 
@@ -45,7 +45,10 @@ function App() {
 
   return (
     <div className="App">
+      <div className="utility-render">
       <ToolBar />
+      <Header />
+      </div>
       {isLoading? <Loader/> :
       <Switch>
         <Route exact path="/login">

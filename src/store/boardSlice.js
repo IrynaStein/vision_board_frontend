@@ -56,7 +56,7 @@ const boardSlice = createSlice({
       state.layout = action.payload;
     },
     addAffirmation(state, { payload }) {
-      debugger;
+    //   debugger;
       const board = state.userBoards.find((b) => b.id === payload.id);
       const newId = "temp-" + payload.paragraph.match(/\w/g).length + payload.paragraph.match(/\w/g).slice(0,2) + payload.paragraph.match(/\w/g).slice(-1) + Math.random(1-2)
       const newPostconstructed = {
@@ -65,14 +65,23 @@ const boardSlice = createSlice({
           category: payload.category,
           coordinates: "x: 0, y: 0"
       }
-      debugger
+    //   debugger
       board.posts.push(newPostconstructed);
     },
     removeAffirmation(state, action) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
     setUserBoards(state, action) {
-      state.userBoards = action.payload;
+        // debugger
+        // const boards = action.payload.map((b) => {
+        //     if(!b.images){
+        //         debugger
+        //        return b.posts = {}
+        //     }else {
+        //        return b
+        //     }
+        // }) 
+      state.userBoards = action.payload
     },
     updateCurrentBoardImages(state, { payload }) {
       const board = payload;
@@ -120,6 +129,13 @@ const boardSlice = createSlice({
         .replace(/[{"'}]/g, "")
         .replace(/[,]/g, ", ");
     },
+    setImageCoordinates(state, {payload}){
+        const board = state.userBoards.find((b) => b.id === payload.boardId);
+        const image = board.images.find((i) => i.id === payload.pictureId);
+        image.coordinates = JSON.stringify(payload.coordinates)
+          .replace(/[{"'}]/g, "")
+          .replace(/[,]/g, ", ");
+    },
     clearBoard(state, { payload }) {
       const board = state.userBoards.find((b) => b.category === payload);
       board.stickers = [];
@@ -145,12 +161,14 @@ const boardSlice = createSlice({
     },
     [createBoard.fulfilled](state, action) {
       state.status = "completed";
-      //   debugger
+        // debugger
       state.isLoadingBoards = false;
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
-        state.userBoards = [...state.userBoards, action.payload];
+        const board = action.payload;
+        board.images = []
+        state.userBoards = [...state.userBoards, board];
         state.errors = [];
       }
     },
@@ -192,13 +210,25 @@ const boardSlice = createSlice({
         state.errors = action.payload.errors;
       } else {
         const board = action.payload;
-        state.userBoards = state.userBoards.map((b) => {
-          if (b.id === action.payload.id) {
-            return board;
-          } else {
-            return b;
-          }
-        });
+        if (!board.images){
+            board.images = []
+            // debugger
+            state.userBoards = state.userBoards.map((b) => {
+                if (b.id === action.payload.id) {
+                  return board;
+                } else {
+                  return b;
+                }
+              });
+        } else {
+            state.userBoards = state.userBoards.map((b) => {
+                if (b.id === action.payload.id) {
+                  return board;
+                } else {
+                  return b;
+                }
+              });
+        }
         state.errors = [];
       }
     },

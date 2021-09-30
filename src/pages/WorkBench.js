@@ -80,13 +80,26 @@ export default function WorkBench() {
   };
 
   //IMAGES part
-  const renderImages = pictures.map((p) => (
-    <Picture 
-    key={p.id} 
-    picture={p} 
-    currentBoardId={currentBoard.id} 
-    />
-  ));
+
+  const renderImages = () => {
+    if (currentBoard.images){
+      return pictures.map((p) => (
+          <Picture 
+          key={p.id} 
+          picture={p} 
+          currentBoardId={currentBoard.id} 
+          />))
+    }else {
+      return 
+    }
+  }
+  // const renderImages = pictures.map((p) => (
+  //   <Picture 
+  //   key={p.id} 
+  //   picture={p} 
+  //   currentBoardId={currentBoard.id} 
+  //   />
+  // ));
 
   function onAddImage(e) {
     e.preventDefault();
@@ -97,7 +110,6 @@ export default function WorkBench() {
       // for (const elem in images) {
       //   form.append("images[]", images[elem]);
       // }
-      debugger;
       images.images.map((i) => form.append("images[]", i));
       fetch(`/boards/${currentBoard.id}`, {
         method: "PATCH",
@@ -105,7 +117,6 @@ export default function WorkBench() {
       })
         .then((resp) => resp.json())
         .then((data) => {
-          // debugger
           dispatch(boardActions.updateCurrentBoardImages(data));
           setShowPictures(true);
           console.log(data);
@@ -156,8 +167,26 @@ export default function WorkBench() {
     }
   };
 
+  //SAVING board
   function onSave() {
     console.log("saving...");
+    const boardObj = {
+      name: currentBoard.name,
+      category: currentBoard.category,
+      stickers: currentBoard.stickers,
+      posts: currentBoard.posts,
+      quote: currentBoard.quote,
+      pictures: currentBoard.images
+    }
+    console.log(boardObj)
+    fetch(`/boards/${currentBoard.id}`, {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(boardObj)
+    })
+    .then(resp => resp.json())
+    //will dispatch saveBoard method or repurpose same updateBoard
+    .then(data => console.log(data))
   }
 
   return (
@@ -168,7 +197,7 @@ export default function WorkBench() {
           <button onClick={() => setMessage(false)}>X</button>
         </div>
       ) : null}
-      {showPictures ? <div>{renderImages}</div> : null}
+      {showPictures ? <div>{renderImages()}</div> : null}
       {stickerShow ? <div>{renderStickers}</div> : null}
       <Quote quote={quote} currentBoardId={currentBoard.id} />
       <div>{affirmationList}</div>

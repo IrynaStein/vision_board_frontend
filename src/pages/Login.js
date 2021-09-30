@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { utilityActions } from "../store/utilitySlice";
 import { boardActions } from "../store/boardSlice";
 import { getStickers } from "../store/boardSlice";
+import { Link } from "react-router-dom";
 export default function Login() {
  
   const { register, handleSubmit, reset } = useForm();
@@ -46,6 +47,7 @@ export default function Login() {
       ></input>
       <button type='submit'>Login</button>
     </form>
+    <Link to='/home'>Home</Link>
     </div>
   );
 }

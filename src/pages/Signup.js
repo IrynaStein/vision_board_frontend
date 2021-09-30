@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { userSignup } from "../store/utilitySlice";
+import { Link } from "react-router-dom";
 export default function Signup(){
 const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const { register, handleSubmit, reset } = useForm();
       ></input>
       <button basic color='purple'>Signup</button>
     </form>
+    <Link to='/home'>Home</Link>
     </div>
     )
 }

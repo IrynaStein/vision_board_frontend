@@ -20,8 +20,9 @@ export default function WorkBench() {
   const postShow = useSelector((state) => state.toolbars.showPost);
   const boards = useSelector((state) => state.boards.userBoards);
   const currentBoard = boards.find((b) => b.id === parseInt(params.id));
+  const toolbar = useSelector(state =>state.utilities.toolbar)
   //image prop is going to have an array
-  const { quote, posts, image } = currentBoard;
+  const { quote, posts } = currentBoard;
   console.log(currentBoard);
   const user = useSelector((state) => state.utilities.user);
   //custom Hook that checks the name of the board

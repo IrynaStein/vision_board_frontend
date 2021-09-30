@@ -49,7 +49,8 @@ const initialState = {
   isLoading: true,
   status: "",
   errors: [],
-  initialQuotes: []
+  initialQuotes: [],
+  toolbar: false
 };
 
 const utilitySlice = createSlice({
@@ -64,6 +65,9 @@ const utilitySlice = createSlice({
     },
     setUser(state, action){
       state.user = action.payload
+    },
+    showTools(state, {payload}){
+      state.toolbar = payload
     }
   },
   extraReducers: {

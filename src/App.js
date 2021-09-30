@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import ToolBar from "./components/ToolBar";
 import HomePage from "./pages/HomePage";
 import Air from "./pages/Air";
@@ -41,7 +41,6 @@ function App() {
     }})
     dispatch(getStickers())
   }, [dispatch]);
-
 
   return (
     <div className="App">

@@ -20,6 +20,7 @@ border: solid black 1px;
 min-width: 200px;
 min-height: 700px;
 justify-content: space-evenly;
+font-family: Mandhor;
 }
 
 .homepage {
@@ -156,4 +157,28 @@ pointer-events: none;
   color: black;
   margin: 5px;
   cursor: grab;
+}
+.thumbnail{
+  display: flex;
+  height: 50px;
+  width: 50px;
+  margin: 10px
+}
+
+.save-edit{
+  display: flex;
+  flex-direction: row;
+  position:absolute;
+  bottom: 60px;
+  left: 430px;
+}
+
+.utility-render{
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-container{
+  display: flex;
+  flex-direction: row;
 }

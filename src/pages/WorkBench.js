@@ -148,8 +148,8 @@ export default function WorkBench() {
           />
           <button type="submit">Add new</button>
         </form>
-        or
-        <button onClick={onLoadPictures}>Load existing pictures</button>
+        {/* or
+        <button onClick={onLoadPictures}>Load existing pictures</button> */}
       </>
     );
   };

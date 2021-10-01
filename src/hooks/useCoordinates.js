@@ -1,5 +1,5 @@
 export default function useCoordinates(coordinates){
-    
+    // debugger
         let a = coordinates.split(", ");
         let b = a.map((coord) => coord.split(":"));
         let result = {

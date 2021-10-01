@@ -98,14 +98,14 @@ element-link > img{
     /* position: relative;
     top: 530px; */
     position: absolute;
-    bottom: 150px;
-    margin: 15px;
+    bottom: 120px;
+    /* margin: 15px; */
     /* background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0)) */
 }
 .work-bench-container{
   display: flex;
   flex-direction: column;
-  max-height: inherit;
+  max-height: 700px;
   max-width: inherit;
   border: solid black 1px;
 }
@@ -141,12 +141,7 @@ pointer-events: none;
   justify-content: center;
 }
 
-.quote{
-  font-size: 50px;
-  font-family: The BraggestDemo;;
-  margin: 15px;
-  cursor: grab;
-}
+
 /* .quote:active{
   cursor: grabbing
 } */
@@ -165,8 +160,16 @@ pointer-events: none;
 }
 
 .quote-container{
-  display: flex;
+  /* display: flex;
   flex-direction: row;
+  position: fixed;
+  top: 20px; */
+}
+.quote{
+  font-size: 50px;
+  font-family: The BraggestDemo;;
+  margin: 15px;
+  cursor: grab;
 }
 
 .thumbnail{
@@ -182,4 +185,20 @@ pointer-events: none;
   position:absolute;
   bottom: 60px;
   left: 300px;
+}
+
+/* .stickers-block{ */
+  /* display: flex;
+  flex-direction: row; */
+  /* position: fixed;
+  bottom: 200px; */
+/* } */
+
+.images-block{
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 100px;
+  flex-wrap: wrap;
+    justify-content: center;
 }

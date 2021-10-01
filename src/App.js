@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ToolBar from "./components/ToolBar";
 import HomePage from "./pages/HomePage";
 import Air from "./pages/Air";

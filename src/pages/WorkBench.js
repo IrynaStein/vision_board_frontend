@@ -2,23 +2,23 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import useNameCheck from "../hooks/useNamecheck";
-import { boardActions } from "../store/boardSlice";
+import { boardActions} from "../store/boardSlice";
 import Sticker from "../components/Sticker";
 import Quote from "../components/Quote";
 import Affirmation from "../components/Affirmation";
 import Picture from "../components/Picture";
+import { toolbarActions } from "../store/toolbarSlice";
 export default function WorkBench() {
   const [affirmation, setAffirmation] = useState("");
   const [images, setImages] = useState([]);
-  const [showPictures, setShowPictures] = useState(false);
-  const [message, setMessage] = useState(false);
+  const [displayedImages, setDisplayedImages] = useState(false)
   const params = useParams();
   const dispatch = useDispatch();
   dispatch(boardActions.setLayout(params.element));
   //might not need stickers. will have to do a full clean up
-  const stickerShow = useSelector((state) => state.toolbars.showSticker);
+  // const stickerShow = useSelector((state) => state.toolbars.showSticker);
   const pictureCollection = useSelector(state => state.toolbars.showPictureCollection)
-  const pictureShow = useSelector((state) => state.toolbars.showPicture);
+  const pictureUploadForm = useSelector((state) => state.toolbars.showPicture);
   const [formErrors, setFormErros] = useState('')
   const postShow = useSelector((state) => state.toolbars.showPost);
   const boards = useSelector((state) => state.boards.userBoards);
@@ -27,13 +27,13 @@ export default function WorkBench() {
   
   const { quote, posts } = currentBoard;
   console.log(currentBoard);
-  const user = useSelector((state) => state.utilities.user);
-  
+
   //custom Hook that checks the name of the board
   const nameCheck = useNameCheck(currentBoard);
 
   const stickers = currentBoard.stickers;
   const pictures = currentBoard.images;
+
   //STICKERS part
   const renderStickers = stickers.map((sticker) => (
     <Sticker
@@ -90,9 +90,22 @@ export default function WorkBench() {
   };
 
   //IMAGES part
-  const renderImages = () => {
-    if (currentBoard.images){
-      return pictures.map((p) => (
+  // const renderImages = () => {
+  //   if (currentBoard.images){
+  //     return pictures.map((p) => (
+  //         <Picture 
+  //         key={p.id} 
+  //         picture={p} 
+  //         currentBoardId={currentBoard.id} 
+  //         />))
+  //   }else {
+  //     return 
+  //   }
+  // }
+
+  const renderFrames = () => {
+    if (currentBoard.frames){
+      return currentBoard.frames.map((p) => (
           <Picture 
           key={p.id} 
           picture={p} 
@@ -117,7 +130,7 @@ export default function WorkBench() {
         .then((resp) => resp.json())
         .then((data) => {
           dispatch(boardActions.updateCurrentBoardImages(data));
-          setShowPictures(true);
+          dispatch(toolbarActions.tooglePictureCollection())
           console.log(data);
         });
     }
@@ -129,16 +142,8 @@ export default function WorkBench() {
     // setImages(e.target.files[0]);
   }
 
-  function onLoadPictures() {
-    if (currentBoard.images) {
-      setShowPictures(true);
-    } else {
-      setMessage(true);
-    }
-  }
   const renderImageUpload = () => {
     return (
-      <>
         <form onSubmit={onAddImage}>
           <input
             type="file"
@@ -149,31 +154,37 @@ export default function WorkBench() {
           />
           <button type="submit">Add new</button>
         </form>
-        or
-        <button onClick={onLoadPictures}>Load existing pictures</button>
-      </>
     );
   };
 
+  function addToFrames(image){
+    console.log(image)
+    dispatch(boardActions.addToFrames({
+      boardId: currentBoard.id,
+      frame: image
+    }))
+  } 
+
   //PICTURE COLLECTION
 const renderPictureCollection = () => {
-  // debugger
   console.log("rendering pic collection")
   if (currentBoard.images){
      return currentBoard.images.map((i) => (
-        <div key={i.id}><img className='thumbnail'src={i.url} alt="pic"></img></div>
+        <div key={i.id}><img className='thumbnail'src={i.url} alt="pic" onClick={()=>addToFrames(i)}></img></div>
       ))
-      // return <div className='pallete'>Picture collection</div>
-  }else {
-    setFormErros("you dont have any images in your collection.")
+  }
+  else {
+    console.log("you dont have any yet")
+    return <div>You dont have any pictures yet</div>
   }
 }
 
   //Rendering workbench toogle
   const renderWorkench = () => {
     if (postShow) {
-      return renderAffirmationInput();
-    } else if (pictureShow) {
+      return renderAffirmationInput()
+    } 
+    else if (pictureUploadForm) {
       return renderImageUpload();
     } 
     else if(pictureCollection){
@@ -184,57 +195,28 @@ const renderPictureCollection = () => {
     }
   };
 
-  //SAVING board
-  function onSave() {
-    console.log("saving...");
-    const boardObj = {
-      name: currentBoard.name,
-      category: currentBoard.category,
-      stickers: currentBoard.stickers,
-      posts: currentBoard.posts,
-      quote: currentBoard.quote,
-      pictures: currentBoard.images
-    }
-    console.log(boardObj)
-    fetch(`/boards/${currentBoard.id}`, {
-      method: "PATCH",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(boardObj)
-    })
-    .then(resp => resp.json())
-    //will dispatch saveBoard method or repurpose same updateBoard
-    .then(data => console.log(data))
-  }
-
   return (
     <div className={`${params.element}-container`}>
       {formErrors? <div>{formErrors}</div> :null}
-      {message ? (
+      {/* {message ? (
         <div>
           <>You dont have any images yet</>
           <button onClick={() => setMessage(false)}>X</button>
         </div>
-      ) : null}
+      ) : null} */}
       {/* {showPictures ? <div>{renderImages()}</div> : null}
       {stickerShow ? <div>{renderStickers}</div> : null} */}
       {toolbar? <>
-      <div>{renderImages()}</div>
-      <div>{renderStickers}</div>
-      </> :null}
+      <div className="images-block">{renderFrames()}</div>
+      <div className="stickers-block">{renderStickers}</div>
       <Quote quote={quote} currentBoardId={currentBoard.id} />
       <div>{affirmationList}</div>
+      </> :null}
+      
       <div>{nameCheck}</div>
 
       <div className="palette">{renderWorkench()}</div>
-      <div className="save-edit">
-        <button disabled={!user} onClick={onSave}>
-          Save
-        </button>
-        <button disabled={!user}>Edit</button>
-        <button disabled={!user} >
-          Delete this board
-        </button>
-      </div>
+       
     </div>
   );
 }

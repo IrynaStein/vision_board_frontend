@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 import {useSelector, useDispatch} from 'react-redux'
 import { useDrag } from "@use-gesture/react"
 import useCoordinates from "../hooks/useCoordinates";
@@ -27,8 +27,8 @@ export default function Quote({quote, currentBoardId}){
       });
    
     return (
-        <div className="quote-container" key={quote.id}  {...bindQuotePos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}> 
-    <div className="quote" >{quote.paragraph}</div>
+        <div className="quote-container" > 
+    <div className="quote" key={quote.id}  {...bindQuotePos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}>{quote.paragraph}</div>
     </div>
     )
 }

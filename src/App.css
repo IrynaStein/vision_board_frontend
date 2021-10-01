@@ -1,6 +1,8 @@
 .App {
   display: flex;
   flex-direction: row;
+  /* width: 700px;
+  height: 700px; */
   text-align: center;
   margin: 20px;
 }

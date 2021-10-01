@@ -16,12 +16,12 @@
   display: flex;
   background-image: url("https://live.staticflickr.com/65535/51498042966_d046b67ed4_o.jpg");
   flex-direction: column;
-  align-items: center;
   min-width: 700px;
-  /* min-height: 700px;
-  max-height: 900px; */
   height: 700px;
   border: solid black 3px;
+  /* justify-content: space-evenly; */
+  /* flex-wrap: wrap; */
+  align-items: center;
   justify-content: space-between;
 }
 

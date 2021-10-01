@@ -163,7 +163,7 @@ pointer-events: none;
   display: flex;
   flex-direction: column;
 }
-
+/* 
 .quote-container{
   display: flex;
   flex-direction: row;
@@ -182,4 +182,4 @@ pointer-events: none;
   position:absolute;
   bottom: 60px;
   left: 430px;
-}
+} */

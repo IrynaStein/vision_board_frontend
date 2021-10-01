@@ -100,7 +100,7 @@ element-link > img{
     position: absolute;
     bottom: 150px;
     margin: 15px;
-    background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0))
+    /* background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0)) */
 }
 .work-bench-container{
   display: flex;

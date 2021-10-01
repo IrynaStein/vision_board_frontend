@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import ToolBar from "./components/ToolBar";
 import HomePage from "./pages/HomePage";
 import Air from "./pages/Air";
@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { boardActions, getStickers } from "./store/boardSlice";
 import { utilityActions } from "./store/utilitySlice";
 import Loader from "./components/Loader";
-import WorkBench from "./pages/WorkBench";
+import Header from "./components/Header";
 import MyComponent from "./components/SaveAsJpeg";
 
 
@@ -42,10 +42,12 @@ function App() {
     dispatch(getStickers())
   }, [dispatch]);
 
-
   return (
     <div className="App">
+      <div className="utility-render">
       <ToolBar />
+      <Header />
+      </div>
       {isLoading? <Loader/> :
       <Switch>
         <Route exact path="/login">

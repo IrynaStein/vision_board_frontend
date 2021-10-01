@@ -1,25 +1,38 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateBoard } from "../store/boardSlice";
+import { toolbarActions } from "../store/toolbarSlice";
+import { utilityActions } from "../store/utilitySlice";
 
 export default function useNameCheck(currentBoard) {
   const [hideInput, setHideInput] = useState(false);
   const [form, setForm] = useState({
     name: "",
   });
+  const [formErrors, setFormErrors] = useState('')
   const dispatch = useDispatch();
   
   function handleChange(e) {
-    console.log(e.target.value);
-    setForm({ name: e.target.value });
+      console.log(e.target.value);
+      setForm({ name: e.target.value });
   }
+
   function handleSubmit(e, id) {
     e.preventDefault();
-    dispatch(updateBoard({ load: form, id }));
-    setHideInput(true);
+    if (form.name){
+      dispatch(updateBoard({ load: form, id }));
+      setHideInput(true);
+      setFormErrors('')
+      setForm({name: ''})
+      dispatch(utilityActions.showTools(true))
+    }else {
+      setFormErrors(`Please enter your manifestation or choose "Same" to continue without changes`)
+    } 
   }
   function onSame() {
     setHideInput(true);
+    setFormErrors('')
+    dispatch(utilityActions.showTools(true))
   }
   function boardNameCheck(name) {
     return name.match("Untitled-board-");
@@ -28,6 +41,7 @@ export default function useNameCheck(currentBoard) {
   return (
     <>
       {" "}
+     <div> {formErrors? <div>{formErrors}</div>: null}</div>
       {!hideInput ? (
         <>
           {!boardNameCheck(currentBoard.name) ? (

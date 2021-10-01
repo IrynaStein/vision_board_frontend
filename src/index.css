@@ -17,9 +17,10 @@ display: flex;
 flex-direction: column;
 flex-wrap: nowrap;
 border: solid black 1px;
-min-width: 200px;
+width: 200px;
 min-height: 700px;
 justify-content: space-evenly;
+font-family: Mandhor;
 }
 
 .homepage {
@@ -91,7 +92,7 @@ element-link > img{
   /* min-height: 100px;
   min-width: inherit; */
   /* border: solid black 1px; */
-  padding: 10px;
+  /* padding: 10px; */
   align-items: center;
     justify-content: space-evenly;
     /* position: relative;
@@ -99,7 +100,7 @@ element-link > img{
     position: absolute;
     bottom: 150px;
     margin: 15px;
-    background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0))
+    /* background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0)) */
 }
 .work-bench-container{
   display: flex;
@@ -156,4 +157,29 @@ pointer-events: none;
   color: black;
   margin: 5px;
   cursor: grab;
+}
+
+.utility-render{
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.thumbnail{
+  display: flex;
+  height: 50px;
+  width: 50px;
+  margin: 10px
+}
+
+.save-edit{
+  display: flex;
+  flex-direction: row;
+  position:absolute;
+  bottom: 60px;
+  left: 300px;
 }

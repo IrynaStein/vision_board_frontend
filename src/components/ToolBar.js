@@ -7,6 +7,7 @@ import { toolbarActions } from "../store/toolbarSlice";
 import { boardActions } from "../store/boardSlice";
 
 import BoardList from "./BoardsList";
+import { utilityActions } from "../store/utilitySlice";
 
 // import { Modal } from "semantic-ui-react";
 export default function ToolBar() {
@@ -14,8 +15,8 @@ export default function ToolBar() {
   const dispatch = useDispatch();
   const layout = useSelector(state=> state.boards.layout)
   const showStickers = useSelector(state=> state.toolbars.showSticker)
- 
-
+const toolbar = useSelector(state => state.utilities.toolbar)
+console.log("TOOLS",toolbar)
   function onChangeQuote() {
     fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
       method: "GET",
@@ -38,26 +39,11 @@ export default function ToolBar() {
       });
   }
 
-//   function onChangeQuote() {
-//     fetch("https://quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com/quote?token=ipworld.info", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com",
-// 		"x-rapidapi-key": apiKey
-// 	}
-// })
-// .then(response => {
-// 	console.log(response);
-// })
-// .catch(err => {
-// 	console.error(err);
-// });
-//   }
-
   function handleReset(name) {
     console.log(name)
     dispatch(boardActions.setLayout(name));
     dispatch(toolbarActions.resetLayoutShow())
+    dispatch(utilityActions.showTools(false))
   }
 
   function stickersHandler(){
@@ -104,37 +90,43 @@ export default function ToolBar() {
         </Link>
       </div>
       <button
-        disabled={!user}
+        disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePosts())}
       >
         Compose affirmation
       </button>
 
       <button
-        disabled={!user}
+        disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePictures())}
       >
         Add Pictures
       </button>
-      
+
       <button
-        disabled={!user || showStickers}
+        disabled={!user || !toolbar}
+        onClick={() => dispatch(toolbarActions.tooglePictureCollection())}
+      >
+        Load picture collection
+      </button>
+      
+      {/* <button
+        disabled={!user || showStickers || !toolbar}
         onClick={stickersHandler}
       >
        Load Stickers
-      </button>
-      <button disabled={!user} onClick={onChangeQuote}>
+      </button> */}
+      {/* <button disabled={!user || !toolbar} onClick={onChangeQuote}>
         Change Quote
-      </button>
-      _________
-      <div className="utilities-edit">
-        <button disabled={!user} onClick={clearHandler}>Clear All</button>
-      </div>
+      </button> */}
+      ____________________
+     
+        <button disabled={!user || !toolbar} onClick={clearHandler}>Clear All</button>
+     
       ____________________
 
-      <BoardList />
-      _________
-      <Link to="/home">Home</Link>
+     {user? <BoardList /> : null} 
+     
     </div>
    
   );

@@ -15,13 +15,17 @@ export default function WorkBench() {
   const params = useParams();
   const dispatch = useDispatch();
   dispatch(boardActions.setLayout(params.element));
+  //might not need stickers. will have to do a full clean up
   const stickerShow = useSelector((state) => state.toolbars.showSticker);
+  const pictureCollection = useSelector(state => state.toolbars.showPictureCollection)
   const pictureShow = useSelector((state) => state.toolbars.showPicture);
+  const [formErrors, setFormErros] = useState('')
   const postShow = useSelector((state) => state.toolbars.showPost);
   const boards = useSelector((state) => state.boards.userBoards);
   const currentBoard = boards.find((b) => b.id === parseInt(params.id));
-  //image prop is going to have an array
-  const { quote, posts, image } = currentBoard;
+  const toolbar = useSelector(state =>state.utilities.toolbar)
+  
+  const { quote, posts } = currentBoard;
   console.log(currentBoard);
   const user = useSelector((state) => state.utilities.user);
   //custom Hook that checks the name of the board
@@ -49,15 +53,20 @@ export default function WorkBench() {
 
   function onAddAffirmation(e, id) {
     e.preventDefault();
-    console.log(affirmation);
-    console.log(id);
-    dispatch(
-      boardActions.addAffirmation({
-        paragraph: affirmation,
-        category: params.element,
-        id,
-      })
-    );
+    if(affirmation){
+      dispatch(
+        boardActions.addAffirmation({
+          paragraph: affirmation,
+          category: params.element,
+          id,
+        })
+       
+      );
+      setFormErros('')
+    }else {
+      setFormErros("Affirmation can't be empty.")
+      setTimeout(()=> setFormErros(''), 3000) 
+    }
     setAffirmation("");
   }
 
@@ -80,7 +89,6 @@ export default function WorkBench() {
   };
 
   //IMAGES part
-
   const renderImages = () => {
     if (currentBoard.images){
       return pictures.map((p) => (
@@ -93,13 +101,6 @@ export default function WorkBench() {
       return 
     }
   }
-  // const renderImages = pictures.map((p) => (
-  //   <Picture 
-  //   key={p.id} 
-  //   picture={p} 
-  //   currentBoardId={currentBoard.id} 
-  //   />
-  // ));
 
   function onAddImage(e) {
     e.preventDefault();
@@ -107,9 +108,6 @@ export default function WorkBench() {
       console.log("Please add files to upload");
     } else {
       const form = new FormData();
-      // for (const elem in images) {
-      //   form.append("images[]", images[elem]);
-      // }
       images.images.map((i) => form.append("images[]", i));
       fetch(`/boards/${currentBoard.id}`, {
         method: "PATCH",
@@ -156,13 +154,31 @@ export default function WorkBench() {
     );
   };
 
+  //PICTURE COLLECTION
+const renderPictureCollection = () => {
+  // debugger
+  console.log("rendering pic collection")
+  if (currentBoard.images){
+     return currentBoard.images.map((i) => (
+        <div key={i.id}><img className='thumbnail'src={i.url} alt="pic"></img></div>
+      ))
+      // return <div className='pallete'>Picture collection</div>
+  }else {
+    setFormErros("you dont have any images in your collection.")
+  }
+}
+
   //Rendering workbench toogle
   const renderWorkench = () => {
     if (postShow) {
       return renderAffirmationInput();
     } else if (pictureShow) {
       return renderImageUpload();
-    } else {
+    } 
+    else if(pictureCollection){
+      return renderPictureCollection()
+    }
+    else {
       return;
     }
   };
@@ -191,24 +207,32 @@ export default function WorkBench() {
 
   return (
     <div className={`${params.element}-container`}>
+      {formErrors? <div>{formErrors}</div> :null}
       {message ? (
         <div>
           <>You dont have any images yet</>
           <button onClick={() => setMessage(false)}>X</button>
         </div>
       ) : null}
-      {showPictures ? <div>{renderImages()}</div> : null}
-      {stickerShow ? <div>{renderStickers}</div> : null}
+      {/* {showPictures ? <div>{renderImages()}</div> : null}
+      {stickerShow ? <div>{renderStickers}</div> : null} */}
+      {toolbar? <>
+      <div>{renderImages()}</div>
+      <div>{renderStickers}</div>
+      </> :null}
       <Quote quote={quote} currentBoardId={currentBoard.id} />
       <div>{affirmationList}</div>
       <div>{nameCheck}</div>
 
       <div className="palette">{renderWorkench()}</div>
-      <div>
+      <div className="save-edit">
         <button disabled={!user} onClick={onSave}>
           Save
         </button>
         <button disabled={!user}>Edit</button>
+        <button disabled={!user} >
+          Delete this board
+        </button>
       </div>
     </div>
   );

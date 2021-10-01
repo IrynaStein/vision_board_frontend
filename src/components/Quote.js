@@ -27,7 +27,7 @@ export default function Quote({quote, currentBoardId}){
       });
    
     return (
-        <div className="sticker-container" key={quote.id}  {...bindQuotePos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}> 
+        <div className="quote-container" key={quote.id}  {...bindQuotePos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}> 
     <div className="quote" >{quote.paragraph}</div>
     </div>
     )

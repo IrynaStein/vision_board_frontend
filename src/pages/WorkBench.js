@@ -225,12 +225,15 @@ const renderPictureCollection = () => {
       <div>{nameCheck}</div>
 
       <div className="palette">{renderWorkench()}</div>
-      {/* <div className="save-edit">
+      <div className="save-edit">
         <button disabled={!user} onClick={onSave}>
           Save
         </button>
         <button disabled={!user}>Edit</button>
-      </div> */}
+        <button disabled={!user} >
+          Delete this board
+        </button>
+      </div>
     </div>
   );
 }

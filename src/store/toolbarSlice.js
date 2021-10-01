@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     showSticker: false,
     showPicture: false,
-    showPost: false
+    showPost: false,
+    showPictureCollection: false
 }
 
 const toolbarSlice = createSlice({
@@ -15,10 +16,15 @@ const toolbarSlice = createSlice({
             state.showPicture = false
             state.showPost = false
         },
-    
+        tooglePictureCollection(state){
+            state.showPictureCollection = !state.showPictureCollection
+            state.showPicture = false
+            state.showPost = false
+        },
         tooglePictures(state){
             state.showPicture = !state.showPicture
             state.showPost = false
+            state.showPictureCollection = false
 
             // state.showSticker = false
         },
@@ -26,11 +32,13 @@ const toolbarSlice = createSlice({
             state.showPost = !state.showPost
             // state.showSticker = false
             state.showPicture = false
+            state.showPictureCollection = false
         },
         resetLayoutShow(state){
             state.showSticker = false
             state.showPicture = false
             state.showPost = false
+            state.showPictureCollection = false
         }
     }
 })

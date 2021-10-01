@@ -92,7 +92,7 @@ element-link > img{
   /* min-height: 100px;
   min-width: inherit; */
   /* border: solid black 1px; */
-  padding: 10px;
+  /* padding: 10px; */
   align-items: center;
     justify-content: space-evenly;
     /* position: relative;
@@ -162,4 +162,24 @@ pointer-events: none;
 .utility-render{
   display: flex;
   flex-direction: column;
+}
+
+.quote-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.thumbnail{
+  display: flex;
+  height: 50px;
+  width: 50px;
+  margin: 10px
+}
+
+.save-edit{
+  display: flex;
+  flex-direction: row;
+  position:absolute;
+  bottom: 60px;
+  left: 430px;
 }

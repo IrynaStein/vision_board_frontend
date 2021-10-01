@@ -7,6 +7,7 @@ const ComponentToPrint = React.forwardRef((props, ref) => (
 ));
 
 const MyComponent = () => {
+  // debugger
   const componentRef = useRef();
 
   return (

@@ -26,7 +26,7 @@ export default function useNameCheck(currentBoard) {
       setForm({name: ''})
       dispatch(utilityActions.showTools(true))
     }else {
-      setFormErrors("Please enter your manifestation or choose Same to continue without changes")
+      setFormErrors(`Please enter your manifestation or choose "Same" to continue without changes`)
     } 
   }
   function onSame() {

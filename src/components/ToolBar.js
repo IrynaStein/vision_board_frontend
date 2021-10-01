@@ -102,16 +102,23 @@ console.log("TOOLS",toolbar)
       >
         Add Pictures
       </button>
-      
+
       <button
+        disabled={!user || !toolbar}
+        onClick={() => dispatch(toolbarActions.tooglePictureCollection())}
+      >
+        Load picture collection
+      </button>
+      
+      {/* <button
         disabled={!user || showStickers || !toolbar}
         onClick={stickersHandler}
       >
        Load Stickers
-      </button>
-      <button disabled={!user || !toolbar} onClick={onChangeQuote}>
+      </button> */}
+      {/* <button disabled={!user || !toolbar} onClick={onChangeQuote}>
         Change Quote
-      </button>
+      </button> */}
       ____________________
      
         <button disabled={!user || !toolbar} onClick={clearHandler}>Clear All</button>

@@ -122,7 +122,15 @@ console.log("TOOLS",toolbar)
       ____________________
      
         <button disabled={!user || !toolbar} onClick={clearHandler}>Clear All</button>
-     
+        {/* <div className="save-edit">
+        <button disabled={!user} onClick={onSave}>
+          Save
+        </button>
+        <button disabled={!user}>Edit</button>
+        <button disabled={!user} >
+          Delete this board
+        </button>
+     </div> */}
       ____________________
 
      {user? <BoardList /> : null} 

@@ -28,6 +28,7 @@ export default function WorkBench() {
   const { quote, posts } = currentBoard;
   console.log(currentBoard);
   const user = useSelector((state) => state.utilities.user);
+  
   //custom Hook that checks the name of the board
   const nameCheck = useNameCheck(currentBoard);
 

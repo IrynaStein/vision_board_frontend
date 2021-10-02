@@ -5,8 +5,7 @@ import { toolbarActions } from "../store/toolbarSlice";
 export default function BoardIcon({ boards }) {
   // const layout = useSelector(state =>state.boards.layout)
   const stickers = useSelector(state => state.boards.stickers)
-  // const sticker = stickers[Math.floor(Math.random()*stickers.length)].image_url
-
+// debugger
   const pickSticker = (category) => {
 const currentStickers = stickers.filter(s => s.category === category)
 return  currentStickers[Math.floor(Math.random()*currentStickers.length)].image_url

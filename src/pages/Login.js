@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { utilityActions } from "../store/utilitySlice";
 import { boardActions } from "../store/boardSlice";
 import { getStickers } from "../store/boardSlice";
@@ -44,6 +44,7 @@ export default function Login() {
       <input
         {...register("password", { required: "Please enter your password." })}
         placeholder="enter password..."
+        type="password"
       ></input>
       <button type='submit'>Login</button>
     </form>

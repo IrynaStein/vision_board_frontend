@@ -1,43 +1,81 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import apiKey from "../api";
+// import apiKey from "../api";
 import { toolbarActions } from "../store/toolbarSlice";
-import { boardActions } from "../store/boardSlice";
-
+import { boardActions, boardDelete } from "../store/boardSlice";
 import BoardList from "./BoardsList";
 import { utilityActions } from "../store/utilitySlice";
+
 
 // import { Modal } from "semantic-ui-react";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
+  const history = useHistory()
   const layout = useSelector(state=> state.boards.layout)
-  const showStickers = useSelector(state=> state.toolbars.showSticker)
+  // const showStickers = useSelector(state=> state.toolbars.showSticker)
 const toolbar = useSelector(state => state.utilities.toolbar)
-console.log("TOOLS",toolbar)
-  function onChangeQuote() {
-    fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "quotes15.p.rapidapi.com",
-        "x-rapidapi-key": apiKey,
-      },
+const buttonsDisplay = useSelector(state => state.toolbars.buttonsDisplay)
+const currentBoard = useSelector(state => state.boards.userBoards.find(b=> b.category === layout))
+console.log("TOOLBAR BOARD", currentBoard)
+  // function onChangeQuote() {
+  //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
+  //     method: "GET",
+  //     headers: {
+  //       "x-rapidapi-host": "quotes15.p.rapidapi.com",
+  //       "x-rapidapi-key": apiKey,
+  //     },
+  //   })
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       dispatch(boardActions.setNewQuote({
+  //         quote: data.content,
+  //         quoteId: data.id,
+  //         category: layout
+  //       }));
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }
+
+  function onSave() {
+    console.log("saving...");
+    const boardObj = {
+      name: currentBoard.name,
+      category: currentBoard.category,
+      stickers: currentBoard.stickers,
+      posts: currentBoard.posts,
+      quote: currentBoard.quote,
+      pictures: currentBoard.images,
+      frames: currentBoard.frames
+    }
+    console.log(boardObj)
+    fetch(`/boards/${currentBoard.id}`, {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(boardObj)
     })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data)
-        dispatch(boardActions.setNewQuote({
-          quote: data.content,
-          quoteId: data.id,
-          category: layout
-        }));
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(resp => resp.json())
+    //will dispatch saveBoard method or repurpose same updateBoard
+    .then(data => console.log(data))
   }
+
+  function onDelete(){
+    console.log("ON DELETE IN TOOLBAR", currentBoard.id)
+    // fetch(`/boards/${currentBoard.id}`, {
+    //   method: "DELETE"
+    // })
+    // .then(resp => resp.json())
+    // .then(data => console.log(data))
+    dispatch(boardDelete(currentBoard.id))
+    dispatch(utilityActions.showTools(false))
+    history.push('/home')
+  }
+
 
   function handleReset(name) {
     console.log(name)
@@ -46,10 +84,10 @@ console.log("TOOLS",toolbar)
     dispatch(utilityActions.showTools(false))
   }
 
-  function stickersHandler(){
-    dispatch(toolbarActions.toogleStickers(true))
-    dispatch(boardActions.addStickers(layout))
-  }
+  // function stickersHandler(){
+  //   dispatch(toolbarActions.toogleStickers(true))
+  //   dispatch(boardActions.addStickers(layout))
+  // }
 
 
   function clearHandler(){
@@ -122,15 +160,20 @@ console.log("TOOLS",toolbar)
       ____________________
      
         <button disabled={!user || !toolbar} onClick={clearHandler}>Clear All</button>
-        {/* <div className="save-edit">
-        <button disabled={!user} onClick={onSave}>
+        {/* <div className="save-edit"> */}
+        <button disabled={!user || !toolbar} onClick={onSave}>
           Save
         </button>
-        <button disabled={!user}>Edit</button>
-        <button disabled={!user} >
+
+        
+        {buttonsDisplay === "none" ? <button disabled={!user || !toolbar} onClick={()=>dispatch(toolbarActions.setButtonsDisplay("block"))}>Edit</button>:
+        <button disabled={!user || !toolbar} onClick={()=>dispatch(toolbarActions.setButtonsDisplay("none"))}>Done editing</button>
+        }
+        
+        <button disabled={!user || !toolbar} onClick={()=>onDelete()}>
           Delete this board
         </button>
-     </div> */}
+     {/* </div> */}
       ____________________
 
      {user? <BoardList /> : null} 

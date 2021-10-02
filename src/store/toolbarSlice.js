@@ -4,7 +4,8 @@ const initialState = {
     showSticker: false,
     showPicture: false,
     showPost: false,
-    showPictureCollection: false
+    showPictureCollection: false,
+    buttonsDisplay: "none"
 }
 
 const toolbarSlice = createSlice({
@@ -39,7 +40,11 @@ const toolbarSlice = createSlice({
             state.showPicture = false
             state.showPost = false
             state.showPictureCollection = false
-        }
+        },
+        setButtonsDisplay(state, {payload}){
+            // debugger
+            state.buttonsDisplay = payload
+        },
     }
 })
 

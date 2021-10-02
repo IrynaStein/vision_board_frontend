@@ -27,6 +27,17 @@ export const updateBoard = createAsyncThunk(
   }
 );
 
+export const boardDelete = createAsyncThunk(
+    "board/boardDelete",
+    async (id) => {
+      const resp = await fetch(`/boards/${id}`, {
+          method: "DELETE"
+      });
+      const data = await resp.json();
+      return data;
+    }
+  );
+
 export const getStickers = createAsyncThunk(
   "stickers/getStickers",
   async () => {
@@ -56,7 +67,6 @@ const boardSlice = createSlice({
       state.layout = action.payload;
     },
     addAffirmation(state, { payload }) {
-    //   debugger;
       const board = state.userBoards.find((b) => b.id === payload.id);
       const newId = "temp-" + payload.paragraph.match(/\w/g).length + payload.paragraph.match(/\w/g).slice(0,2) + payload.paragraph.match(/\w/g).slice(-1) + Math.random(1-2)
       const newPostconstructed = {
@@ -65,23 +75,24 @@ const boardSlice = createSlice({
           category: payload.category,
           coordinates: "x: 0, y: 0"
       }
-    //   debugger
       board.posts.push(newPostconstructed);
     },
     removeAffirmation(state, action) {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
-    setUserBoards(state, action) {
-        // debugger
-        // const boards = action.payload.map((b) => {
-        //     if(!b.images){
-        //         debugger
-        //        return b.posts = {}
-        //     }else {
-        //        return b
-        //     }
-        // }) 
+    setUserBoards(state, action) { 
       state.userBoards = action.payload
+    },
+    addToFrames(state, {payload}){
+        const board = state.userBoards.find((b) => b.id === payload.boardId);
+        // debugger
+        const frame = board.frames.find(f => f.id === payload.frame.id)
+        // debugger
+        if (!frame){
+            board.frames.push(payload.frame) 
+        }else {
+            return 
+        } 
     },
     updateCurrentBoardImages(state, { payload }) {
       const board = payload;
@@ -109,7 +120,6 @@ const boardSlice = createSlice({
     },
     //A BLOCK OF ACTIONS THAT SET COORDINATES FOR ELEMENTS
     setStickerCoordinates(state, { payload }) {
-      // debugger
       const board = state.userBoards.find((b) => b.id === payload.boardId);
       const sticker = board.stickers.find((s) => s.id === payload.stickerId);
       sticker.coordinates = JSON.stringify(payload.coordinates)
@@ -131,8 +141,8 @@ const boardSlice = createSlice({
     },
     setImageCoordinates(state, {payload}){
         const board = state.userBoards.find((b) => b.id === payload.boardId);
-        const image = board.images.find((i) => i.id === payload.pictureId);
-        image.coordinates = JSON.stringify(payload.coordinates)
+        const frame = board.frames.find((i) => i.id === payload.frameId);
+        frame.coordinates = JSON.stringify(payload.coordinates)
           .replace(/[{"'}]/g, "")
           .replace(/[,]/g, ", ");
     },
@@ -143,6 +153,14 @@ const boardSlice = createSlice({
       board.frames = [];
       board.quote = [];
       board.image =[]
+    },
+    removeBoardElement(state, {payload}){
+// debugger
+const board = state.userBoards.find((b) => b.id === payload.board);
+if (payload.type === "stickers"){
+    const sticker = board.stickers.find(s => s.id === payload.typeId)
+    board.stickers = board.stickers.filter(s => s.id !== sticker.id)
+}
     },
     setNewQuote(state, { payload }) {
       const board = state.userBoards.find(
@@ -240,6 +258,26 @@ const boardSlice = createSlice({
         state.errors = action.error.message;
       }
     },
+    [boardDelete.pending](state){
+        state.status = "pending"
+    },
+    [boardDelete.fulfilled](state, action){
+        state.status = "completed"
+        if (action.payload.errors){
+            state.errors = action.payload.errors
+        }else{
+            state.userBoards = state.userBoards.filter(b => b.id !== action.payload.board.id)
+            state.errors = []
+        }
+    },
+    [boardDelete.rejected](state, action){
+        state.status = "rejected";
+      if (action.payload) {
+        state.errors = action.payload.errorMessage;
+      } else {
+        state.errors = action.error.message;
+      }
+    }
   },
 });
 

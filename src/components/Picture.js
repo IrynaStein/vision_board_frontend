@@ -4,16 +4,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { boardActions } from "../store/boardSlice";
 import useCoordinates from "../hooks/useCoordinates";
 
-export default function Picture({picture, currentBoardId}){
+export default function Picture({frame, currentBoardId}){
     const currentBoard = useSelector((state) =>
     state.boards.userBoards.find((b) => b.id === currentBoardId)
     );
+    const buttonsDisplay = useSelector((state) => state.toolbars.buttonsDisplay);
     const dispatch = useDispatch();
-    let coordinates = currentBoard.images.find(
-        (i) => i.id === picture.id
+    let coordinates = currentBoard.frames.find(
+        (i) => i.id === frame.id
         ).coordinates;
         console.log(coordinates)
 
+        function removeFrame(sticker) {
+            console.log(sticker.id);
+            dispatch(
+              boardActions.removeBoardElement({
+                type: "stickers",
+                typeId: sticker.id,
+                board: currentBoard.id,
+              })
+            );
+          }
     const updatedCoordinates = useCoordinates(coordinates);
 
     const bindPicPos = useDrag((params) => {
@@ -24,15 +35,21 @@ export default function Picture({picture, currentBoardId}){
               y: params.offset[1],
             },
             boardId: currentBoardId,
-            pictureId: picture.id
+            frameId: frame.id
           })
         );
       });
 
     //send additional prop that will specify class of image size chosen by user. "Large, medium, small" it will render accordingly
     return (
-        <div className="sticker-container" key={picture.id}  {...bindPicPos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}> 
-      <img className="App-logo-medium" src={picture.url} alt="photograph"/>
+        <div className="sticker-container" key={frame.id}  {...bindPicPos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}> 
+      <img className="App-logo-medium" src={frame.url} alt="photograph"/>
+      <button
+        style={{ display: buttonsDisplay }}
+        onClick={() => removeFrame(frame)}
+      >
+        x
+      </button>
     </div>
        
     )

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateBoard } from "../store/boardSlice";
-import { toolbarActions } from "../store/toolbarSlice";
 import { utilityActions } from "../store/utilitySlice";
 
 export default function useNameCheck(currentBoard) {

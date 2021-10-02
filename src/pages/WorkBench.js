@@ -31,11 +31,9 @@ export default function WorkBench() {
   //custom Hook that checks the name of the board
   const nameCheck = useNameCheck(currentBoard);
 
-  const stickers = currentBoard.stickers;
-  const pictures = currentBoard.images;
 
   //STICKERS part
-  const renderStickers = stickers.map((sticker) => (
+  const renderStickers = currentBoard.stickers.map((sticker) => (
     <Sticker
       key={sticker.id}
       sticker={sticker}
@@ -105,10 +103,10 @@ export default function WorkBench() {
 
   const renderFrames = () => {
     if (currentBoard.frames){
-      return currentBoard.frames.map((p) => (
+      return currentBoard.frames.map((f) => (
           <Picture 
-          key={p.id} 
-          picture={p} 
+          key={f.id} 
+          frame={f} 
           currentBoardId={currentBoard.id} 
           />))
     }else {

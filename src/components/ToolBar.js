@@ -50,7 +50,8 @@ console.log("TOOLBAR BOARD", currentBoard)
       stickers: currentBoard.stickers,
       posts: currentBoard.posts,
       quote: currentBoard.quote,
-      pictures: currentBoard.images
+      pictures: currentBoard.images,
+      frames: currentBoard.frames
     }
     console.log(boardObj)
     fetch(`/boards/${currentBoard.id}`, {

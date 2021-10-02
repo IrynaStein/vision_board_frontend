@@ -141,8 +141,8 @@ const boardSlice = createSlice({
     },
     setImageCoordinates(state, {payload}){
         const board = state.userBoards.find((b) => b.id === payload.boardId);
-        const image = board.images.find((i) => i.id === payload.pictureId);
-        image.coordinates = JSON.stringify(payload.coordinates)
+        const frame = board.frames.find((i) => i.id === payload.frameId);
+        frame.coordinates = JSON.stringify(payload.coordinates)
           .replace(/[{"'}]/g, "")
           .replace(/[,]/g, ", ");
     },

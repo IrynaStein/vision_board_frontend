@@ -15,12 +15,12 @@ export default function Picture({frame, currentBoardId}){
         ).coordinates;
         console.log(coordinates)
 
-        function removeFrame(sticker) {
-            console.log(sticker.id);
+        function removeFrame(frame) {
+            console.log(frame.id);
             dispatch(
               boardActions.removeBoardElement({
-                type: "stickers",
-                typeId: sticker.id,
+                type: "frames",
+                typeId: frame.id,
                 board: currentBoard.id,
               })
             );

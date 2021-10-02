@@ -50,7 +50,7 @@ console.log("TOOLBAR BOARD", currentBoard)
       stickers: currentBoard.stickers,
       posts: currentBoard.posts,
       quote: currentBoard.quote,
-      pictures: currentBoard.images,
+      // pictures: currentBoard.images,
       frames: currentBoard.frames
     }
     console.log(boardObj)
@@ -61,7 +61,10 @@ console.log("TOOLBAR BOARD", currentBoard)
     })
     .then(resp => resp.json())
     //will dispatch saveBoard method or repurpose same updateBoard
-    .then(data => console.log(data))
+    .then(data => {
+      console.log("SAVED DATA", data)
+      dispatch(boardActions.updateBoard(data))
+  })
   }
 
   function onDelete(){

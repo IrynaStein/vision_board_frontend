@@ -81,12 +81,13 @@ const boardSlice = createSlice({
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
     setUserBoards(state, action) { 
+      // debugger
       state.userBoards = action.payload
     },
     addToFrames(state, {payload}){
         const board = state.userBoards.find((b) => b.id === payload.boardId);
         // debugger
-        const frame = board.frames.find(f => f.id === payload.frame.id)
+        const frame = board.frames.find(f => f.id === payload.frame.id || f.old_id === payload.frame.id)
         // debugger
         if (!frame){
             board.frames.push(payload.frame) 
@@ -154,12 +155,25 @@ const boardSlice = createSlice({
       board.quote = [];
       board.image =[]
     },
+    updateBoard(state, {payload}){
+      state.userBoards = state.userBoards.map((b) => {
+        if (b.id === payload.id) {
+          return payload;
+        } else {
+          return b;
+        }
+      });
+    },
     removeBoardElement(state, {payload}){
 // debugger
 const board = state.userBoards.find((b) => b.id === payload.board);
 if (payload.type === "stickers"){
     const sticker = board.stickers.find(s => s.id === payload.typeId)
     board.stickers = board.stickers.filter(s => s.id !== sticker.id)
+}
+else if(payload.type === "frames"){
+  const frame = board.frames.find(f => f.id === payload.typeId)
+  board.frames = board.frames.filter(f => f.id !== frame.id)
 }
     },
     setNewQuote(state, { payload }) {
@@ -185,7 +199,7 @@ if (payload.type === "stickers"){
         state.errors = action.payload.errors;
       } else {
         const board = action.payload;
-        board.images = []
+        // board.images = []
         state.userBoards = [...state.userBoards, board];
         state.errors = [];
       }
@@ -227,26 +241,26 @@ if (payload.type === "stickers"){
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
-        const board = action.payload;
-        if (!board.images){
-            board.images = []
-            // debugger
+        // const board = action.payload;
+        // if (!board.images){
+        //     // board.images = []
+        //     // debugger
+        //     state.userBoards = state.userBoards.map((b) => {
+        //         if (b.id === action.payload.id) {
+        //           return board;
+        //         } else {
+        //           return b;
+        //         }
+        //       });
+        // } else {
             state.userBoards = state.userBoards.map((b) => {
                 if (b.id === action.payload.id) {
-                  return board;
+                  return action.payload;
                 } else {
                   return b;
                 }
               });
-        } else {
-            state.userBoards = state.userBoards.map((b) => {
-                if (b.id === action.payload.id) {
-                  return board;
-                } else {
-                  return b;
-                }
-              });
-        }
+        // }
         state.errors = [];
       }
     },

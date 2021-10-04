@@ -93,6 +93,7 @@ element-link > img{
   min-width: inherit; */
   /* border: solid black 1px; */
   /* padding: 10px; */
+  z-index: 10;
   align-items: center;
     justify-content: space-evenly;
     /* position: relative;
@@ -148,6 +149,7 @@ pointer-events: none;
 } */
 
 .affirmation{
+  z-index: 8;
   font-size: 25px;
   font-family: Mandhor;
   color: black;

@@ -3,6 +3,7 @@
   flex-direction: row;
   /* width: 700px; */
   /* height: 700px; */
+  max-width: 900px;
   text-align: center;
   margin: 20px;
 }

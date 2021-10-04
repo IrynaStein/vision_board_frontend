@@ -29,11 +29,6 @@ export default function Sticker({ sticker, currentBoardId }) {
     );
   }
   const bindStickerPos = useDrag((params) => {
-    // console.log(updatedCoordinates.x)
-    // console.log("PARAMS", params)
-    // console.log("PARAMS", params.offset[0])
-    // params.initial[0] = updatedCoordinates.x
-    // params.initial[1] = updatedCoordinates.x
     dispatch(
       boardActions.setStickerCoordinates({
         coordinates: {

@@ -180,6 +180,9 @@ else if(payload.type === "frames"){
   const frame = board.frames.find(f => f.id === payload.typeId)
   board.frames = board.frames.filter(f => f.id !== frame.id)
 }
+else if (payload.type === "quote"){
+ board.quote= ""
+}
 else {
   const post = board.posts.find(p => p.id === payload.typeId)
   board.posts = board.posts.filter(p => p.id !== post.id)

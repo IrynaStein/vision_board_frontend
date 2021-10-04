@@ -26,9 +26,7 @@ export default function Quote({quote, currentBoardId}){
         );
       });
    
-    return (
-        <div className="quote-container" > 
-    <div className="quote" key={quote.id}  {...bindQuotePos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}>{quote.paragraph}</div>
-    </div>
+    return (   
+    <div className="quote" key={quote.id}  {...bindQuotePos()} style={{display: "inline-block", zIndex: 9, position: "absolute", top: updatedCoordinates.y, left: updatedCoordinates.x}}>{quote.paragraph}</div>
     )
 }

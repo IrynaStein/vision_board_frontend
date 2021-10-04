@@ -61,11 +61,11 @@ font-family: Mandhor;
 }
 
 .layout{
-display: flex;
+display: block;
 flex-direction: column;
 justify-content: flex-end;
 align-items: center;
-min-height: 500px;
+/* min-height: 500px; */
 width: 500px;
 padding: 15px;
 /* border: solid black 1px; */
@@ -103,10 +103,11 @@ element-link > img{
     /* background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0)) */
 }
 .work-bench-container{
-  display: flex;
+  display: block;
   flex-direction: column;
-  max-height: 700px;
-  max-width: inherit;
+  position: fixed;
+  height: 700px;
+  width: 700px;
   border: solid black 1px;
 }
 .canvas{
@@ -160,10 +161,10 @@ pointer-events: none;
 }
 
 .quote-container{
-  /* display: flex;
+  display: block;
   flex-direction: row;
   position: fixed;
-  top: 20px; */
+  top: 20px;
 }
 .quote{
   font-size: 50px;
@@ -187,18 +188,34 @@ pointer-events: none;
   left: 300px;
 }
 
-/* .stickers-block{ */
-  /* display: flex;
-  flex-direction: row; */
-  /* position: fixed;
-  bottom: 200px; */
-/* } */
+/* .stickers-block{ 
+  display: block;
+  height: 700px;
+  width: 700px;
+  /* flex-direction: row; */
+  /* position: absolute;
+  bottom: 200px;
+  border: solid 2px; */
+/* } */ 
 
-.images-block{
-  display: flex;
+/* .affirmation-block{ 
+  display: block;
   flex-direction: row;
   position: fixed;
-  top: 100px;
-  flex-wrap: wrap;
-    justify-content: center;
+  bottom: 200px; 
+} */
+
+.images-block{
+  display: block;
+  height: 700px;
+  width: 700px;
+  position: relative;
+}
+
+.delete-button{
+  border: none;
+  background: none;
+  color: red;
+  position: absolute;
+  font-size: 30px;
 }

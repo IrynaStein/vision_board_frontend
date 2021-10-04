@@ -86,9 +86,15 @@ const boardSlice = createSlice({
     },
     addToFrames(state, {payload}){
         const board = state.userBoards.find((b) => b.id === payload.boardId);
-        // debugger
-        const frame = board.frames.find(f => f.id === payload.frame.id || f.old_id === payload.frame.id)
-        // debugger
+        const frame = board.frames.find((f) => {
+          if (f.old_id && f.old_id === payload.frame.id){
+            return f
+          } else if (!f.old && f.id === payload.frame.id){
+            return f
+          } else{
+            return 0
+          }
+        })
         if (!frame){
             board.frames.push(payload.frame) 
         }else {
@@ -165,7 +171,6 @@ const boardSlice = createSlice({
       });
     },
     removeBoardElement(state, {payload}){
-// debugger
 const board = state.userBoards.find((b) => b.id === payload.board);
 if (payload.type === "stickers"){
     const sticker = board.stickers.find(s => s.id === payload.typeId)
@@ -174,6 +179,10 @@ if (payload.type === "stickers"){
 else if(payload.type === "frames"){
   const frame = board.frames.find(f => f.id === payload.typeId)
   board.frames = board.frames.filter(f => f.id !== frame.id)
+}
+else {
+  const post = board.posts.find(p => p.id === payload.typeId)
+  board.posts = board.posts.filter(p => p.id !== post.id)
 }
     },
     setNewQuote(state, { payload }) {
@@ -193,13 +202,11 @@ else if(payload.type === "frames"){
     },
     [createBoard.fulfilled](state, action) {
       state.status = "completed";
-        // debugger
       state.isLoadingBoards = false;
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
         const board = action.payload;
-        // board.images = []
         state.userBoards = [...state.userBoards, board];
         state.errors = [];
       }
@@ -217,7 +224,6 @@ else if(payload.type === "frames"){
     [getStickers.fulfilled](state, action) {
       state.status = "completed";
       if (action.payload.errors) {
-        // debugger;
         state.errors = action.payload.errors;
       } else {
         state.stickers = action.payload;
@@ -241,18 +247,6 @@ else if(payload.type === "frames"){
       if (action.payload.errors) {
         state.errors = action.payload.errors;
       } else {
-        // const board = action.payload;
-        // if (!board.images){
-        //     // board.images = []
-        //     // debugger
-        //     state.userBoards = state.userBoards.map((b) => {
-        //         if (b.id === action.payload.id) {
-        //           return board;
-        //         } else {
-        //           return b;
-        //         }
-        //       });
-        // } else {
             state.userBoards = state.userBoards.map((b) => {
                 if (b.id === action.payload.id) {
                   return action.payload;
@@ -260,7 +254,6 @@ else if(payload.type === "frames"){
                   return b;
                 }
               });
-        // }
         state.errors = [];
       }
     },

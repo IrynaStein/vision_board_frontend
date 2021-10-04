@@ -33,7 +33,13 @@ export default function WorkBench() {
 
 
   //STICKERS part
-  const renderStickers = currentBoard.stickers.map((sticker) => (
+  // debugger
+  // const stickers = currentBoard.stickers.sort((a, b) => a.id - b.id)
+  // debugger
+  // console.log(currentBoard.stickers)
+  // debugger
+  const renderStickers = currentBoard.stickers
+  .map((sticker) => (
     <Sticker
       key={sticker.id}
       sticker={sticker}
@@ -205,10 +211,11 @@ const renderPictureCollection = () => {
       {/* {showPictures ? <div>{renderImages()}</div> : null}
       {stickerShow ? <div>{renderStickers}</div> : null} */}
       {toolbar? <>
-      <div className="images-block">{renderFrames()}</div>
-      <div className="stickers-block">{renderStickers}</div>
-      <Quote quote={quote} currentBoardId={currentBoard.id} />
-      <div>{affirmationList}</div>
+      <div className="images-block">
+        {renderFrames()}
+        {renderStickers}
+        {affirmationList}
+        <Quote quote={quote} currentBoardId={currentBoard.id} /></div>
       </> :null}
       
       <div>{nameCheck}</div>

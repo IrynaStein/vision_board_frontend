@@ -29,36 +29,47 @@ export default function Sticker({ sticker, currentBoardId }) {
     );
   }
   const bindStickerPos = useDrag((params) => {
-      console.log("OFFSET",params)
+    // console.log(updatedCoordinates.x)
+    // console.log("PARAMS", params)
+    // console.log("PARAMS", params.offset[0])
+    // params.initial[0] = updatedCoordinates.x
+    // params.initial[1] = updatedCoordinates.x
     dispatch(
       boardActions.setStickerCoordinates({
         coordinates: {
           x: params.offset[0],
           y: params.offset[1],
+
         },
         boardId: currentBoardId,
         stickerId: sticker.id,
       })
-    );
-  });
+    )
+
+    });
 
   return (
     <div
       key={sticker.id}
       {...bindStickerPos()}
       style={{
-        position: "relative",
+        display: "inline-block",
+        zIndex: 8,
+        position: "absolute",
         top: updatedCoordinates.y,
         left: updatedCoordinates.x,
       }}
     >
-      <img className="App-logo" src={sticker.image_url} alt="sticker"></img>
-      <button
-        style={{ display: buttonsDisplay }}
+      <div style={{display: "flex", justifyContent: "center",alignItems: "center", postion: "relative"}}>
+      <img className="App-logo" src={sticker.image_url} alt="sticker" style={{postion: "absolute"}}></img>
+      <button 
+      className="delete-button"
+        style={{ display: buttonsDisplay}}
         onClick={() => removeSticker(sticker)}
       >
         x
       </button>
+      </div>
     </div>
   );
 }

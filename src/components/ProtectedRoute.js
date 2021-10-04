@@ -4,10 +4,10 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.utilities.user);
   return (
     <Route
-    {...rest}
+      {...rest}
       render={(props) => {
-        if (user) { 
-          return <Component {...props}/>;
+        if (user) {
+          return <Component {...props} />;
         } else {
           return <Redirect to="/home" />;
         }

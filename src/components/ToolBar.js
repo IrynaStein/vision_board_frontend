@@ -1,4 +1,3 @@
-
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,18 +7,17 @@ import { boardActions, boardDelete } from "../store/boardSlice";
 import BoardList from "./BoardsList";
 import { utilityActions } from "../store/utilitySlice";
 
-
-// import { Modal } from "semantic-ui-react";
 export default function ToolBar() {
   const user = useSelector((state) => state.utilities.user);
   const dispatch = useDispatch();
-  const history = useHistory()
-  const layout = useSelector(state=> state.boards.layout)
-  // const showStickers = useSelector(state=> state.toolbars.showSticker)
-const toolbar = useSelector(state => state.utilities.toolbar)
-const buttonsDisplay = useSelector(state => state.toolbars.buttonsDisplay)
-const currentBoard = useSelector(state => state.boards.userBoards.find(b=> b.category === layout))
-console.log("TOOLBAR BOARD", currentBoard)
+  const history = useHistory();
+  const layout = useSelector((state) => state.boards.layout);
+  const toolbar = useSelector((state) => state.utilities.toolbar);
+  const buttonsDisplay = useSelector((state) => state.toolbars.buttonsDisplay);
+  const currentBoard = useSelector((state) =>
+    state.boards.userBoards.find((b) => b.category === layout)
+  );
+  console.log("TOOLBAR BOARD", currentBoard);
   // function onChangeQuote() {
   //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
   //     method: "GET",
@@ -42,6 +40,11 @@ console.log("TOOLBAR BOARD", currentBoard)
   //     });
   // }
 
+  //When the API is ready this function will call for a new quote
+  // function onChangeQuote(){
+  //   console.log("changing quote")
+  // }
+
   function onSave() {
     console.log("saving...");
     const boardObj = {
@@ -50,41 +53,33 @@ console.log("TOOLBAR BOARD", currentBoard)
       stickers: currentBoard.stickers,
       posts: currentBoard.posts,
       quote: currentBoard.quote,
-      // pictures: currentBoard.images,
-      frames: currentBoard.frames
-    }
-    console.log(boardObj)
+      frames: currentBoard.frames,
+    };
+    console.log(boardObj);
     fetch(`/boards/${currentBoard.id}`, {
       method: "PATCH",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(boardObj)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(boardObj),
     })
-    .then(resp => resp.json())
-    //will dispatch saveBoard method or repurpose same updateBoard
-    .then(data => {
-      console.log("SAVED DATA", data)
-      dispatch(boardActions.updateBoard(data))
-  })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("SAVED DATA", data);
+        dispatch(boardActions.updateBoard(data));
+      });
   }
 
-  function onDelete(){
-    console.log("ON DELETE IN TOOLBAR", currentBoard.id)
-    // fetch(`/boards/${currentBoard.id}`, {
-    //   method: "DELETE"
-    // })
-    // .then(resp => resp.json())
-    // .then(data => console.log(data))
-    dispatch(boardDelete(currentBoard.id))
-    dispatch(utilityActions.showTools(false))
-    history.push('/home')
+  function onDelete() {
+    console.log("ON DELETE IN TOOLBAR", currentBoard.id);
+    dispatch(boardDelete(currentBoard.id));
+    dispatch(utilityActions.showTools(false));
+    history.push("/home");
   }
-
 
   function handleReset(name) {
-    console.log(name)
+    console.log(name);
     dispatch(boardActions.setLayout(name));
-    dispatch(toolbarActions.resetLayoutShow())
-    dispatch(utilityActions.showTools(false))
+    dispatch(toolbarActions.resetLayoutShow());
+    dispatch(utilityActions.showTools(false));
   }
 
   // function stickersHandler(){
@@ -92,38 +87,51 @@ console.log("TOOLBAR BOARD", currentBoard)
   //   dispatch(boardActions.addStickers(layout))
   // }
 
-
-  function clearHandler(){
-    console.log(layout)
-    dispatch(boardActions.clearBoard(layout))
-    dispatch(toolbarActions.toogleStickers(false))
+  function clearHandler() {
+    console.log(layout);
+    dispatch(boardActions.clearBoard(layout));
+    dispatch(toolbarActions.toogleStickers(false));
   }
-
 
   return (
     <div className="toolbar">
       ToolBar
       <div className="element-link-container">
-        {/* <Modal /> */}
-        <Link to="/water" onClick={()=>handleReset("water")} className="element-link"> 
+        <Link
+          to="/water"
+          onClick={() => handleReset("water")}
+          className="element-link"
+        >
           <img
             src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png"
             alt="water symbol"
           />
         </Link>
-        <Link to="/earth" onClick={()=>handleReset("earth")}className="element-link">
+        <Link
+          to="/earth"
+          onClick={() => handleReset("earth")}
+          className="element-link"
+        >
           <img
             src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png"
             alt="earth symbol"
           />
         </Link>
-        <Link to="/air" onClick={()=>handleReset("air")} className="element-link">
+        <Link
+          to="/air"
+          onClick={() => handleReset("air")}
+          className="element-link"
+        >
           <img
             src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png"
             alt="air symbol"
           />
         </Link>
-        <Link to="/fire" onClick={()=>handleReset("fire")} className="element-link">
+        <Link
+          to="/fire"
+          onClick={() => handleReset("fire")}
+          className="element-link"
+        >
           <img
             src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png"
             alt="fire symbol"
@@ -136,21 +144,18 @@ console.log("TOOLBAR BOARD", currentBoard)
       >
         Compose affirmation
       </button>
-
       <button
         disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePictures())}
       >
         Add Pictures
       </button>
-
       <button
         disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePictureCollection())}
       >
         Load picture collection
       </button>
-      
       {/* <button
         disabled={!user || showStickers || !toolbar}
         onClick={stickersHandler}
@@ -158,30 +163,35 @@ console.log("TOOLBAR BOARD", currentBoard)
        Load Stickers
       </button> */}
       {/* <button disabled={!user || !toolbar} onClick={onChangeQuote}>
-        Change Quote
-      </button> */}
+       Change Quote
+      </button>  */}
       ____________________
-     
-        <button disabled={!user || !toolbar} onClick={clearHandler}>Clear All</button>
-        {/* <div className="save-edit"> */}
-        <button disabled={!user || !toolbar} onClick={onSave}>
-          Save
+      <button disabled={!user || !toolbar} onClick={clearHandler}>
+        Clear All
+      </button>
+      <button disabled={!user || !toolbar} onClick={onSave}>
+        Save
+      </button>
+      {buttonsDisplay === "none" ? (
+        <button
+          disabled={!user || !toolbar}
+          onClick={() => dispatch(toolbarActions.setButtonsDisplay("block"))}
+        >
+          Edit
         </button>
-
-        
-        {buttonsDisplay === "none" ? <button disabled={!user || !toolbar} onClick={()=>dispatch(toolbarActions.setButtonsDisplay("block"))}>Edit</button>:
-        <button disabled={!user || !toolbar} onClick={()=>dispatch(toolbarActions.setButtonsDisplay("none"))}>Done editing</button>
-        }
-        
-        <button disabled={!user || !toolbar} onClick={()=>onDelete()}>
-          Delete this board
+      ) : (
+        <button
+          disabled={!user || !toolbar}
+          onClick={() => dispatch(toolbarActions.setButtonsDisplay("none"))}
+        >
+          Done editing
         </button>
-     {/* </div> */}
+      )}
+      <button disabled={!user || !toolbar} onClick={() => onDelete()}>
+        Delete this board
+      </button>
       ____________________
-
-     {user? <BoardList /> : null} 
-     
+      {user ? <BoardList /> : null}
     </div>
-   
   );
 }

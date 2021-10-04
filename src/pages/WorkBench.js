@@ -11,12 +11,9 @@ import { toolbarActions } from "../store/toolbarSlice";
 export default function WorkBench() {
   const [affirmation, setAffirmation] = useState("");
   const [images, setImages] = useState([]);
-  const [displayedImages, setDisplayedImages] = useState(false);
   const params = useParams();
   const dispatch = useDispatch();
   dispatch(boardActions.setLayout(params.element));
-  //might not need stickers. will have to do a full clean up
-  // const stickerShow = useSelector((state) => state.toolbars.showSticker);
   const pictureCollection = useSelector(
     (state) => state.toolbars.showPictureCollection
   );
@@ -34,11 +31,6 @@ export default function WorkBench() {
   const nameCheck = useNameCheck(currentBoard);
 
   //STICKERS part
-  // debugger
-  // const stickers = currentBoard.stickers.sort((a, b) => a.id - b.id)
-  // debugger
-  // console.log(currentBoard.stickers)
-  // debugger
   const renderStickers = currentBoard.stickers.map((sticker) => (
     <Sticker
       key={sticker.id}
@@ -97,19 +89,6 @@ export default function WorkBench() {
   };
 
   //IMAGES part
-  // const renderImages = () => {
-  //   if (currentBoard.images){
-  //     return pictures.map((p) => (
-  //         <Picture
-  //         key={p.id}
-  //         picture={p}
-  //         currentBoardId={currentBoard.id}
-  //         />))
-  //   }else {
-  //     return
-  //   }
-  // }
-
   const renderFrames = () => {
     if (currentBoard.frames) {
       return currentBoard.frames.map((f) => (
@@ -207,14 +186,6 @@ export default function WorkBench() {
   return (
     <div className={`${params.element}-container`}>
       {formErrors ? <div>{formErrors}</div> : null}
-      {/* {message ? (
-        <div>
-          <>You dont have any images yet</>
-          <button onClick={() => setMessage(false)}>X</button>
-        </div>
-      ) : null} */}
-      {/* {showPictures ? <div>{renderImages()}</div> : null}
-      {stickerShow ? <div>{renderStickers}</div> : null} */}
       {toolbar ? (
         <>
           <div className="images-block">

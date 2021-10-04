@@ -5,7 +5,7 @@
   align-items: center;
   min-width: 700px;
   height: 700px;
-  border: solid black 3px;
+  /* border: solid black 3px; */
   justify-content: space-between;
   /* font: 15px The BraggestDemo; */
 }
@@ -16,7 +16,7 @@
   flex-direction: column;
   min-width: 700px;
   height: 700px;
-  border: solid black 3px;
+  /* border: solid black 3px; */
   /* justify-content: space-evenly; */
   /* flex-wrap: wrap; */
   align-items: center;
@@ -32,7 +32,7 @@
     /* min-height: 700px;
   max-height: 900px; */
   height: 700px;
-    border: solid black 3px;
+    /* border: solid black 3px; */
     justify-content: space-between;
   }
 
@@ -45,7 +45,7 @@
     /* min-height: 700px;
   max-height: 900px; */
   height: 700px;
-    border: solid black 3px;
+    /* border: solid black 3px; */
     justify-content: space-between;
   }
 

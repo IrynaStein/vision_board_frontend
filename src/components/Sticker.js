@@ -1,7 +1,6 @@
 import { useDrag } from "@use-gesture/react";
 import { useSelector, useDispatch } from "react-redux";
 import { boardActions } from "../store/boardSlice";
-import { toolbarActions } from "../store/toolbarSlice";
 import useCoordinates from "../hooks/useCoordinates";
 
 export default function Sticker({ sticker, currentBoardId }) {
@@ -34,14 +33,12 @@ export default function Sticker({ sticker, currentBoardId }) {
         coordinates: {
           x: params.offset[0],
           y: params.offset[1],
-
         },
         boardId: currentBoardId,
         stickerId: sticker.id,
       })
-    )
-
-    });
+    );
+  });
 
   return (
     <div
@@ -55,15 +52,27 @@ export default function Sticker({ sticker, currentBoardId }) {
         left: updatedCoordinates.x,
       }}
     >
-      <div style={{display: "flex", justifyContent: "center",alignItems: "center", postion: "relative"}}>
-      <img className="App-logo" src={sticker.image_url} alt="sticker" style={{postion: "absolute"}}></img>
-      <button 
-      className="delete-button"
-        style={{ display: buttonsDisplay}}
-        onClick={() => removeSticker(sticker)}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          postion: "relative",
+        }}
       >
-        x
-      </button>
+        <img
+          className="App-logo"
+          src={sticker.image_url}
+          alt="sticker"
+          style={{ postion: "absolute" }}
+        ></img>
+        <button
+          className="delete-button"
+          style={{ display: buttonsDisplay }}
+          onClick={() => removeSticker(sticker)}
+        >
+          x
+        </button>
       </div>
     </div>
   );

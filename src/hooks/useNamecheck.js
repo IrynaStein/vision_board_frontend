@@ -8,30 +8,32 @@ export default function useNameCheck(currentBoard) {
   const [form, setForm] = useState({
     name: "",
   });
-  const [formErrors, setFormErrors] = useState('')
+  const [formErrors, setFormErrors] = useState("");
   const dispatch = useDispatch();
-  
+
   function handleChange(e) {
-      console.log(e.target.value);
-      setForm({ name: e.target.value });
+    console.log(e.target.value);
+    setForm({ name: e.target.value });
   }
 
   function handleSubmit(e, id) {
     e.preventDefault();
-    if (form.name){
+    if (form.name) {
       dispatch(updateBoard({ load: form, id }));
       setHideInput(true);
-      setFormErrors('')
-      setForm({name: ''})
-      dispatch(utilityActions.showTools(true))
-    }else {
-      setFormErrors(`Please enter your manifestation or choose "Same" to continue without changes`)
-    } 
+      setFormErrors("");
+      setForm({ name: "" });
+      dispatch(utilityActions.showTools(true));
+    } else {
+      setFormErrors(
+        `Please enter your manifestation or choose "Same" to continue without changes`
+      );
+    }
   }
   function onSame() {
     setHideInput(true);
-    setFormErrors('')
-    dispatch(utilityActions.showTools(true))
+    setFormErrors("");
+    dispatch(utilityActions.showTools(true));
   }
   function boardNameCheck(name) {
     return name.match("Untitled-board-");
@@ -40,7 +42,7 @@ export default function useNameCheck(currentBoard) {
   return (
     <>
       {" "}
-     <div> {formErrors? <div>{formErrors}</div>: null}</div>
+      <div> {formErrors ? <div>{formErrors}</div> : null}</div>
       {!hideInput ? (
         <>
           {!boardNameCheck(currentBoard.name) ? (
@@ -62,7 +64,9 @@ export default function useNameCheck(currentBoard) {
             ></input>
             <div>
               <button type="submit">Ok</button>
-              {boardNameCheck(currentBoard.name)? null : <button onClick={onSame}>Same</button>}
+              {boardNameCheck(currentBoard.name) ? null : (
+                <button onClick={onSame}>Same</button>
+              )}
             </div>
           </form>{" "}
         </>

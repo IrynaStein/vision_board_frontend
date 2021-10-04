@@ -15,12 +15,12 @@ export default function Picture({frame, currentBoardId}){
         ).coordinates;
         console.log(coordinates)
 
-        function removeFrame(sticker) {
-            console.log(sticker.id);
+        function removeFrame(frame) {
+            console.log(frame.id);
             dispatch(
               boardActions.removeBoardElement({
-                type: "stickers",
-                typeId: sticker.id,
+                type: "frames",
+                typeId: frame.id,
                 board: currentBoard.id,
               })
             );
@@ -42,9 +42,10 @@ export default function Picture({frame, currentBoardId}){
 
     //send additional prop that will specify class of image size chosen by user. "Large, medium, small" it will render accordingly
     return (
-        <div className="sticker-container" key={frame.id}  {...bindPicPos()} style={{position: "relative", top: updatedCoordinates.y, left: updatedCoordinates.x}}> 
+        <div className="sticker-container" key={frame.id}  {...bindPicPos()} style={{zIndex: 7, display: "flex", position: "absolute", top: updatedCoordinates.y, left: updatedCoordinates.x}}> 
       <img className="App-logo-medium" src={frame.url} alt="photograph"/>
       <button
+      className="delete-button"
         style={{ display: buttonsDisplay }}
         onClick={() => removeFrame(frame)}
       >

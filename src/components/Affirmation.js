@@ -40,12 +40,7 @@ export default function Affirmation({ post, currentBoardId }) {
 
   return (
     <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-        }}
+       className="draggable-element-container"
       >
     <div
       className="affirmation"

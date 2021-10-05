@@ -299,6 +299,9 @@ element-link > img {
   margin: 5px;
   cursor: grab;
 }
+.affirmation:active{
+  cursor: grabbing;
+}
 
 .quote-container {
   display: block;
@@ -311,6 +314,9 @@ element-link > img {
   font-family: The BraggestDemo;
   margin: 15px;
   cursor: grab;
+}
+.quote:active{
+  cursor:grabbing;
 }
 
 .thumbnail {
@@ -422,7 +428,7 @@ element-link > img {
 
 .input-field:focus,
 textarea {
-  outline: none !important;
+  outline: none;
 }
 
 .input-field[type=file]::file-selector-button{

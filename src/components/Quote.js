@@ -38,12 +38,7 @@ export default function Quote({ quote, currentBoardId }) {
 
   return (
     <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-        }}
+    className="draggable-element-container"
       >
     <div
       className="quote"

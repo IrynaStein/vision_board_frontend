@@ -17,7 +17,16 @@
   pointer-events: none;
   border: white solid 7px;
 }
-
+.draggable-element-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: grab;
+}
+.draggable-element-container:active{
+  cursor: grabbing;
+}
 /* .App-header {
   background-color: #282c34;
   min-height: 100vh;

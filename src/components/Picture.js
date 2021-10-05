@@ -41,8 +41,8 @@ export default function Picture({ frame, currentBoardId }) {
 
   //send additional prop that will specify class of image size chosen by user. "Large, medium, small" it will render accordingly
   return (
+    <div className="draggable-element-container">
     <div
-      className="sticker-container"
       key={frame.id}
       {...bindPicPos()}
       style={{
@@ -61,6 +61,7 @@ export default function Picture({ frame, currentBoardId }) {
       >
         x
       </button>
+    </div>
     </div>
   );
 }

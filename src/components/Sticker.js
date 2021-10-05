@@ -53,12 +53,7 @@ export default function Sticker({ sticker, currentBoardId }) {
       }}
     >
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          postion: "relative",
-        }}
+        className="draggable-element-container"
       >
         <img
           className="App-logo"

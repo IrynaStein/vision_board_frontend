@@ -158,7 +158,7 @@ export default function ToolBar() {
         disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePictureCollection())}
       >
-        Load picture collection
+        Picture collection
       </button>
       </div>
       {/* <button

@@ -1,8 +1,10 @@
 .App {
   display: flex;
   flex-direction: row;
-  width: 900px;
+  width: 933px;
+  padding: 10px;
   text-align: center;
+  border: solid #b5b5aaaf 1px;
 }
 
 .App-logo {

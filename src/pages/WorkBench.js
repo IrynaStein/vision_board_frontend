@@ -75,6 +75,7 @@ export default function WorkBench() {
       <div>
         <form onSubmit={(e) => onAddAffirmation(e, currentBoard.id)}>
           <input
+          className="input-field"
             name="post"
             onChange={(e) => {
               setAffirmation(e.target.value);
@@ -82,7 +83,7 @@ export default function WorkBench() {
             placeholder="compose your affirmation..."
             value={affirmation}
           ></input>
-          <button type="submit">Add</button>
+          <button className="btn btn-white" type="submit">Add</button>
         </form>
       </div>
     );
@@ -129,13 +130,14 @@ export default function WorkBench() {
     return (
       <form onSubmit={onAddImage}>
         <input
+        className="input-field"
           type="file"
           name="images"
           placeholder="upload image..."
           onChange={onImageChange}
           multiple={true}
         />
-        <button type="submit">Add new</button>
+        <button className="btn btn-white" type="submit">Add new</button>
       </form>
     );
   };

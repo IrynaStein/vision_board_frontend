@@ -69,7 +69,7 @@ body {
   color: black;
   text-transform: uppercase;
   position: absolute;
-  bottom: -5%;
+  bottom: -7%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-decoration: none;
@@ -164,6 +164,7 @@ body {
 
 .toolbar {
   display: flex;
+  position: relative;
   flex-direction: column;
   flex-wrap: nowrap;
   background-image: linear-gradient(
@@ -177,6 +178,7 @@ body {
   margin-right: 10px;
   justify-content: space-evenly;
   font-family: Mandhor;
+  margin-bottom: 7px;
 }
 
 .utilities-edit {
@@ -204,8 +206,7 @@ body {
   display: inline-flex;
   flex-direction: row;
   position: absolute;
-  top: 7%;
-  left: 2%;
+  top: 3%;
 }
 .element-link {
   display: flex;
@@ -224,19 +225,14 @@ element-link > img {
 .palette {
   display: flex;
   flex-direction: row;
-  /* min-height: 100px;
-  min-width: inherit; */
-  /* border: solid black 1px; */
-  /* padding: 10px; */
+  max-width: 500px;
+  height: 125px;
+  overflow: auto;
   z-index: 10;
   align-items: center;
   justify-content: space-evenly;
-  /* position: relative;
-    top: 530px; */
   position: absolute;
-  bottom: 120px;
-  /* margin: 15px; */
-  /* background-image: -webkit-linear-gradient(rgb(255, 255, 255, 100), rgb(255, 255, 255, 0)) */
+  bottom: 30px;
 }
 .work-bench-container {
   display: block;
@@ -267,11 +263,12 @@ pointer-events: none;
 
 .nameForm {
   display: block;
-  left: 30%;
+  position: absolute;
+  top: 14%;
+  left: 28.7%;
   width: 500px;
   align-items: center;
   text-transform: uppercase;
-  margin: 20%;
   padding: 5%;
   border: solid white .5px;
   box-shadow: 0 10px 10px 5px rgb(0 0 0 / 10%);
@@ -296,7 +293,7 @@ pointer-events: none;
 
 .affirmation {
   z-index: 8;
-  font-size: 25px;
+  font-size: 17px;
   font-family: Mandhor;
   color: black;
   margin: 5px;
@@ -326,6 +323,15 @@ pointer-events: none;
   height: 50px;
   width: 50px;
   margin: 10px;
+  border: solid 2px white;
+}
+
+.thumbnail:hover{
+  transform: scale(2.5);
+  cursor:pointer;
+}
+.thumbnail:active{
+  transform:translateY(-2px)
 }
 
 .save-edit {
@@ -358,6 +364,7 @@ pointer-events: none;
   height: 700px;
   width: 700px;
   position: relative;
+  padding: 10px;
 }
 
 .delete-button {
@@ -400,7 +407,7 @@ pointer-events: none;
 }
 
 .btn-white {
-  margin: 2%;
+  margin:3px;
   background-color: #fff;
   color: black;
 }
@@ -441,6 +448,20 @@ textarea {
   outline: none !important;
 }
 
+.input-field[type=file]::file-selector-button{
+  text-transform: uppercase;
+  font-size: 10px;
+  text-decoration: none;
+  padding: 3%;
+  display: inline-block;
+  border: none;
+  border-radius: 100px;
+  transition: 1s;
+}
+.input-field[type=file]::file-selector-button:hover{
+  background-color: #FEB17B;
+  color: white
+}
 .login-form {
   display: block;
   position: absolute;
@@ -478,7 +499,7 @@ textarea {
 
 .bottom-message{
   position: absolute;
-  left: 26.8%;
-  top: 50%;
+  left: 28.7%;
+  top: 65%;
 }
 

@@ -40,6 +40,14 @@ export default function Affirmation({ post, currentBoardId }) {
 
   return (
     <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
+        }}
+      >
+    <div
       className="affirmation"
       {...bindPostPos()}
       style={{
@@ -60,6 +68,7 @@ export default function Affirmation({ post, currentBoardId }) {
       >
         x
       </button>
+    </div>
     </div>
   );
 }

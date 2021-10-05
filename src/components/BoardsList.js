@@ -4,7 +4,7 @@ export default function BoardList() {
   const boards = useSelector((state) => state.boards.userBoards);
   const user = useSelector((state) => state.boards.userBoards);
   return (
-    <div>
+    <div className="boards-list">
       {user && boards.length > 0 ? (
         <BoardIcon boards={boards} />
       ) : (

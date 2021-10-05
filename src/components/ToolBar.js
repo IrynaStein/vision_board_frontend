@@ -87,11 +87,11 @@ export default function ToolBar() {
   //   dispatch(boardActions.addStickers(layout))
   // }
 
-  function clearHandler() {
-    console.log(layout);
-    dispatch(boardActions.clearBoard(layout));
-    dispatch(toolbarActions.toogleStickers(false));
-  }
+  // function clearHandler() {
+  //   console.log(layout);
+  //   dispatch(boardActions.clearBoard(layout));
+  //   dispatch(toolbarActions.toogleStickers(false));
+  // }
 
   return (
     <div className="toolbar">
@@ -103,7 +103,7 @@ export default function ToolBar() {
           className="element-link"
         >
           <img
-            src="https://live.staticflickr.com/65535/51499110765_a3f537a2c4_o.png"
+            src="https://live.staticflickr.com/65535/51553944286_0035bcbf8b_o.png"
             alt="water symbol"
           />
         </Link>
@@ -113,7 +113,7 @@ export default function ToolBar() {
           className="element-link"
         >
           <img
-            src="https://live.staticflickr.com/65535/51498899924_746037b32f_o.png"
+            src="https://live.staticflickr.com/65535/51554193913_2e00b6c28f_o.png"
             alt="earth symbol"
           />
         </Link>
@@ -123,7 +123,7 @@ export default function ToolBar() {
           className="element-link"
         >
           <img
-            src="https://live.staticflickr.com/65535/51498405518_35f832371a_o.png"
+            src="https://live.staticflickr.com/65535/51554861770_61b6a63938_o.png"
             alt="air symbol"
           />
         </Link>
@@ -133,7 +133,7 @@ export default function ToolBar() {
           className="element-link"
         >
           <img
-            src="https://live.staticflickr.com/65535/51498183701_90f7ba7f6e_o.png"
+            src="https://live.staticflickr.com/65535/51554861705_13ea37ee6a_o.png"
             alt="fire symbol"
           />
         </Link>
@@ -206,5 +206,3 @@ export default function ToolBar() {
     </div>
   );
 }
-
-

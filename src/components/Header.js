@@ -17,12 +17,12 @@ export default function Header() {
   return (
     <div>
       {user ? (
-        <>
+         <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
           <button  className="btn btn-white" onClick={logoutHandler}>Logout</button>
           <Link className="btn btn-white" to="/home">Home</Link>
-        </>
+        </div>
       ) : (
-        <div>
+        <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
           <Link className="btn btn-white" to="/login">Login</Link> <Link className="btn btn-white" to="/signup">Signup</Link>
         </div>
       )}

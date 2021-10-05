@@ -38,6 +38,14 @@ export default function Quote({ quote, currentBoardId }) {
 
   return (
     <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
+        }}
+      >
+    <div
       className="quote"
       key={quote.id}
       {...bindQuotePos()}
@@ -57,6 +65,7 @@ export default function Quote({ quote, currentBoardId }) {
       >
         x
       </button>
+    </div>
     </div>
   );
 }

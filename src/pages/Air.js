@@ -25,7 +25,7 @@ const initialQuote = {cat:"air",text: "Happiness comes the way the wind blows"}
 const symbol = "https://live.staticflickr.com/65535/51499946401_80628c9579_o.png"
 
 
-const description = "It is associated with the breath of life and attributed to cleansing power. Air symbolizes communication, intelligence, perception, knowledge, learning, thinking, imagination, creativity, harmony, and travel. This source of life can also, at times, become a force of terrible destruction. Air is associated with the Spring season and its corresponding direction is East. The Air symbol is an upright triangle with a horizontal line going through it."
+const description = "Air element is associated with the breath of life and attributed to cleansing power. Air symbolizes communication, intelligence, perception, knowledge, learning, thinking, imagination, creativity, harmony, and travel. This source of life can also, at times, become a force of terrible destruction. Air is associated with the Spring season and its corresponding direction is East. The Air symbol is an upright triangle with a horizontal line going through it."
 return (
     <div className="air-container">
       {errors.length === 0 ? (

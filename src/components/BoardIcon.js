@@ -14,6 +14,7 @@ export default function BoardIcon({ boards }) {
   console.log(boards);
   const renderBoards = boards.map((board) => (
     <Link
+    className="board-icon"
       to={`/${board.category}/${board.id}`}
       onClick={() => {
         dispatch(boardActions.setLayout(board.category));
@@ -21,10 +22,10 @@ export default function BoardIcon({ boards }) {
       }}
       key={board.id}
     >
-      <div className="board-icon">
+     
         <img src={pickSticker(board.category)} alt="sticker" />
         {board.name}
-      </div>
+     
     </Link>
   ));
 

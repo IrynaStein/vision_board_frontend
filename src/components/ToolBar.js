@@ -95,7 +95,7 @@ export default function ToolBar() {
 
   return (
     <div className="toolbar">
-      ToolBar
+      {/* <img src="https://live.staticflickr.com/65535/51549405587_90a9bf23f2_o.png"/> */}
       <div className="element-link-container">
         <Link
           to="/water"
@@ -138,24 +138,29 @@ export default function ToolBar() {
           />
         </Link>
       </div>
+      <div className="btn-display">
       <button
+      className="btn btn-white"
         disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePosts())}
       >
         Compose affirmation
       </button>
       <button
+      className="btn btn-white"
         disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePictures())}
       >
         Add Pictures
       </button>
       <button
+      className="btn btn-white"
         disabled={!user || !toolbar}
         onClick={() => dispatch(toolbarActions.tooglePictureCollection())}
       >
         Load picture collection
       </button>
+      </div>
       {/* <button
         disabled={!user || showStickers || !toolbar}
         onClick={stickersHandler}
@@ -165,15 +170,18 @@ export default function ToolBar() {
       {/* <button disabled={!user || !toolbar} onClick={onChangeQuote}>
        Change Quote
       </button>  */}
-      ____________________
-      <button disabled={!user || !toolbar} onClick={clearHandler}>
+      {/* <button disabled={!user || !toolbar} onClick={clearHandler}>
         Clear All
-      </button>
-      <button disabled={!user || !toolbar} onClick={onSave}>
+      </button> */}
+      <div className="btn-display">
+      <button 
+      className="btn btn-white"
+      disabled={!user || !toolbar} onClick={onSave}>
         Save
       </button>
       {buttonsDisplay === "none" ? (
         <button
+        className="btn btn-white"
           disabled={!user || !toolbar}
           onClick={() => dispatch(toolbarActions.setButtonsDisplay("block"))}
         >
@@ -181,17 +189,22 @@ export default function ToolBar() {
         </button>
       ) : (
         <button
+        className="btn btn-white"
           disabled={!user || !toolbar}
           onClick={() => dispatch(toolbarActions.setButtonsDisplay("none"))}
         >
           Done editing
         </button>
       )}
-      <button disabled={!user || !toolbar} onClick={() => onDelete()}>
+      <button 
+      className="btn btn-white"
+      disabled={!user || !toolbar} onClick={() => onDelete()}>
         Delete this board
       </button>
-      ____________________
+      </div>
       {user ? <BoardList /> : null}
     </div>
   );
 }
+
+

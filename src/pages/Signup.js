@@ -14,7 +14,7 @@ const { register, handleSubmit, reset } = useForm();
     reset();
   };
     return (
-      <div className="signuppage">
+      <div className="homepage">
         <form onSubmit={handleSubmit(onSubmit)}>
             <input
         {...register("name", { required: "Please enter your name." })}
@@ -38,9 +38,9 @@ const { register, handleSubmit, reset } = useForm();
         placeholder="re-enter password..."
         type="password"
       ></input>
-      <button basic color='purple'>Signup</button>
+      <button className="btn btn-white">Signup</button>
     </form>
-    <Link to='/home'>Home</Link>
+    <Link className="footer-primary-main" to='/home'>Home</Link>
     </div>
     )
 }

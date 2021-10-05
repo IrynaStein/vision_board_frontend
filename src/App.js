@@ -30,7 +30,7 @@ function App() {
     .then((resp) => {
       if (resp.ok){
         resp.json().then( data => {
-          dispatch(utilityActions.setUser(data.user))
+      dispatch(utilityActions.setUser(data.user))
       dispatch(boardActions.setUserBoards(data.user.boards))
       dispatch(utilityActions.setInitialQuotes(data.quotes))
       dispatch(utilityActions.toogleLoading(false))

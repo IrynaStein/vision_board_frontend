@@ -42,7 +42,7 @@ export default function useNameCheck(currentBoard) {
   return (
     <>
       {" "}
-      <div> {formErrors ? <div>{formErrors}</div> : null}</div>
+      <div> {formErrors ? <div className="error bottom-message">{formErrors}</div> : null}</div>
       {!hideInput ? (
         <>
           {!boardNameCheck(currentBoard.name) ? (
@@ -57,15 +57,16 @@ export default function useNameCheck(currentBoard) {
           >
             <label for="nameChange">What are you manifesting today?</label>
             <input
+            className="input-field"
               id="nameChange"
               onChange={handleChange}
               name="name"
               value={form.name}
             ></input>
             <div>
-              <button type="submit">Ok</button>
+              <button className="btn btn-white" type="submit">Ok</button>
               {boardNameCheck(currentBoard.name) ? null : (
-                <button onClick={onSame}>Same</button>
+                <button className="btn btn-white" onClick={onSame}>Same</button>
               )}
             </div>
           </form>{" "}

@@ -25,13 +25,16 @@ export default function BlurLayer({ name, description, symbol, quote }) {
         <>
           {!isChosen ? (
             <div className="layout">
+              <div className="layout-image">
               <img
                 src={symbol}
                 style={{ height: "100px", width: "100px" }}
                 alt="symbol"
               />
-              <p>{description}</p>
+              </div>
+              <div className="description-text">{description}</div>
               <button
+              className="btn btn-gray"
                 disabled={name === "air" || name === "fire" ? true : false}
                 onClick={handleLayoutChoice}
               >

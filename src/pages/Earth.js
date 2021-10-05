@@ -36,9 +36,10 @@ export default function Earth() {
             />
         </>
       ) : (
-        <div>
+        <div className="error top-message">
           {errors}
-          <button onClick={handleReset}>Ok</button>
+          <br/>
+          <button className="btn btn-gray" onClick={handleReset}>Ok</button>
         </div>
       )}
     </div>

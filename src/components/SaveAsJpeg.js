@@ -16,7 +16,7 @@ const MyComponent = () => {
   return (
     <div>
       <ComponentToPrint ref={componentRef} />
-      <button onClick={() => exportComponentAsJPEG(componentRef)}>
+      <button className="btn btn-white" onClick={() => exportComponentAsJPEG(componentRef)}>
         Export As JPEG
       </button>
     </div>

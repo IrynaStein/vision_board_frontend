@@ -265,7 +265,7 @@ pointer-events: none;
   display: block;
   position: absolute;
   top: 14%;
-  left: 28.7%;
+  left: 15%;
   width: 500px;
   align-items: center;
   text-transform: uppercase;
@@ -275,7 +275,7 @@ pointer-events: none;
 }
 
 .nameForm:hover {
-    transform: translateX(-25px);
+    transform: translateY(-25px);
     background-color: rgba(248, 248, 247, 0.5);
 }
 
@@ -499,7 +499,7 @@ textarea {
 
 .bottom-message{
   position: absolute;
-  left: 28.7%;
-  top: 65%;
+  left: 15%;
+  top: 60%;
 }
 

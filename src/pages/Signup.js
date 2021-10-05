@@ -15,28 +15,33 @@ const { register, handleSubmit, reset } = useForm();
   };
     return (
       <div className="homepage">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="login-form"  onSubmit={handleSubmit(onSubmit)}>
             <input
         {...register("name", { required: "Please enter your name." })}
+        className="input-field"
         placeholder="enter name..."
       ></input>
       <input
         {...register("email", { required: "Please enter your email." })}
         placeholder="enter email..."
+        className="input-field"
       ></input>
       <input
         {...register("username", { required: "Please choose username." })}
         placeholder="choose username..."
+        className="input-field"
       ></input>
       <input
         {...register("password", { required: "Please enter your password." })}
         placeholder="enter password..."
         type="password"
+        className="input-field"
       ></input>
       <input
         {...register("password_confirmation", { required: "Please re-enter your password." })}
         placeholder="re-enter password..."
         type="password"
+        className="input-field"
       ></input>
       <button className="btn btn-white">Signup</button>
     </form>

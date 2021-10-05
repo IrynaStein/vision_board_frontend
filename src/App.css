@@ -13,6 +13,7 @@
 .App-logo-medium {
   height: 20vmin;
   pointer-events: none;
+  border: white solid 7px;
 }
 
 /* .App-header {

@@ -265,8 +265,20 @@ pointer-events: none;
 } */
 
 .nameForm {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  left: 30%;
+  width: 500px;
+  align-items: center;
+  text-transform: uppercase;
+  margin: 20%;
+  padding: 5%;
+  border: solid white .5px;
+  box-shadow: 0 10px 10px 5px rgb(0 0 0 / 10%);
+}
+
+.nameForm:hover {
+    transform: translateX(-25px);
+    background-color: rgba(248, 248, 247, 0.5);
 }
 
 .board-icon {
@@ -465,6 +477,7 @@ textarea {
 
 .bottom-message{
   position: absolute;
-  left: 35%;
-  top: 40%;
+  left: 26.8%;
+  top: 50%;
 }
+

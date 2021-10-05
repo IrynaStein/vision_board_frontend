@@ -44,18 +44,19 @@ export default function useNameCheck(currentBoard) {
       {" "}
       <div> {formErrors ? <div className="error bottom-message">{formErrors}</div> : null}</div>
       {!hideInput ? (
-        <>
+        <div className="nameForm">
           {!boardNameCheck(currentBoard.name) ? (
             <>
-              <div>Last time you were manifesting:</div>
-              <div>{currentBoard.name}</div>
+              Last time you were manifesting:
+              <br/>
+              <span style={{ fontFamily: "Mandhor", color: "white", fontSize: "30px"}}>{currentBoard.name}</span>
             </>
           ) : null}
           <form
-            className="nameForm"
             onSubmit={(e) => handleSubmit(e, currentBoard.id)}
           >
-            <label for="nameChange">What are you manifesting today?</label>
+            What are you manifesting today?
+            <br/>
             <input
             className="input-field"
               id="nameChange"
@@ -70,7 +71,7 @@ export default function useNameCheck(currentBoard) {
               )}
             </div>
           </form>{" "}
-        </>
+        </div>
       ) : null}{" "}
     </>
   );

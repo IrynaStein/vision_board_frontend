@@ -73,7 +73,7 @@ const boardSlice = createSlice({
           id: newId,
           paragraph: payload.paragraph,
           category: payload.category,
-          coordinates: "x: 0, y: 0"
+          coordinates: "x: 244, y: 473"
       }
       board.posts.push(newPostconstructed);
     },

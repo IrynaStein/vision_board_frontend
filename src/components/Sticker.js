@@ -4,11 +4,12 @@ import { boardActions } from "../store/boardSlice";
 import useCoordinates from "../hooks/useCoordinates";
 
 export default function Sticker({ sticker, currentBoardId }) {
+
   const currentBoard = useSelector((state) =>
     state.boards.userBoards.find((b) => b.id === currentBoardId)
   );
   const buttonsDisplay = useSelector((state) => state.toolbars.buttonsDisplay);
-  console.log("BUTTONS", buttonsDisplay);
+
   const dispatch = useDispatch();
 
   let coordinates = currentBoard.stickers.find(
@@ -27,17 +28,17 @@ export default function Sticker({ sticker, currentBoardId }) {
       })
     );
   }
-  const bindStickerPos = useDrag((params) => {
-    dispatch(
-      boardActions.setStickerCoordinates({
-        coordinates: {
-          x: params.offset[0],
-          y: params.offset[1],
-        },
-        boardId: currentBoardId,
-        stickerId: sticker.id,
-      })
-    );
+  const bindStickerPos = useDrag(({delta}) => { 
+      dispatch(
+          boardActions.setStickerCoordinates({
+            coordinates: {
+              x: delta[0],
+              y: delta[1]
+            },
+            boardId: currentBoardId,
+            stickerId: sticker.id,
+          })
+        );
   });
 
   return (

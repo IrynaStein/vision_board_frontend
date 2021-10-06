@@ -24,12 +24,12 @@ export default function Quote({ quote, currentBoardId }) {
     );
   }
 
-  const bindQuotePos = useDrag((params) => {
+  const bindQuotePos = useDrag(({delta}) => {
     dispatch(
       boardActions.setQuoteCoordinates({
         coordinates: {
-          x: params.offset[0],
-          y: params.offset[1],
+          x: delta[0],
+          y: delta[1],
         },
         boardId: currentBoardId,
       })

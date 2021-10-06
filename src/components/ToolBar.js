@@ -17,7 +17,7 @@ export default function ToolBar() {
   const currentBoard = useSelector((state) =>
     state.boards.userBoards.find((b) => b.category === layout)
   );
-  console.log("TOOLBAR BOARD", currentBoard);
+  // console.log("TOOLBAR BOARD", currentBoard);
   // function onChangeQuote() {
   //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
   //     method: "GET",

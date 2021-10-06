@@ -26,12 +26,12 @@ export default function Picture({ frame, currentBoardId }) {
   }
   const updatedCoordinates = useCoordinates(coordinates);
 
-  const bindPicPos = useDrag((params) => {
+  const bindPicPos = useDrag(({delta}) => {
     dispatch(
       boardActions.setImageCoordinates({
         coordinates: {
-          x: params.offset[0],
-          y: params.offset[1],
+          x: delta[0],
+          y: delta[1],
         },
         boardId: currentBoardId,
         frameId: frame.id,

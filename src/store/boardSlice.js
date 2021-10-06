@@ -129,27 +129,39 @@ const boardSlice = createSlice({
     setStickerCoordinates(state, { payload }) {
       const board = state.userBoards.find((b) => b.id === payload.boardId);
       const sticker = board.stickers.find((s) => s.id === payload.stickerId);
-      sticker.coordinates = JSON.stringify(payload.coordinates)
+      const x = payload.coordinates.x + parseFloat(sticker.coordinates.split(', ')[0].split(':')[1])
+      const y = payload.coordinates.y + parseFloat(sticker.coordinates.split(', ')[1].split(':')[1])
+      const newCoordinates = { x, y }
+      sticker.coordinates = JSON.stringify(newCoordinates)
         .replace(/[{"'}]/g, "")
         .replace(/[,]/g, ", ");
     },
     setQuoteCoordinates(state, {payload}){
         const board = state.userBoards.find((b) => b.id === payload.boardId);
-        board.quote.coordinates = JSON.stringify(payload.coordinates)
+        const x = payload.coordinates.x + parseFloat(board.quote.coordinates.split(', ')[0].split(':')[1])
+      const y = payload.coordinates.y + parseFloat(board.quote.coordinates.split(', ')[1].split(':')[1])
+      const newCoordinates = { x, y }
+        board.quote.coordinates = JSON.stringify(newCoordinates)
         .replace(/[{"'}]/g, "")
         .replace(/[,]/g, ", "); 
     },
     setPostCoordinates(state, {payload}){
         const board = state.userBoards.find((b) => b.id === payload.boardId);
         const post = board.posts.find((p) => p.id === payload.postId);
-        post.coordinates = JSON.stringify(payload.coordinates)
+        const x = payload.coordinates.x + parseFloat(post.coordinates.split(', ')[0].split(':')[1])
+      const y = payload.coordinates.y + parseFloat(post.coordinates.split(', ')[1].split(':')[1])
+      const newCoordinates = { x, y }
+        post.coordinates = JSON.stringify(newCoordinates)
         .replace(/[{"'}]/g, "")
         .replace(/[,]/g, ", ");
     },
     setImageCoordinates(state, {payload}){
         const board = state.userBoards.find((b) => b.id === payload.boardId);
         const frame = board.frames.find((i) => i.id === payload.frameId);
-        frame.coordinates = JSON.stringify(payload.coordinates)
+        const x = payload.coordinates.x + parseFloat(frame.coordinates.split(', ')[0].split(':')[1])
+        const y = payload.coordinates.y + parseFloat(frame.coordinates.split(', ')[1].split(':')[1])
+        const newCoordinates = { x, y }
+        frame.coordinates = JSON.stringify(newCoordinates)
           .replace(/[{"'}]/g, "")
           .replace(/[,]/g, ", ");
     },

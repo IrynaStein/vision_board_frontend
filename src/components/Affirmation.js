@@ -25,12 +25,12 @@ export default function Affirmation({ post, currentBoardId }) {
   }
   const updatedCoordinates = useCoordinates(coordinates);
 
-  const bindPostPos = useDrag((params) => {
+  const bindPostPos = useDrag(({delta}) => {
     dispatch(
       boardActions.setPostCoordinates({
         coordinates: {
-          x: params.offset[0],
-          y: params.offset[1],
+          x: delta[0],
+          y: delta[1],
         },
         boardId: currentBoardId,
         postId: post.id,

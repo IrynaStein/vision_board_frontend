@@ -46,7 +46,7 @@ export default function Quote({ quote, currentBoardId }) {
       {...bindQuotePos()}
       style={{
         display: "inline-block",
-        zIndex: 9,
+        zIndex: 5,
         position: "absolute",
         top: updatedCoordinates.y,
         left: updatedCoordinates.x,

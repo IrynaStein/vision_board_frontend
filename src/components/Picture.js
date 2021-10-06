@@ -46,7 +46,7 @@ export default function Picture({ frame, currentBoardId }) {
       key={frame.id}
       {...bindPicPos()}
       style={{
-        zIndex: 7,
+        zIndex: 3,
         display: "flex",
         position: "absolute",
         top: updatedCoordinates.y,

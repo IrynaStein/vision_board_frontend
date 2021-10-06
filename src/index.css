@@ -16,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 100%;
   line-height: 1.7;
   padding: 30px;
 }
@@ -235,7 +235,7 @@ element-link > img {
   max-width: 500px;
   height: 125px;
   overflow: auto;
-  z-index: 10;
+  z-index: 6;
   align-items: center;
   justify-content: space-evenly;
   position: absolute;
@@ -292,7 +292,7 @@ element-link > img {
 }
 
 .affirmation {
-  z-index: 8;
+  z-index: 4;
   font-size: 17px;
   font-family: Mandhor;
   color: black;

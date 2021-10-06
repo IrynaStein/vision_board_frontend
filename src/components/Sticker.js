@@ -46,7 +46,7 @@ export default function Sticker({ sticker, currentBoardId }) {
       {...bindStickerPos()}
       style={{
         display: "inline-block",
-        zIndex: 8,
+        zIndex: 4,
         position: "absolute",
         top: updatedCoordinates.y,
         left: updatedCoordinates.x,

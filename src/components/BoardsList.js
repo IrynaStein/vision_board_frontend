@@ -8,7 +8,7 @@ export default function BoardList() {
       {user && boards.length > 0 ? (
         <BoardIcon boards={boards} />
       ) : (
-        "You dont have any boards yet. Create one and start manifesting"
+        <div style={{padding: "7px", color: "#646568", fontSize: "12px"}}>You dont have any boards yet. Create one and start manifesting</div>
       )}
     </div>
   );

@@ -19,7 +19,6 @@ export default function Sticker({ sticker, currentBoardId }) {
   const updatedCoordinates = useCoordinates(coordinates);
 
   function removeSticker(sticker) {
-    console.log(sticker.id);
     dispatch(
       boardActions.removeBoardElement({
         type: "stickers",

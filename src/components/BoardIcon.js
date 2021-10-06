@@ -11,7 +11,6 @@ export default function BoardIcon({ boards }) {
   };
 
   const dispatch = useDispatch();
-  console.log(boards);
   const renderBoards = boards.map((board) => (
     <Link
     className="board-icon"

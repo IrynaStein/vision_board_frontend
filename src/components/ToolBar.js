@@ -55,7 +55,6 @@ export default function ToolBar() {
       quote: currentBoard.quote,
       frames: currentBoard.frames,
     };
-    console.log(boardObj);
     fetch(`/boards/${currentBoard.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -69,7 +68,6 @@ export default function ToolBar() {
   }
 
   function onDelete() {
-    console.log("ON DELETE IN TOOLBAR", currentBoard.id);
     dispatch(boardDelete(currentBoard.id));
     dispatch(utilityActions.showTools(false));
     history.push("/home");

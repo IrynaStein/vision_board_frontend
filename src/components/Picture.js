@@ -12,10 +12,8 @@ export default function Picture({ frame, currentBoardId }) {
   let coordinates = currentBoard.frames.find(
     (i) => i.id === frame.id
   ).coordinates;
-  console.log(coordinates);
 
   function removeFrame(frame) {
-    console.log(frame.id);
     dispatch(
       boardActions.removeBoardElement({
         type: "frames",

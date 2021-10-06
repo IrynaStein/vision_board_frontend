@@ -14,7 +14,6 @@ export default function Quote({ quote, currentBoardId }) {
   const updatedCoordinates = useCoordinates(coordinates);
 
   function removeQuote(quote) {
-    console.log(quote.id);
     dispatch(
       boardActions.removeBoardElement({
         type: "quote",

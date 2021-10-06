@@ -12,7 +12,6 @@ export default function useNameCheck(currentBoard) {
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    console.log(e.target.value);
     setForm({ name: e.target.value });
   }
 

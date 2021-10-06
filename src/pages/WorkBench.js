@@ -25,7 +25,6 @@ export default function WorkBench() {
   const toolbar = useSelector((state) => state.utilities.toolbar);
 
   const { quote, posts } = currentBoard;
-  console.log(currentBoard);
 
   //custom Hook that checks the name of the board
   const nameCheck = useNameCheck(currentBoard);
@@ -103,7 +102,6 @@ export default function WorkBench() {
   function onAddImage(e) {
     e.preventDefault();
     if (images.length === 0) {
-      console.log("Please add files to upload");
     } else {
       const form = new FormData();
       images.images.map((i) => form.append("images[]", i));
@@ -115,7 +113,6 @@ export default function WorkBench() {
         .then((data) => {
           dispatch(boardActions.updateCurrentBoardImages(data));
           dispatch(toolbarActions.tooglePictureCollection());
-          console.log(data);
         });
     }
   }
@@ -143,7 +140,6 @@ export default function WorkBench() {
   };
 
   function addToFrames(image) {
-    console.log(image);
     dispatch(
       boardActions.addToFrames({
         boardId: currentBoard.id,
@@ -154,7 +150,6 @@ export default function WorkBench() {
 
   //PICTURE COLLECTION
   const renderPictureCollection = () => {
-    console.log("rendering pic collection");
     if (currentBoard.images) {
       return currentBoard.images.map((i) => (
         <div key={i.id}>
@@ -167,7 +162,6 @@ export default function WorkBench() {
         </div>
       ));
     } else {
-      console.log("you dont have any yet");
       return <div>You dont have any pictures yet</div>;
     }
   };

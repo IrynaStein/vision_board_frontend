@@ -14,7 +14,6 @@ export default function Affirmation({ post, currentBoardId }) {
     (p) => p.id === post.id
   ).coordinates;
   function removeAffirmation(post) {
-    console.log(post.id);
     dispatch(
       boardActions.removeBoardElement({
         type: "posts",

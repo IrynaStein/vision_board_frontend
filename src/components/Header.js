@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { userLogout } from "../store/utilitySlice";
 import { boardActions } from "../store/boardSlice";
 import { toolbarActions } from "../store/toolbarSlice";
+import { utilityActions } from "../store/utilitySlice";
 
 export default function Header() {
   const user = useSelector((state) => state.utilities.user);
@@ -19,7 +20,7 @@ export default function Header() {
       {user ? (
          <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
           <button  className="btn btn-white" onClick={logoutHandler}>Logout</button>
-          <Link className="btn btn-white" to="/home">Home</Link>
+          <Link className="btn btn-white" to="/home" onClick={() => dispatch(utilityActions.showTools(false))}>Home</Link>
         </div>
       ) : (
         <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>

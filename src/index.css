@@ -486,5 +486,31 @@ textarea {
   top: 60%;
 }
 
+.signup-message{
+  width: 400px;
+  text-align: center;
+  position: absolute;
+  left: 20%;
+  top: 60%;
+}
+
+.input-warning-messages{
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: red
+}
+
+.logout-message{
+  width: 300px;
+  text-align: center;
+  position: absolute;
+  color: red;
+  font-weight: 400;
+  font-size: 12px;
+  left: 25%;
+  bottom: 1%;
+}
+
 
 

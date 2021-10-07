@@ -13,7 +13,7 @@ export default function BlurLayer({ name, description, symbol, quote }) {
   function handleLayoutChoice() {
     setIsChosen((mUv) => !mUv);
     dispatch(boardActions.setLayout(name));
-    dispatch(createBoard({ category: name, quote_id: quote }));
+    dispatch(createBoard({ category: name, quote: quote }));
     dispatch(boardActions.toogleBoardsLoading());
   }
 

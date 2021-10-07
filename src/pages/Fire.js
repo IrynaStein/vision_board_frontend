@@ -36,7 +36,7 @@ export default function Fire(){
                   name="fire"
                   description={description}
                   symbol={symbol}
-                //   quote={initialQuote.id}
+                //   quote={initialQuote}
                 />
             </>
           ) : (

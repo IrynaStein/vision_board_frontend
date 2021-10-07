@@ -1,7 +1,11 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { utilityActions } from "../store/utilitySlice";
+import { boardActions } from "../store/boardSlice";
 export default function HomePage() {
   const user = useSelector((state) => state.utilities.user);
-
+const errors = useSelector(state => state.utilities.errors)
+const boardErrors = useSelector(state => state.boards.errors)
+const dispatch = useDispatch()
   return (
     <div className="homepage">
       <h1 className="heading-primary">
@@ -28,7 +32,8 @@ export default function HomePage() {
           anytime anywhere
         </p>
       </div>
-
+      {errors.length > 0 ? <div className="error logout-message">{errors}<br/><button className="btn btn-gray" onClick={()=>dispatch(utilityActions.clearErrors())}>Ok</button></div> : null}
+      {boardErrors.length > 0 ? <div className="error logout-message">{boardErrors}<br/><button className="btn btn-gray" onClick={()=>dispatch(boardActions.partialReset())}>Ok</button></div> : null}
       {user ? null : (
         <h3 className="footer-primary-main">
           {" "}

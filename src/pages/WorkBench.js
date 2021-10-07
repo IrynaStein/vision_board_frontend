@@ -40,7 +40,7 @@ export default function WorkBench() {
 
   //AFFIRMATIONS part
   const affirmationList = posts.map((post) => (
-    <Affirmation key={post} post={post} currentBoardId={currentBoard.id} />
+    <Affirmation key={post.id} post={post} currentBoardId={currentBoard.id} />
   ));
 
   const renderQuote = () => {
@@ -63,7 +63,7 @@ export default function WorkBench() {
       );
       setFormErros("");
     } else {
-      setFormErros("Affirmation can't be empty.");
+      setFormErros("Affirmation can't be empty");
       setTimeout(() => setFormErros(""), 3000);
     }
     setAffirmation("");
@@ -162,7 +162,7 @@ export default function WorkBench() {
         </div>
       ));
     } else {
-      return <div>You dont have any pictures yet</div>;
+      return <div className="input-warning-messages">You dont have any pictures yet</div>;
     }
   };
 
@@ -181,7 +181,7 @@ export default function WorkBench() {
 
   return (
     <div className={`${params.element}-container`}>
-      {formErrors ? <div>{formErrors}</div> : null}
+      
       {toolbar ? (
         <>
           <div className="images-block">
@@ -192,9 +192,9 @@ export default function WorkBench() {
           </div>
         </>
       ) : null}
-
+{formErrors ? <div className="input-warning-messages">{formErrors}</div> : null}
       <div>{nameCheck}</div>
-
+      
       <div className="palette">{renderWorkench()}</div>
     </div>
   );

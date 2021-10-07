@@ -36,7 +36,7 @@ return (
               name="air"
               description={description}
               symbol={symbol}
-            //   quote={initialQuote.id}
+            //   quote={initialQuote}
             />
         </>
       ) : (

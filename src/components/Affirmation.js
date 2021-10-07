@@ -9,7 +9,7 @@ export default function Affirmation({ post, currentBoardId }) {
   );
   const buttonsDisplay = useSelector((state) => state.toolbars.buttonsDisplay);
   const dispatch = useDispatch();
-
+// console.log("POST id", post.id)
   let coordinates = currentBoard.posts.find(
     (p) => p.id === post.id
   ).coordinates;

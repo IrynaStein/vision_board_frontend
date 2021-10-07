@@ -35,7 +35,7 @@ export default function Water() {
               name="water"
               description={description}
               symbol={symbol}
-              quote={initialQuote.id}
+              quote={initialQuote}
             />
         </>
       ) : (

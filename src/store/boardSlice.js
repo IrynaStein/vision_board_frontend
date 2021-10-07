@@ -204,10 +204,13 @@ else {
       const board = state.userBoards.find(
         (b) => b.category === payload.category
       );
+      // debugger
       board.quote = {
         id: payload.quoteId,
         paragraph: payload.quote,
         category: payload.category,
+        author: payload.author,
+        coordinates: payload.coordinates
       };
     },
   },
@@ -289,7 +292,7 @@ else {
             state.errors = action.payload.errors
         }else{
             state.userBoards = state.userBoards.filter(b => b.id !== action.payload.board.id)
-            state.errors = []
+            state.errors = action.payload.message
         }
     },
     [boardDelete.rejected](state, action){

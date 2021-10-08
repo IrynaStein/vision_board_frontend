@@ -6,10 +6,9 @@ import { boardActions } from "../store/boardSlice"
 export default function Fire(){
 
     const errors = useSelector((state) => state.boards.errors);
-    // const initialQuote = useSelector((state) =>
-    //   state.utilities.initialQuotes.find((q) => q.category === "fire")
-    // );
-    const initialQuote = {cat:"fire",text: "The finest steel has to go through the hottest fire"}
+    const initialQuote = useSelector((state) =>
+      state.utilities.initialQuotes.find((q) => q.category === "fire")
+    );
 
     const user = useSelector((state) => state.utilities.user);
    
@@ -30,13 +29,12 @@ export default function Fire(){
         <div className="fire-container">
           {errors.length === 0 ? (
             <>
-             {/* <div className="quote">{initialQuote.paragraph}</div>  */}
-             <div className="quote">{initialQuote.text}</div>
+             <div className="quote">{initialQuote.paragraph}</div> 
                 <BlurLayer
                   name="fire"
                   description={description}
                   symbol={symbol}
-                //   quote={initialQuote.id}
+                  quote={initialQuote}
                 />
             </>
           ) : (

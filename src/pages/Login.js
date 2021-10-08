@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { utilityActions } from "../store/utilitySlice";
@@ -5,9 +6,9 @@ import { boardActions } from "../store/boardSlice";
 import { getStickers } from "../store/boardSlice";
 import { Link } from "react-router-dom";
 export default function Login() {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const dispatch = useDispatch();
-
+  const [submissionErrors, setSubmissionErrors] = useState('')
   const onSubmit = (data, e) => {
     e.preventDefault();
 
@@ -25,6 +26,8 @@ export default function Login() {
         });
       } else {
         dispatch(utilityActions.toogleLoading(false));
+        resp.json().then(data => setSubmissionErrors(data.errors))
+       
       }
     });
     dispatch(getStickers());
@@ -35,20 +38,23 @@ export default function Login() {
     <div className="homepage">
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <input
-          {...register("username", { required: "Please enter your username." })}
+          {...register("username", { required: "Please enter your username" })}
           className="input-field"
           placeholder="enter username..."
         ></input>
+        {errors.username && <p className="input-warning-messages">{errors.username.message}</p>}
         <br/>
         <input
-          {...register("password", { required: "Please enter your password." })}
+          {...register("password", { required: "Please enter your password" })}
           className="input-field"
           placeholder="enter password..."
           type="password"
         ></input>
+        {errors.password && <p className="input-warning-messages">{errors.password.message}</p>}
         <br/>
         <button className="btn btn-white" type="submit">Login</button>
       </form>
+      {submissionErrors ? <div className="error signup-message">{submissionErrors}<br/><button className="btn btn-gray" onClick={()=>setSubmissionErrors('')}>Ok</button></div> : null}
       <Link className="footer-primary-main" to="/home">
         Home
       </Link>

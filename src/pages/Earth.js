@@ -32,7 +32,7 @@ export default function Earth() {
               name="earth"
               description={description}
               symbol={symbol}
-              quote={initialQuote.id}
+              quote={initialQuote}
             />
         </>
       ) : (

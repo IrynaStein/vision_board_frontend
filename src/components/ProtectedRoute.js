@@ -1,3 +1,4 @@
+
 import { Route, Redirect } from "react-router";
 import { useSelector } from "react-redux";
 const ProtectedRoute = ({ component: Component, ...rest }) => {
@@ -17,3 +18,4 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 };
 
 export default ProtectedRoute;
+

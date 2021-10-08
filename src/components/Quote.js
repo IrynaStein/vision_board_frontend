@@ -52,13 +52,13 @@ export default function Quote({ quote, currentBoardId }) {
       }}
     >
       {quote.paragraph}
-      <button
+      {/* <button
         className="delete-button"
         style={{ display: buttonsDisplay }}
         onClick={() => removeQuote(quote)}
       >
         x
-      </button>
+      </button> */}
     </div>
     </div>
   );

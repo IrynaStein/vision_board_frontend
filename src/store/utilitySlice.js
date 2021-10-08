@@ -68,6 +68,9 @@ const utilitySlice = createSlice({
     },
     showTools(state, {payload}){
       state.toolbar = payload
+    }, 
+    clearErrors(state){
+      state.errors = []
     }
   },
   extraReducers: {

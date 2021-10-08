@@ -41,9 +41,21 @@ export default function ToolBar() {
   // }
 
   //When the API is ready this function will call for a new quote
-  // function onChangeQuote(){
-  //   console.log("changing quote")
-  // }
+  function onChangeQuote(){
+    console.log("changing quote")
+    fetch(`http://localhost:3005/quotes?category=${layout}`)
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+      dispatch(boardActions.setNewQuote({
+                quote: data.paragraph,
+                quoteId: data.id,
+                category: layout,
+                author: data.author,
+                coordinates: currentBoard.quote.coordinates
+              }));
+    })
+  }
 
   function onSave() {
     console.log("saving...");
@@ -93,7 +105,6 @@ export default function ToolBar() {
 
   return (
     <div className="toolbar">
-      {/* <img src="https://live.staticflickr.com/65535/51549405587_90a9bf23f2_o.png"/> */}
       <div className="element-link-container">
         <Link
           to="/water"
@@ -137,6 +148,12 @@ export default function ToolBar() {
         </Link>
       </div>
       <div className="btn-display">
+      <button 
+      className="btn btn-white"
+      disabled={!user || !toolbar} 
+      onClick={onChangeQuote}>
+       Change Quote
+      </button>
       <button
       className="btn btn-white"
         disabled={!user || !toolbar}
@@ -165,9 +182,7 @@ export default function ToolBar() {
       >
        Load Stickers
       </button> */}
-      {/* <button disabled={!user || !toolbar} onClick={onChangeQuote}>
-       Change Quote
-      </button>  */}
+     
       {/* <button disabled={!user || !toolbar} onClick={clearHandler}>
         Clear All
       </button> */}

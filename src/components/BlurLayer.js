@@ -13,7 +13,7 @@ export default function BlurLayer({ name, description, symbol, quote }) {
   function handleLayoutChoice() {
     setIsChosen((mUv) => !mUv);
     dispatch(boardActions.setLayout(name));
-    dispatch(createBoard({ category: name, quote_id: quote }));
+    dispatch(createBoard({ category: name, quote: quote }));
     dispatch(boardActions.toogleBoardsLoading());
   }
 
@@ -35,12 +35,10 @@ export default function BlurLayer({ name, description, symbol, quote }) {
               <div className="description-text">{description}</div>
               <button
               className="btn btn-gray"
-                disabled={name === "air" || name === "fire" ? true : false}
+                // disabled={name === "air" || name === "fire" ? true : false}
                 onClick={handleLayoutChoice}
               >
-                {name === "air" || name === "fire"
-                  ? "Comign soon!"
-                  : "Choose this layout"}
+                Choose this layout
               </button>
             </div>
           ) : (

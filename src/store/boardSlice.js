@@ -121,6 +121,10 @@ const boardSlice = createSlice({
       state.errors = [];
       state.isLoadingBoards = false;
     },
+
+    clearErrorMessages(state){
+      state.errors = [];
+    },
     addStickers(state, { payload }) {
       const board = state.userBoards.find((b) => b.category === payload);
       board.stickers = state.stickers.filter((s) => s.category === payload);

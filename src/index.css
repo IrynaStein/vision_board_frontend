@@ -354,7 +354,7 @@ element-link > img {
   font-size: 30px;
 }
 .delete-button:hover{
-  transform: translateX(-4px) translateY(-17px);
+  transform: translateX(-7px) translateY(-17px);
   /* transform: translate(-50%, -50%); */
 }
 

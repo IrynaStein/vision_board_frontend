@@ -33,7 +33,7 @@ const dispatch = useDispatch()
         </p>
       </div>
       {errors.length > 0 ? <div className="error logout-message">{errors}<br/><button className="btn btn-gray" onClick={()=>dispatch(utilityActions.clearErrors())}>Ok</button></div> : null}
-      {boardErrors.length > 0 ? <div className="error logout-message">{boardErrors}<br/><button className="btn btn-gray" onClick={()=>dispatch(boardActions.partialReset())}>Ok</button></div> : null}
+      {boardErrors.length > 0 ? <div className="error logout-message">{boardErrors}<br/><button className="btn btn-gray" onClick={()=>dispatch(boardActions.clearErrorMessages())}>Ok</button></div> : null}
       {user ? null : (
         <h3 className="footer-primary-main">
           {" "}

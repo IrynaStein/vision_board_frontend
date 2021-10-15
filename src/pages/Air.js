@@ -14,7 +14,7 @@ export default function Air(){
   
   
     function handleReset() {
-      dispatch(boardActions.partialReset());
+      dispatch(boardActions.clearErrorMessages());
       dispatch(boardActions.setUserBoards(user.boards));
     }
 

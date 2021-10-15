@@ -15,7 +15,7 @@ export default function Fire(){
     const dispatch = useDispatch();
   
     function handleReset() {
-        dispatch(boardActions.partialReset());
+        dispatch(boardActions.clearErrorMessages());
         dispatch(boardActions.setUserBoards(user.boards));
       }
 
@@ -38,10 +38,11 @@ export default function Fire(){
                 />
             </>
           ) : (
-            <div>
-              {errors}
-              <button onClick={handleReset}>Ok</button>
-            </div>
+            <div className="error top-message">
+            {errors}
+            <br/>
+            <button className="btn btn-gray" onClick={handleReset}>Ok</button>
+          </div>
           )}
         </div>
       );

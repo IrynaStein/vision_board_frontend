@@ -11,7 +11,7 @@ export default function Earth() {
   const user = useSelector((state) => state.utilities.user);
  
   function handleReset() {
-    dispatch(boardActions.partialReset());
+    dispatch(boardActions.clearErrorMessages());
     dispatch(boardActions.setUserBoards(user.boards));
   }
   const initialQuote = useSelector((state) =>

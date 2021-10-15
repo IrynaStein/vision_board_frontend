@@ -17,28 +17,6 @@ export default function ToolBar() {
   const currentBoard = useSelector((state) =>
     state.boards.userBoards.find((b) => b.category === layout)
   );
-  // console.log("TOOLBAR BOARD", currentBoard);
-  // function onChangeQuote() {
-  //   fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
-  //     method: "GET",
-  //     headers: {
-  //       "x-rapidapi-host": "quotes15.p.rapidapi.com",
-  //       "x-rapidapi-key": apiKey,
-  //     },
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       dispatch(boardActions.setNewQuote({
-  //         quote: data.content,
-  //         quoteId: data.id,
-  //         category: layout
-  //       }));
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }
 
   //When the API is ready this function will call for a new quote
   function onChangeQuote(){

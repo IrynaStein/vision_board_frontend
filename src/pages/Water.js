@@ -16,7 +16,7 @@ export default function Water() {
 
 
   function handleReset() {
-    dispatch(boardActions.partialReset());
+    dispatch(boardActions.clearErrorMessages());
     dispatch(boardActions.setUserBoards(user.boards));
   }
 

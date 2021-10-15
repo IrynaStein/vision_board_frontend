@@ -2,6 +2,7 @@ import { useDrag } from "@use-gesture/react";
 import { useSelector, useDispatch } from "react-redux";
 import { boardActions } from "../store/boardSlice";
 import useCoordinates from "../hooks/useCoordinates";
+import image from '../assets/x-delete.png'
 
 export default function Picture({ frame, currentBoardId }) {
   const currentBoard = useSelector((state) =>
@@ -57,7 +58,7 @@ export default function Picture({ frame, currentBoardId }) {
         style={{ display: buttonsDisplay }}
         onClick={() => removeFrame(frame)}
       >
-        x
+       <img src={image} style={{width: "30px"}}alt="delete" />
       </button>
     </div>
     </div>
